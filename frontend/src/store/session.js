@@ -2,8 +2,6 @@ import { csrfFetch } from "./csrf";
 
 const SET_SESSION = 'session/SET_SESSION';
 const REMOVE_SESSION = 'session/REMOVE_SESSION'
-const GET_USER = 'session/GET_USER'
-const SIGN_UP = 'session/SIGN_UP'
 
 const setSession = (user) => ({
     type: SET_SESSION,
@@ -32,10 +30,18 @@ export const signUpUser = (user) => async dispatch => {
 
 export const restoreUser = () => async dispatch => {
     const res = await csrfFetch(`/api/session`)
-
+    
     const data = await res.json();
     dispatch(setSession(data.user))
     return res
+}
+
+export const logout = () => async dispatch => {
+    const res = await csrfFetch('/api/session', {
+        method: 'DELETE'
+    })
+    dispatch(removeSession());
+    return res;
 }
 
 export const login = (user) => async dispatch => {
@@ -62,7 +68,7 @@ const sessionReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_SESSION:
         newState = Object.assign({}, state);
-        newState.user = action.payload.user
+        newState.user = action.payload;
             return newState
         case REMOVE_SESSION:
             newState = Object.assign({}, state);
