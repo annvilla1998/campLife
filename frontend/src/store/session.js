@@ -7,7 +7,7 @@ const SIGN_UP = 'session/SIGN_UP'
 
 const setSession = (user) => ({
     type: SET_SESSION,
-    user
+    payload: user
 })
 
 const removeSession = () => ({
@@ -62,7 +62,7 @@ const sessionReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_SESSION:
         newState = Object.assign({}, state);
-        newState.user = action.user
+        newState.user = action.payload.user
             return newState
         case REMOVE_SESSION:
             newState = Object.assign({}, state);
