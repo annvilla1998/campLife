@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom"
-import { useState } from "react"
 import { useSelector } from "react-redux"
 import { ProfileButton } from "./ProfileButton"
 import './Navigation.css';
@@ -15,19 +14,17 @@ export const Navigation = ({isLoaded}) => {
         )
     } else {
        sessionLinks = (  
-        <>
+        <nav>
             <LoginFormModal/>
             <NavLink to='/signup'>Sign Up</NavLink>
-        </>
+        </nav>
        )    
     }
 
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <nav>
+            <NavLink exact to="/">Home</NavLink>
+            {isLoaded && sessionLinks}
+        </nav>
     )
 }

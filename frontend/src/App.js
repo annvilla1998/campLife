@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { LoginFormPage } from "./components/LoginFormPage";
 import { Switch, Route } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import * as sessionActions from './store/session'
