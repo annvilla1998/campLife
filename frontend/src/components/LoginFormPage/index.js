@@ -13,9 +13,6 @@ export const LoginFormPage = () => {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    if(sessionUser) return (
-        <Redirect to='/' />
-    )
 
     const onSubmit = async (e) => {
         e.preventDefault()
