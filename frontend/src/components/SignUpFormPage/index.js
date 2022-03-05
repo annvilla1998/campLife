@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 
 export const SignUpFormPage = () => {
     const dispatch = useDispatch()
-    // const history = useHistory()
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -15,15 +15,15 @@ export const SignUpFormPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors,setErrors] = useState([])
 
-    if (sessionUser) return <Redirect to="/" />;
+    // if (sessionUser) return <Redirect to="/" />;
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
         if(password === confirmPassword) {
-            // history.push('/')
+            history.push('/')
             setErrors([]);
-            
+
             return dispatch(sessionActions.signUpUser({
                 username,
                 email,
