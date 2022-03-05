@@ -1,0 +1,28 @@
+/* .nav-bar {
+    display: grid;
+    grid-template-areas: 
+    "logo signup login";
+    margin: 0;
+    padding: 0;
+    background-color: #D1D6C7;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+
+
+a {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 15px;
+} 
+
+
+li a:hover { 
+    background-color: #C5c9bb;
+}  */
