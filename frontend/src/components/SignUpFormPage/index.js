@@ -39,7 +39,7 @@ export const SignUpFormPage = () => {
     }
     
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <ul>
                 {errors.map((errors,idx) => (
                     <li key={idx}>{errors}</li>
@@ -77,7 +77,7 @@ export const SignUpFormPage = () => {
                 onChange={e => setConfirmPassword(e.target.value)}
                 required/>
             </label>
-            <div onClick={onSubmit}>Sign Up</div>
+            <button type='submit'>Sign Up</button>
         </form>
     )
 }

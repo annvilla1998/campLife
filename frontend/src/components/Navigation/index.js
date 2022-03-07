@@ -7,20 +7,22 @@ import LoginFormModal from "../LoginFormModal";
 
 export const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
-    let sessionLinks = (  
+    let sessionLinks;
+    
+    
+    if(!sessionUser) {
+        sessionLinks = (  
         <>
             <LoginFormModal />
             <NavLink to='/signup'>Sign Up</NavLink>
         </>
        )  
-
-    useEffect(() => {
-        if(sessionUser) {
+    }else{
             sessionLinks = (
                 <ProfileButton user={sessionUser} />
             )   
-        }
-    },[sessionUser])
+    }
+    
 
 
     return (
