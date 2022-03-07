@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import * as sessionActions from '../../store/session'
@@ -17,29 +17,29 @@ export const SignUpFormPage = () => {
 
     // if (sessionUser) return <Redirect to="/" />;
 
-    const onSubmit = async (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-
+        
+        setErrors([]);
         if(password === confirmPassword) {
-            history.push('/')
-            setErrors([]);
-
-            return dispatch(sessionActions.signUpUser({
-                username,
+            
+            dispatch(sessionActions.signUpUser({
                 email,
+                username,
                 password
             }))
             .catch(async res => {
                 const data = await res.json();
                 if(data && data.errors) setErrors(data.errors)
             })
+            return history.push('/')
         }else{ 
             return setErrors(['Passwords must match'])
         }
     }
     
     return (
-        <form onSubmit={onSubmit}>
+        <form>
             <ul>
                 {errors.map((errors,idx) => (
                     <li key={idx}>{errors}</li>
@@ -77,7 +77,7 @@ export const SignUpFormPage = () => {
                 onChange={e => setConfirmPassword(e.target.value)}
                 required/>
             </label>
-            <button type="submit">Sign Up</button>
+            <div onClick={onSubmit}>Sign Up</div>
         </form>
     )
 }

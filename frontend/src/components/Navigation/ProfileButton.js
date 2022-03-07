@@ -4,8 +4,8 @@ import * as sessionActions from '../../store/session'
 
 
 export const ProfileButton = ({user}) => {
-    const [dropdown, showDropdown] = useState(false)
     const dispatch = useDispatch()
+    const [dropdown, showDropdown] = useState(false)
 
     const showMenu = () => {
         if(dropdown) return;
