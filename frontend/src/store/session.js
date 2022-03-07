@@ -23,7 +23,7 @@ export const signUpUser = (user) => async dispatch => {
             password
         })
     })
-    const data = res.json()
+    const data = await res.json()
     dispatch(setSession(data.user))
     return res
 }
