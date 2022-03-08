@@ -8,15 +8,13 @@ import './Sites.css'
 
 export const Sites = () => {
     const dispatch = useDispatch();
-    const sitesObj = useSelector(state => state.siteState)
+    const sitesObj = useSelector(state => state.siteState.sites)
     const sitesArr = Object.values(sitesObj)
     const [showForm, setShowForm] = useState(false)
-
+   
     useEffect(() => {
         dispatch(getAllSites())
     },[dispatch])
-
-
     return (
        <div className='sites'>
         <h2>Sites</h2>

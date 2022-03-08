@@ -118,6 +118,13 @@ export const CreateSite = ({hideForm}) => {
                     onChange={e => setDescription(e.target.value)}
                     />
                 </label>
+                <label>Image
+                    <input 
+                    type="image"
+                    
+                    multiple
+                    />
+                </label>
                 <button type='submit'>Host New Site</button>
                 <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>

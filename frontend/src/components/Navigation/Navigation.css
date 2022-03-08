@@ -36,6 +36,7 @@ a {
     background-color: #0A0A09;
     height: 100px;
     position: fixed;
+    z-index: 100;
 }
 
 
