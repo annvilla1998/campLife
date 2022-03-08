@@ -5,27 +5,32 @@ const GET_SITES = 'sites/GET_SITES'
 const POST_SITE = 'sites/POST_SITE'
 const DELETE_SITE = 'sites/DELETE_SITE'
 
-const getSites = (siteList) => { 
+export const getSites = (sites) => ({ 
     type: GET_SITES,
-    siteList
-}
+    sites
+})
 
-const initialState = {
-    siteList: []
-}
 
 export const getAllSites = () => async dispatch => {
     const res = await csrfFetch('/api/sites');
+    const sites = await res.json();
+    dispatch(getSites(sites))
+}
 
-    if(res.ok) {
-        const siteList = await res.json();
-        dispatch(getSites(siteList))
-    }
+const initialState = {
+    sites : {}
 }
 
 const siteReducer = (state = initialState, action) => {
+    let newState;
+    let sites;
     switch(action.type) {
         case GET_SITES:
+            // newState = { ...state}
+            // // newSites = {}
+            // action.sites.forEach(site => sites[site.id] = site)
+            // newState.sites = sites
+            // return newState
             const allSites = {};
             action.sites.forEach(site => {
                 allSites[site.id] = site
@@ -39,3 +44,5 @@ const siteReducer = (state = initialState, action) => {
             return state
     }
 }
+
+export default siteReducer
