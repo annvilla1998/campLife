@@ -1,16 +1,19 @@
+import { NavLink } from "react-router-dom"
 
 
 export const SiteList = ({ site }) => {
 
 
     return (
-        <li className='site-list'>
-            <span>{site.name}</span>
-            <span>{site.address}</span>
-            <span>{site.city}</span>
-            <span>{site.state}</span>
-            <span>{site.country}</span>
-            <span>{site.price}</span>
-        </li>
+        <NavLink exact to='/sites/:id'>
+            <li className='site-list'>
+                <span>Site: {site.name}</span>
+                <span>Address: {site.address}</span>
+                <span>City: {site.city}</span>
+                <span>State:{site.state}</span>
+                <span>Country: {site.country}</span>
+                <span>${site.price}/night</span>
+            </li>
+        </NavLink>
     )
 }
