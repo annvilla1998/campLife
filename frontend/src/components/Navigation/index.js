@@ -27,12 +27,18 @@ export const Navigation = ({isLoaded}) => {
 
     return (
         <div  className="nav-container">
-            <ul className="nav-bar">
-                <li>
-                    <NavLink exact to="/">Home</NavLink>
-                    {isLoaded && sessionLinks}
-                </li>
-            </ul>    
+            <NavLink id='home-link' to="/">
+                <img id='logo' src='https://cdn-icons-png.flaticon.com/512/1020/1020586.png'/>
+                    CAMPLIFE</NavLink>
+            <div className='nav-menu'>
+                <div className="nav-bar">
+                        <div id="user-buttons">
+                            {isLoaded && sessionLinks}
+                            
+                        </div>
+                        
+                </div>    
+            </div>
         </div>
     )
 }
