@@ -37,7 +37,8 @@ export const createSite = (data) => async dispatch => {
 }
 
 const initialState = {
-    sites : {}
+    sites : {},
+    images: {}
 }
 
 const siteReducer = (state = initialState, action) => {
@@ -47,12 +48,22 @@ const siteReducer = (state = initialState, action) => {
             // action.sites.forEach(site => newState[site.id] = site)
             // return newState
             const allSites = {};
+            const allImages = {}
             action.sites.sites.forEach(site => {
                 allSites[site.id] = site
             })
+            action.sites.images.forEach(image => {
+                allImages[image.id] = image
+            })
             return {
-                ...allSites,
-                ...state,
+                sites: {
+                    ...allSites,
+                    ...state.sites
+                },
+                images: {
+                    ...allImages,
+                    ...state.images
+                },
             }
         default:
             return state

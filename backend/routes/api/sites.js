@@ -10,9 +10,10 @@ const router = express.Router();
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
     const sites = await Site.findAll();
-    // const images = await Image.findAll();
+    const images = await Image.findAll();
     return res.json({
-        sites
+        sites,
+        images
     })
 }))
 
