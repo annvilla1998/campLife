@@ -25,6 +25,9 @@ function Root() {
         <ModalProvider>
           <BrowserRouter>
             <App />
+            <div className='stars'></div>
+            <div className='twinkling'></div>
+            <div className='clouds'></div>
           </BrowserRouter>
         </ModalProvider>
     </Provider>
