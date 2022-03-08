@@ -17,13 +17,14 @@ export const Sites = () => {
 
 
     return (
-       <>
+       <div className='sites'>
         <h2>Sites</h2>
         <ul className="site-list">
             {sitesArr.map(site => (
                 <SiteList key={site.id} site={site}/>
             ))}
         </ul>
-       </>  
+        
+       </div>  
     )
 }
