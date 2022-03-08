@@ -3,10 +3,8 @@
     margin: 0;
     padding: 0;
 }
-/* 
-body { 
-    
-} */
+
+
 
 
 a:hover { 
@@ -37,6 +35,7 @@ a {
     /* background-color: #D1D6C7; */
     background-color: #0A0A09;
     height: 100px;
+    position: fixed;
 }
 
 

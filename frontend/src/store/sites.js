@@ -26,19 +26,16 @@ const siteReducer = (state = initialState, action) => {
     let sites;
     switch(action.type) {
         case GET_SITES:
-            // newState = { ...state}
-            // // newSites = {}
-            // action.sites.forEach(site => sites[site.id] = site)
-            // newState.sites = sites
+            // const newState = { ...state}
+            // action.sites.forEach(site => newState[site.id] = site)
             // return newState
             const allSites = {};
-            action.sites.forEach(site => {
+            action.sites.sites.forEach(site => {
                 allSites[site.id] = site
             })
             return {
                 ...allSites,
                 ...state,
-                siteList: action.siteList
             }
         default:
             return state
