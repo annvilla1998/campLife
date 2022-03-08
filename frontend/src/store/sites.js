@@ -10,6 +10,11 @@ export const getSites = (sites) => ({
     sites
 })
 
+export const postSite = (site) => ({
+    type: POST_SITE,
+    site
+})
+
 
 export const getAllSites = () => async dispatch => {
     const res = await csrfFetch('/api/sites');
@@ -17,13 +22,25 @@ export const getAllSites = () => async dispatch => {
     dispatch(getSites(sites))
 }
 
+export const createSite = (data) => async dispatch => {
+    const res = await csrfFetch('/api/sites', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+
+    const newSite = await res.json();
+    dispatch(postSite(newSite))
+    return newSite
+}
+
 const initialState = {
     sites : {}
 }
 
 const siteReducer = (state = initialState, action) => {
-    let newState;
-    let sites;
     switch(action.type) {
         case GET_SITES:
             // const newState = { ...state}
