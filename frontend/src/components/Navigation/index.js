@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import { ProfileButton } from "./ProfileButton"
 import './Navigation.css';
 import LoginFormModal from "../LoginFormModal";
+import { Sites } from "../Sites";
 
 export const Navigation = ({isLoaded}) => {
     const sessionUser = useSelector(state => state.session.user);
@@ -32,9 +33,8 @@ export const Navigation = ({isLoaded}) => {
                 <div className="nav-bar">
                         <div id="user-buttons">
                             {isLoaded && sessionLinks}
-                            
                         </div>
-                        
+                        <NavLink to="/sites">Sites</NavLink>                        
                 </div>    
             </div>
         </div>

@@ -24,10 +24,12 @@ function Root() {
     <Provider store={store}>
         <ModalProvider>
           <BrowserRouter>
-            <App />
-            <div className='stars'></div>
-            <div className='twinkling'></div>
-            <div className='clouds'></div>
+            <App className='everything' />
+            <div className='stars-background'>
+              <div className='stars'></div>
+              <div className='twinkling'></div>
+              <div className='clouds'></div>
+            </div>
           </BrowserRouter>
         </ModalProvider>
     </Provider>
