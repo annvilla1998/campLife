@@ -2,12 +2,18 @@ import { applyMiddleware } from "redux";
 import { csrfFetch } from "./csrf";
 
 const GET_SITES = 'sites/GET_SITES'
+const GET_ONE = 'sites/GET_ONE'
 const POST_SITE = 'sites/POST_SITE'
 const DELETE_SITE = 'sites/DELETE_SITE'
 
 export const getSites = (sites) => ({ 
     type: GET_SITES,
     sites
+})
+
+export const getOne = (site) => ({
+    type: GET_ONE,
+    site
 })
 
 export const postSite = (site) => ({
@@ -20,6 +26,13 @@ export const getAllSites = () => async dispatch => {
     const res = await csrfFetch('/api/sites');
     const sites = await res.json();
     dispatch(getSites(sites))
+}
+
+export const getSiteDetails = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/sites/${id}`)
+
+    const site = await res.json();
+    dispatch(getOne(site))
 }
 
 export const createSite = (data) => async dispatch => {
@@ -42,13 +55,13 @@ const initialState = {
 }
 
 const siteReducer = (state = initialState, action) => {
+    const allSites = {};
+    const allImages = {}
     switch(action.type) {
         case GET_SITES:
             // const newState = { ...state}
             // action.sites.forEach(site => newState[site.id] = site)
             // return newState
-            const allSites = {};
-            const allImages = {}
             action.sites.sites.forEach(site => {
                 allSites[site.id] = site
             })
@@ -65,6 +78,18 @@ const siteReducer = (state = initialState, action) => {
                     ...state.images
                 },
             }
+        case GET_ONE:
+            return {
+                ...state,
+                sites: {
+                    ...state.sites,
+                    ...action.site
+                }
+            }
+        // case POST_SITE:
+        //     allSites = {...state.sites};
+        //     allImages = {...state.images};
+        //     // allSites[]
         default:
             return state
     }

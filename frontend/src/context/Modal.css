@@ -1,3 +1,4 @@
+
 #modal {
     position: fixed;
     top: 0;
@@ -19,6 +20,20 @@
   }
   
   #modal-content {
+    /* display: flex; */
+    /* flex-direction: row; */
     position: absolute;
     background-color:white;
+    padding: 20px;
+
+  }
+
+  button {
+    font-family: 'Fredoka', sans-serif;
+    padding: 5px;
+    border-radius: 15px;
+  }
+
+  button:hover {
+    background-color: #73766D;
   }

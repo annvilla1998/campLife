@@ -20,7 +20,16 @@ router.get('/', asyncHandler(async (req, res) => {
 //post a new site
 router.post('/', requireAuth, asyncHandler(async (req,res) => {
     const { address, city, state, country, name, price, description } = req.body
-    const newSite = await Site.create(req.body)
+    const newSite = await Site.create({
+        address, 
+        city, 
+        state, 
+        country, 
+        name, 
+        price, 
+        description
+    })
+
     return res.redirect(`${req.baseUrl}/${newSite.id}`)
 }))
 
