@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { editSite } from "../../store/sites";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import './Form.css';
 
 
 export const EditSite = ({site, hideForm}) => {
@@ -53,7 +54,7 @@ export const EditSite = ({site, hideForm}) => {
    
 
     return (
-        <section className='create-site-form'>
+        <section className='edit-site-form'>
             <ul>
                 {errors.map(error => (
                     <li key={error}>{error}</li>

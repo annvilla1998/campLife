@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createSite } from "../../store/sites";
 import { useSelector } from "react-redux";
+import './Form.css';
 
 
 export const CreateSite = ({hideForm}) => {

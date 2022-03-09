@@ -74,6 +74,7 @@ export const editSite = (data) => async dispatch => {
     return site
 }
 
+//thunk
 export const deleteSite = (siteId) => async dispatch => {
     const response = await csrfFetch(`/api/sites/${siteId}`, {
       method: 'DELETE',

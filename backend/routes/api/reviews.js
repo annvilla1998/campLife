@@ -8,13 +8,30 @@ const { Review } = require('../../db/models');
 const router = express.Router();
 
 
-//get all reviews
+// //get all reviews
+// router.get('/', asyncHandler(async(req,res) => {
+//     const reviews = await Review.findAll()
 
-//post a review
+//     return res.json(reviews)
+// }))
 
-//edit a review
+// //post a review
+// router.post('/', requireAuth, asyncHandler(async(req,res) => {
 
-//delete a review
+//     const { userId, siteId, review, rating } = req.body;
+//     const newReview = await Review.create({
+//         userId,
+//         siteId,
+//         review,
+//         rating
+//     })
+//     res.redirect(`${req.baseUrl}/`)
+// }))
+
+
+// //edit a review
+
+// //delete a review
 
 
 module.exports = router

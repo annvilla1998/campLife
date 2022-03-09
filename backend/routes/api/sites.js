@@ -62,7 +62,7 @@ router.put('/:id', requireAuth,asyncHandler(async (req,res) => {
     return res.json(site)
 }))
 
-//delete a site
+//delete a site route
 router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
     const site = await Site.findByPk(req.params.id)
 
@@ -79,5 +79,31 @@ router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
     }))
     return res.json({ id: site.id })
 }))
+
+//get all reviews
+router.get('/:id/reviews', asyncHandler(async(req,res) => {
+    const reviews = await Review.findAll()
+
+    return res.json(reviews)
+}))
+
+//post a review
+router.post('/:id/reviews', requireAuth, asyncHandler(async(req,res) => {
+    
+    const { userId, siteId, review, rating } = req.body;
+    const newReview = await Review.create({
+        userId,
+        siteId,
+        review,
+        rating
+    })
+    res.redirect(`${req.baseUrl}/`)
+}))
+
+
+//edit a review
+
+//delete a review
+
 
 module.exports = router

@@ -37,9 +37,19 @@ module.exports = (sequelize, DataTypes) => {
   Site.associate = function(models) {
     // associations can be defined here
     Site.belongsTo(models.User, { foreignKey: 'userId' })
-    Site.hasMany(models.Trip, { foreignKey: 'siteId'})
-    Site.hasMany(models.Image, { foreignKey: 'siteId'})
-    Site.hasMany(models.Review, { foreignKey: 'siteId'})
+    Site.hasMany(models.Trip, { foreignKey: 'siteId',
+    onDelete: 'CASCADE',
+    hooks: true
+  })
+    Site.hasMany(models.Image, { foreignKey: 'siteId',
+      onDelete: 'CASCADE',
+      hooks: true
+    })
+    Site.hasMany(models.Review, { foreignKey: 'siteId',
+      onDelete: 'CASCADE',
+      hooks: true
+  })
+
   };
   return Site;
 };
