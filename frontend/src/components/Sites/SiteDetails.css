@@ -1,5 +1,5 @@
-.site-detail {
-    padding-top: 120px;
+.site-detail-container {
+    /* padding-top: 120px; */
     color: white;
-    
+    /* display: flex; */
 }

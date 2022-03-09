@@ -19,7 +19,11 @@ router.get('/', asyncHandler(async (req, res) => {
 
 //post a new site
 router.post('/', requireAuth, asyncHandler(async (req,res) => {
-    const { address, city, state, country, name, price, description } = req.body
+    const { address, city, state, country, name, price, description, url } = req.body
+    const newImage = await Image.create({
+        url,
+        siteId: +req.params.id
+    })
     const newSite = await Site.create({
         address, 
         city, 
@@ -29,13 +33,14 @@ router.post('/', requireAuth, asyncHandler(async (req,res) => {
         price, 
         description
     })
-
+    
     return res.redirect(`${req.baseUrl}/${newSite.id}`)
 }))
 
+
 //get site details
 router.get('/:id', asyncHandler(async (req,res) => {
-    const siteId = req.params.id;
+    const siteId = +req.params.id;
     const site = await Site.findByPk(siteId);
     return res.json(site)
 }))

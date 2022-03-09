@@ -19,6 +19,8 @@ export const CreateSite = ({hideForm}) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
+        setErrors([])
+        hideForm()
         const newSite = {
             address,
             city,
@@ -26,25 +28,30 @@ export const CreateSite = ({hideForm}) => {
             country,
             name,
             price,
-            description
+            description,
+            url
         }
 
         // const newImage = {
         //     url
         // }
-        let createdSite;
-        try {
-            createdSite = await dispatch(createdSite(newSite))
-        }catch (res){
-            const data = await res.json();
-            if(data && data.errors) setErrors(data.errors)
-        }
-        if(createdSite){
-            setErrors([])
-            history.push(`/sites/${createdSite.id}`)
-            hideForm()
-        }
-
+        // let createdSite;
+        // try {
+        //     createdSite = await dispatch(createSite(newSite))
+        // }catch (errors){
+        //     const data = await res.json();
+        //     if(data && data.errors) setErrors(data.errors)
+        // }
+        dispatch(createSite(newSite))
+        .catch(async (res) => {
+            const data = await res.json()
+            if(data && data.errors) setErrors(data.errors) 
+        })
+        return history.push(`/sites/${newSite.id}`)
+        
+        // if(createdSite){
+        // }
+        
     }
 
 

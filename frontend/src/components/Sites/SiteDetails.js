@@ -8,6 +8,8 @@ export const SiteDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const site = useSelector(state => state.siteState.sites)
+    const imageObj = useSelector(state => state.siteState.images)
+    const imageArr = Object.values(imageObj)
     // const [showEdit, setShowEdit] = useState(false)
     useEffect(() => {
         dispatch(getSiteDetails(id))
@@ -15,13 +17,22 @@ export const SiteDetails = () => {
     },[dispatch, id])
     
     return (
-        <div className="site-detail">
-            <span>Site: {site.name}</span>
-            <span>Address: {site.address}</span>
-            <span>City: {site.city}</span>
-            <span>State: {site.state}</span>
-            <span>Country: {site.country}</span>
-            <span>${site.price}/night</span>
+        <div className="site-detail-container">
+            <span id='image-detail-page'>
+                {imageArr.map(({ siteId, url }) => (
+                    siteId === site.id ? (
+                        <img key={url} src={url}/>
+                    )
+                : null))}
+            </span>
+            <div id="site-detail-text">
+                <span>Site: {site.name}</span>
+                <span>Address: {site.address}</span>
+                <span>City: {site.city}</span>
+                <span>State: {site.state}</span>
+                <span>Country: {site.country}</span>
+                <span>${site.price}/night</span>
+            </div>
         </div>
     )
 }

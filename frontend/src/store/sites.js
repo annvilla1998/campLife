@@ -86,10 +86,13 @@ const siteReducer = (state = initialState, action) => {
                     ...action.site
                 }
             }
-        // case POST_SITE:
-        //     allSites = {...state.sites};
-        //     allImages = {...state.images};
-        //     // allSites[]
+        case POST_SITE:
+            const newState = {
+                ...state,
+                [action.site.id]: action.site,
+            }
+            action.site[action.site.id] = action.site
+            return newState
         default:
             return state
     }
