@@ -39,14 +39,15 @@ export const SignUpFormPage = () => {
     }
     
     return (
-        <form onSubmit={onSubmit}>
+        <form id="sign-up-form" onSubmit={onSubmit}>
+            <h2>Sign Up</h2>
             <ul>
                 {errors.map((errors,idx) => (
                     <li key={idx}>{errors}</li>
                 ))}
             </ul>
             <label>
-                Username
+                Username 
                 <input
                 type="text"
                 value={username}

@@ -1,7 +1,33 @@
-form {
-    color: white;
+#sign-up-form {
+    color: white; 
+    position: relative;
+    top: 200px;
+    text-align: center;
+    border: 5px solid white;
+    height: 500px;
+    margin: 0 500px;
+    display:flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    font-family: 'Fredoka', sans-serif;
+}
+
+input {
+    border-radius: 10px;
+    height: 25px;
 }
 
 button {
     color: black;
+    width: 60px;
+    padding: 20px;
 }
+
+h2 {
+    padding: 10px;
+    padding-bottom: 20px;
+    font-family: 'Fredoka', sans-serif;
+}
+
+

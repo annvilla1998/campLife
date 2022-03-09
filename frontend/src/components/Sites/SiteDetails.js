@@ -7,17 +7,35 @@ import './SiteDetails.css'
 export const SiteDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
+    const sessionUser = useSelector(state => state.session.user);
     const site = useSelector(state => state.siteState.sites)
     const imageObj = useSelector(state => state.siteState.images)
     const imageArr = Object.values(imageObj)
-    // const [showEdit, setShowEdit] = useState(false)
+    const [showButtons, setShowButtons] = useState(false)
+    console.log(imageArr)
     useEffect(() => {
         dispatch(getSiteDetails(id))
-        // setShowEdit(false)
+        setShowButtons(false)
     },[dispatch, id])
+    
+    // let content = null;
+    // console.log(sessionUser.id === site.userId)
+    
+    // if(sessionUser && sessionUser.id === site.userId) {
+    //     setShowButtons(true)
+    // }
+    // if(showButtons) {
+    //     content = (
+    //         <div>
+    //             <button>Edit</button>
+    //             <button>Delete</button>
+    //         </div>
+    //     )
+    // }
     
     return (
         <div className="site-detail-container">
+            <div id="site-details">
             <span id='image-detail-page'>
                 {imageArr.map(({ siteId, url }) => (
                     siteId === site.id ? (
@@ -32,6 +50,10 @@ export const SiteDetails = () => {
                 <span>State: {site.state}</span>
                 <span>Country: {site.country}</span>
                 <span>${site.price}/night</span>
+            </div>
+         {/* {content} */}
+                <button>Edit</button>
+                <button>Delete</button>
             </div>
         </div>
     )

@@ -2,9 +2,13 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createSite } from "../../store/sites";
+import { useSelector } from "react-redux";
+
 
 export const CreateSite = ({hideForm}) => {
     const [errors, setErrors] = useState([]);
+    const sessionUser = useSelector(state => state.session.user);
+
     const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState('');
@@ -15,13 +19,11 @@ export const CreateSite = ({hideForm}) => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState('')
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        setErrors([])
-        hideForm()
+     
         const newSite = {
+            userId: sessionUser.id,
             address,
             city,
             state,
@@ -31,27 +33,19 @@ export const CreateSite = ({hideForm}) => {
             description,
             url
         }
-
-        // const newImage = {
-        //     url
-        // }
-        // let createdSite;
-        // try {
-        //     createdSite = await dispatch(createSite(newSite))
-        // }catch (errors){
-        //     const data = await res.json();
-        //     if(data && data.errors) setErrors(data.errors)
-        // }
-        dispatch(createSite(newSite))
+        
+        let createdSite;
+        createdSite = await dispatch(createSite(newSite))
         .catch(async (res) => {
             const data = await res.json()
             if(data && data.errors) setErrors(data.errors) 
         })
-        return history.push(`/sites/${newSite.id}`)
-        
-        // if(createdSite){
-        // }
-        
+
+        if (createdSite) {
+            setErrors([])
+            hideForm()
+            return history.push(`/sites/${createdSite.id}`)
+        }
     }
 
 
@@ -127,9 +121,9 @@ export const CreateSite = ({hideForm}) => {
                     onChange={e => setDescription(e.target.value)}
                     />
                 </label>
-                <label>Image
+                <label>Image URL
                     <input 
-                    type="file"
+                    src="URL"
                     value={url}
                     onChange={e => setUrl(e.target.value)}
                     multiple

@@ -1,5 +1,16 @@
-.site-detail-container {
+html {
     /* padding-top: 120px; */
     color: white;
     /* display: flex; */
+}
+
+#site-details {
+    /* padding-top: 400px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+    gap: 20px;
+    top: 200px;
 }
