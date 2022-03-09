@@ -5,7 +5,7 @@ import { createSite } from "../../store/sites";
 
 export const CreateSite = ({hideForm}) => {
     const [errors, setErrors] = useState([]);
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const history = useHistory();
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('')

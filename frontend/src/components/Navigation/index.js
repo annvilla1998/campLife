@@ -12,13 +12,13 @@ export const Navigation = ({isLoaded}) => {
     let sessionLinks;
     if(sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <ProfileButton id='profile-button' user={sessionUser} />
         )
     } else {
         sessionLinks = (
         <>
             <LoginFormModal />
-            <NavLink to='/signup'>Sign Up</NavLink>
+            <NavLink id='sign-up' to='/signup'>Sign Up</NavLink>
         </>
        ) 
     }
@@ -34,7 +34,7 @@ export const Navigation = ({isLoaded}) => {
                         <div id="user-buttons">
                             {isLoaded && sessionLinks}
                         </div>
-                        <NavLink to="/sites">Sites</NavLink>                        
+                        <NavLink id='sites' to="/sites">Sites</NavLink>                        
                 </div>    
             </div>
         </div>

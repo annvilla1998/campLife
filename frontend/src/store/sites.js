@@ -38,9 +38,9 @@ export const getSiteDetails = (id) => async dispatch => {
 export const createSite = (data) => async dispatch => {
     const res = await csrfFetch('/api/sites', {
         method: 'post',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        // headers: {
+        //     'Content-Type': 'application/json',
+        // },
         body: JSON.stringify(data)
     })
 

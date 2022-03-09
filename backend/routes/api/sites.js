@@ -33,7 +33,7 @@ router.post('/', requireAuth, asyncHandler(async (req,res) => {
         price, 
         description
     })
-    
+    console.log(req.body)
     return res.redirect(`${req.baseUrl}/${newSite.id}`)
 }))
 
