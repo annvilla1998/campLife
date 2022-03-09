@@ -1,29 +1,31 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { createSite } from "../../store/sites";
+import { useHistory, useParams } from "react-router-dom";
+import { editSite } from "../../store/sites";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import './Form.css';
 
 
-export const CreateSite = ({hideForm}) => {
+export const EditSite = ({site, hideForm}) => {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
-
     const dispatch = useDispatch();
     const history = useHistory();
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
-    const [country, setCountry] = useState('')
-    const [name, setName] = useState("")
-    const [price, setPrice] = useState(0)
-    const [description, setDescription] = useState("")
-    const [url, setUrl] = useState('')
+    const [address, setAddress] = useState(site.address);
+    const [city, setCity] = useState(site.city)
+    const [state, setState] = useState(site.state)
+    const [country, setCountry] = useState(site.country)
+    const [name, setName] = useState(site.name)
+    const [price, setPrice] = useState(site.price)
+    const [description, setDescription] = useState(site.description)
+    const [url, setUrl] = useState(site.url)
+
     const handleSubmit = async (e) => {
         e.preventDefault();
      
         const newSite = {
+            ...site,
             userId: sessionUser.id,
             address,
             city,
@@ -35,30 +37,24 @@ export const CreateSite = ({hideForm}) => {
             url
         }
         
-        let createdSite;
-        createdSite = await dispatch(createSite(newSite))
-        .catch(async (res) => {
-            const data = await res.json()
-            if(data && data.errors) setErrors(data.errors) 
-        })
-
-        if (createdSite) {
-            setErrors([])
+        const updatedSite = await dispatch(editSite(newSite))
+        if(updatedSite){
             hideForm()
-            return history.push(`/sites/${createdSite.id}`)
+            setErrors([])
         }
+
     }
-
-
 
     const handleCancelClick = (e) => {
         e.preventDefault();
-        setErrors([]);
         hideForm();
+        setErrors([])
       };
 
+   
+
     return (
-        <section className='create-site-form'>
+        <section className='edit-site-form'>
             <ul>
                 {errors.map(error => (
                     <li key={error}>{error}</li>
@@ -130,7 +126,7 @@ export const CreateSite = ({hideForm}) => {
                     multiple
                     />
                 </label>
-                <button type='submit'>Host New Site</button>
+                <button type='submit'>Edit Site</button>
                 <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>

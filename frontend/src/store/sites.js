@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 const GET_SITES = 'sites/GET_SITES'
 const GET_ONE = 'sites/GET_ONE'
 const POST_SITE = 'sites/POST_SITE'
+const EDIT_SITE = 'sites/EDIT_SITE'
 const DELETE_SITE = 'sites/DELETE_SITE'
 
 export const getSites = (sites) => ({ 
@@ -19,6 +20,17 @@ export const getOne = (site) => ({
 export const postSite = (site) => ({
     type: POST_SITE,
     site
+})
+
+export const editOne = (site) => ({
+    type: EDIT_SITE,
+    site
+})
+
+export const remove = (siteId) => ({
+    type: DELETE_SITE,
+    siteId,
+    
 })
 
 
@@ -48,6 +60,30 @@ export const createSite = (data) => async dispatch => {
     dispatch(postSite(newSite))
     return newSite
 }
+
+export const editSite = (data) => async dispatch => {
+    const res = await csrfFetch(`api/sites/${data.id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    const site = await res.json();
+    dispatch(editOne(site))
+    return site
+}
+
+//thunk
+export const deleteSite = (siteId) => async dispatch => {
+    const response = await csrfFetch(`/api/sites/${siteId}`, {
+      method: 'DELETE',
+    });
+    const { id: deletedSiteId } = await response.json();
+    dispatch(remove(deletedSiteId));
+      return deletedSiteId;
+  };
+
 
 const initialState = {
     sites : {},
@@ -84,7 +120,6 @@ const siteReducer = (state = initialState, action) => {
                 }
             }
         case POST_SITE:
-            
               return {
                 ...state,
                 sites: {
@@ -98,6 +133,18 @@ const siteReducer = (state = initialState, action) => {
                     ...action.images
                 }
               };
+        case EDIT_SITE:
+              return {
+                  ...state,
+                  [action.site.id]: {
+                      ...state[action.site.id],
+                      ...action.site
+                  }
+              }
+        case DELETE_SITE:
+            const newState = { ...state };
+            delete newState[action.site.siteId];
+            return newState;
         default:
             return state
     }

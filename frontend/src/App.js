@@ -6,6 +6,7 @@ import * as sessionActions from "./store/session";
 import {Navigation} from "./components/Navigation";
 import { Sites } from "./components/Sites"
 import { SiteDetails } from "./components/Sites/SiteDetails";
+import { EditSite } from "./components/Sites/EditSiteForm"
 
 function App() {
   const dispatch = useDispatch();
