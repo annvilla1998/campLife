@@ -1,3 +1,7 @@
+#login-h2 {
+  color: black;
+}
+
 
 #modal {
     position: fixed;
@@ -21,11 +25,14 @@
   
   #modal-content {
     /* display: flex; */
-    /* flex-direction: row; */
+    /* flex-direction: column; */
     position: absolute;
     background-color:white;
     padding: 20px;
-
+    border-radius: 20px;
+    height: 400px;
+    width: 400px;
+    
   }
 
   button {
@@ -36,4 +43,11 @@
 
   button:hover {
     background-color: #73766D;
+  }
+
+  #log-in-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
   }

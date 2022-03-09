@@ -37,14 +37,14 @@ export const getSiteDetails = (id) => async dispatch => {
 
 export const createSite = (data) => async dispatch => {
     const res = await csrfFetch('/api/sites', {
-        method: 'post',
-        // headers: {
-        //     'Content-Type': 'application/json',
-        // },
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify(data)
     })
-
     const newSite = await res.json();
+    console.log(newSite)
     dispatch(postSite(newSite))
     return newSite
 }
@@ -59,9 +59,6 @@ const siteReducer = (state = initialState, action) => {
     const allImages = {}
     switch(action.type) {
         case GET_SITES:
-            // const newState = { ...state}
-            // action.sites.forEach(site => newState[site.id] = site)
-            // return newState
             action.sites.sites.forEach(site => {
                 allSites[site.id] = site
             })
@@ -87,12 +84,20 @@ const siteReducer = (state = initialState, action) => {
                 }
             }
         case POST_SITE:
-            const newState = {
+            
+              return {
                 ...state,
-                [action.site.id]: action.site,
-            }
-            action.site[action.site.id] = action.site
-            return newState
+                sites: {
+                    ...state.sites,
+                    [action.site.id]: {
+                        ...action.site
+                    }    
+                },
+                images: {
+                    ...state.images,
+                    ...action.images
+                }
+              };
         default:
             return state
     }
