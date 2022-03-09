@@ -14,11 +14,7 @@ export const CreateSite = ({hideForm}) => {
     const [name, setName] = useState("")
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
-
-
-    // useEffect(() => {
-    //     dispatc
-    // })
+    const [url, setUrl] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,6 +28,10 @@ export const CreateSite = ({hideForm}) => {
             price,
             description
         }
+
+        // const newImage = {
+        //     url
+        // }
         let createdSite;
         try {
             createdSite = await dispatch(createdSite(newSite))
@@ -46,6 +46,8 @@ export const CreateSite = ({hideForm}) => {
         }
 
     }
+
+
 
     const handleCancelClick = (e) => {
         e.preventDefault();
@@ -120,8 +122,9 @@ export const CreateSite = ({hideForm}) => {
                 </label>
                 <label>Image
                     <input 
-                    type="image"
-                    
+                    type="file"
+                    value={url}
+                    onChange={e => setUrl(e.target.value)}
                     multiple
                     />
                 </label>

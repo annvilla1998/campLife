@@ -4,16 +4,12 @@ import { useEffect } from "react"
 import { getAllSites } from "../../store/sites"
 
 export const SiteList = ({ site }) => {
-    const dispatch = useDispatch();
     const imageObj = useSelector(state => state.siteState.images)
     const imagesArr = Object.values(imageObj)
-  
-
-    // console.log(site.id)
 
 
     return (
-        <NavLink exact to='/sites/:id'>
+        <NavLink exact to={`/sites/${site.id}`}>
             <li className='site-list'>
                 <div className='site-detail-container'>
                     <span id='images'>
