@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { Site, Image } = require('../../db/models');
+const { Site, Image, Review, Trip } = require('../../db/models');
 
 const router = express.Router();
 
@@ -50,9 +50,34 @@ router.get('/:id', asyncHandler(async (req,res) => {
 }))
 
 
-// //edit a site
-// router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
-//     const siteId = req.params.id
-// }))
+//edit a site
+router.put('/:id', requireAuth,asyncHandler(async (req,res) => {
+    const id = req.params.id
+    delete req.body.id;
+    await Site.update(req.body, {
+        where: { id },
+        returning: true
+    })
+    const site = await Site.findByPk(id)
+    return res.json(site)
+}))
+
+//delete a site
+router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
+    const site = await Site.findByPk(req.params.id)
+
+    await Site.destroy({ where: { id: site.id }})
+    await Review.destroy({where: {
+        siteId: site.id
+    }})
+    await Trip.destroy({where: {
+        siteId: site.id
+    }})
+    await Image.destroy(({where: {
+        siteId: site.id
+    }
+    }))
+    return res.json({ id: site.id })
+}))
 
 module.exports = router
