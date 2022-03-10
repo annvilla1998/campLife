@@ -17,7 +17,7 @@ export const Sites = () => {
     },[dispatch])
     return (
        <div className='sites'>
-        <h2>Sites</h2>
+        <h2>Adventure Awaits!</h2>
         <div onClick={() => {setShowForm(true)}}>Host New Site</div>
         {showForm ? (
              <CreateSite hideForm={() => setShowForm(false)}/>

@@ -55,34 +55,38 @@ export const SiteDetails = () => {
       }
 
     return (
-        <div className="site-detail-container">
-            {content}
-            <div id="site-details">
-            <span id='image-detail-page'>
-                {imageArr.map(({ siteId, url }) => (
-                    siteId === site?.id ? (
-                        <img key={url} src={url}/>
-                    )
-                : null))}
-            </span>
-            <div id="site-detail-text">
-                <span>Site: {site?.name}</span>
-                <span>Address: {site?.address}</span>
-                <span>City: {site?.city}</span>
-                <span>State: {site?.state}</span>
-                <span>Country: {site?.country}</span>
-                <span>${site?.price}/night</span>
-            </div>
-            {!showEditForm &&
-                <button  onClick={() => setShowEditForm(true)}>Edit</button>
-            }
-                <button onClick={handleDeleteSubmit}>Delete</button>
-                {/* {content} */}
-                {/* {site.userId === sessionUser.id && (
-                    <div>
+        <div className="site-detail-container-form">
+            <div className="site-detail-container">
+                <div id="site-details">
+                    <h2 id="site-details-h2">{site?.name}</h2>
+                <span id='image-detail-page'>
+                    {imageArr.map(({ siteId, url }) => (
+                        siteId === site?.id ? (
+                            <img key={url} src={url}/>
+                        )
+                    : null))}
+                </span>
+                <div id="site-detail-text">
+                    <span>Address: {site?.address}</span>
+                    <span>City: {site?.city}</span>
+                    <span>State: {site?.state}</span>
+                    <span>Country: {site?.country}</span>
+                    <span>${site?.price}/night</span>
+                </div>
+                    <div id="edit-delete-site">
+                    {!showEditForm &&
+                        <button  onClick={() => setShowEditForm(true)}>Edit</button>
+                    }
+                        <button onClick={handleDeleteSubmit}>Delete</button>
+                        {/* {content} */}
+                        {/* {site.userId === sessionUser.id && (
+                            <div>
+                            </div>
+                        )} */}
                     </div>
-                )} */}
+                </div>
             </div>
+            {content}
         </div>
     )
 }

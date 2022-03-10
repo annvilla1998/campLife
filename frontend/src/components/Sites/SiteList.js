@@ -11,7 +11,7 @@ export const SiteList = ({ site }) => {
     return (
         <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
             <li className='site-list'>
-                <div className='site-detail-container'>
+                <div className='site-list-detail-container'>
                     <span id='images'>
                         {imagesArr.map(({ siteId, url }) => (
                             siteId === site.id ? (

@@ -4,13 +4,69 @@ html {
     /* display: flex; */
 }
 
+
+.site-detail-container {
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    position: relative;
+    top: 150px;
+    justify-content: center;
+    /* border: 20px solid #565e47; */
+    box-shadow: 0 5px 40px;
+    width: 800px;
+    height: 700px;
+    
+}
+
 #site-details {
     /* padding-top: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position:relative;
+    /* position:relative;
     gap: 20px;
-    top: 200px;
+    top: 200px; */
 }
+#image-detail-page {
+    display: flex;
+    gap: 15px;
+    width: 500px;
+    height: 400px;
+    overflow-x: auto;
+    /* box-shadow: 0 5px 40px; */
+    border-radius: 5px;
+}
+
+#site-detail-text {
+    font-family: 'PT Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+}
+
+#edit-delete-site {
+    display:flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 10px;
+}
+
+/* #0A0A09
+#73766D
+#C5C9BB
+#D1D6C7
+#ACB0A4
+
+Earthy Tones
+#7C8265
+#70684D
+#B57F53
+#7D6766
+#79737A
+
+Other
+#F1D5A3
+#9E8F7F */
