@@ -10,12 +10,12 @@ export const SiteDetails = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
-    const site = useSelector(state => state.siteState.sites)
+    const site = useSelector(state => state.siteState.site)
     const imageObj = useSelector(state => state.siteState.images)
     const imageArr = Object.values(imageObj)
     const [showButtons, setShowButtons] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false);
-
+    // console.log(site)
     useEffect(() => {
         dispatch(getSiteDetails(id))
         setShowButtons(false)
@@ -23,24 +23,28 @@ export const SiteDetails = () => {
     
     let content = null;
     // if(sessionUser.id === site.userId) {
-    //     setShowButtons(true)
-    // }
-    // if(showButtons) {
-    //     content = (
-    //         <div>
-    //             <button>Edit</button>
-    //             <button>Delete</button>
-    //         </div>
-    //     )
-    // }
-
+        //     setShowButtons(true)
+        // }
+        // if(showButtons) {
+            //     content = (
+                //         <div>
+                //             <button>Edit</button>
+                //             <button>Delete</button>
+                //         </div>
+                //     )
+                // }
+                
     const handleDeleteSubmit = (e) => {
         e.preventDefault();
+    
+        let deletedSite;
+        deletedSite = dispatch(deleteSite(site.id))
 
-        dispatch(deleteSite(site.id))
-        history.push('/sites')
+        if(deletedSite){
+            history.push('/sites')
+        }
     }
-
+                
     if (showEditForm) {
         content = (
           <EditSite 
@@ -56,18 +60,18 @@ export const SiteDetails = () => {
             <div id="site-details">
             <span id='image-detail-page'>
                 {imageArr.map(({ siteId, url }) => (
-                    siteId === site.id ? (
+                    siteId === site?.id ? (
                         <img key={url} src={url}/>
                     )
                 : null))}
             </span>
             <div id="site-detail-text">
-                <span>Site: {site.name}</span>
-                <span>Address: {site.address}</span>
-                <span>City: {site.city}</span>
-                <span>State: {site.state}</span>
-                <span>Country: {site.country}</span>
-                <span>${site.price}/night</span>
+                <span>Site: {site?.name}</span>
+                <span>Address: {site?.address}</span>
+                <span>City: {site?.city}</span>
+                <span>State: {site?.state}</span>
+                <span>Country: {site?.country}</span>
+                <span>${site?.price}/night</span>
             </div>
             {!showEditForm &&
                 <button  onClick={() => setShowEditForm(true)}>Edit</button>

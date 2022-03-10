@@ -1,7 +1,8 @@
 .sites {
     padding-top: 120px;
     color: #7C8265;
-    font-family: 'Fredoka', sans-serif;
+    /* font-family: 'Fredoka', sans-serif; */
+    font-family: 'PT Sans', sans-serif;
 }
 
 h2 {
@@ -11,18 +12,22 @@ h2 {
 
 
 
-.site-list {
-    margin: 50px;
-    padding: 20px;
+.site-list-container {
+    display:block;
+    /* position: relative; */
+    /* top: 50px; */
+    /* left: 70px; */
+    
+    margin: auto;
+    /* margin: 30px; */
+    padding: 50px;
     width:100%;
     /* padding-top: 100px; */
     display: grid;
     grid-template-areas:
     "a b c";
     color:white;
-    grid-gap: 20px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 
@@ -31,13 +36,13 @@ li.site-list{
     height: 500px;
     width: 450px;
     display: grid;
-    border: 1px solid white;
-    box-shadow: 0 0 50px;
+    /* border: 0 solid white; */
+    /* box-shadow: 0 0 50px; */
 }
 
 img {
-    width: 400px;
-    border-radius: 20px;
+    width: 100%;
+    border-radius: 5px;
 }
 
 #site-list-text {
@@ -52,6 +57,13 @@ img {
 #images {
     display: flex;
     gap: 15px;
+    /* border: 1px solid  white; */
+    width: 400px;
+    height: 300px;
+    overflow-x: auto;
+    box-shadow: 0 5px 40px;
+    border-radius: 5px;
 }
+
 
 

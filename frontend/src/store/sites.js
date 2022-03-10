@@ -11,9 +11,10 @@ export const getSites = (sites) => ({
     sites
 })
 
-export const getOne = (site) => ({
+export const getOne = (site, images) => ({
     type: GET_ONE,
-    site
+    site,
+    images
 })
 
 export const postSite = (site) => ({
@@ -38,12 +39,14 @@ export const getAllSites = () => async dispatch => {
     const sites = await res.json();
     dispatch(getSites(sites))
 }
-
+//thunk
 export const getSiteDetails = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}`)
-
-    const site = await res.json();
-    dispatch(getOne(site))
+    if(res.ok){
+        const site = await res.json();
+        console.log(site)
+        dispatch(getOne(site))
+    }
 }
 
 export const createSite = (data) => async dispatch => {
@@ -55,7 +58,7 @@ export const createSite = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newSite = await res.json();
-    console.log(newSite)
+    // console.log(newSite)
     dispatch(postSite(newSite))
     return newSite
 }
@@ -68,7 +71,7 @@ export const editSite = (data) => async dispatch => {
         },
         body: JSON.stringify(data)
     })
-    console.log(res)
+    // console.log(res)
     const site = await res.json();
     dispatch(editOne(site))
     return site
@@ -93,6 +96,7 @@ const initialState = {
 const siteReducer = (state = initialState, action) => {
     const allSites = {};
     const allImages = {}
+    let newState = {}
     switch(action.type) {
         case GET_SITES:
             action.sites.sites.forEach(site => {
@@ -112,12 +116,12 @@ const siteReducer = (state = initialState, action) => {
                 },
             }
         case GET_ONE:
+            newState = {...state}
+            newState[action.site.site.id] = action.site.site;
             return {
-                ...state,
-                sites: {
-                    ...state.sites,
-                    ...action.site
-                }
+                ...newState,
+                site: action.site.site,
+                images: action.site.images
             }
         case POST_SITE:
               return {
@@ -148,7 +152,7 @@ const siteReducer = (state = initialState, action) => {
                 }
               };
         case DELETE_SITE:
-            const newState = { ...state };
+            newState = { ...state };
             delete newState[action.siteId];            
             return newState;
         default:

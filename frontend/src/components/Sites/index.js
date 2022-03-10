@@ -26,7 +26,7 @@ export const Sites = () => {
 
             </Route>
         )}
-        <ul className="site-list">
+        <ul className="site-list-container">
             {sitesArr.map(site => (
                 <SiteList key={site.id} site={site}/>
             ))}
