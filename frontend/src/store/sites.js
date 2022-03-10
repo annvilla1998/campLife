@@ -1,4 +1,3 @@
-import { applyMiddleware } from "redux";
 import { csrfFetch } from "./csrf";
 
 const GET_SITES = 'sites/GET_SITES'
@@ -62,13 +61,14 @@ export const createSite = (data) => async dispatch => {
 }
 
 export const editSite = (data) => async dispatch => {
-    const res = await csrfFetch(`api/sites/${data.id}`, {
-        method: "PUT",
+    const res = await csrfFetch(`/api/sites/${data.id}`, {
+        method: "PATCH",
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
     })
+    console.log(res)
     const site = await res.json();
     dispatch(editOne(site))
     return site
@@ -79,9 +79,9 @@ export const deleteSite = (siteId) => async dispatch => {
     const response = await csrfFetch(`/api/sites/${siteId}`, {
       method: 'DELETE',
     });
-    const { id: deletedSiteId } = await response.json();
-    dispatch(remove(deletedSiteId));
-      return deletedSiteId;
+    const site = await response.json();
+    dispatch(remove(site.id));
+      return site;
   };
 
 
@@ -135,15 +135,21 @@ const siteReducer = (state = initialState, action) => {
               };
         case EDIT_SITE:
               return {
-                  ...state,
-                  [action.site.id]: {
-                      ...state[action.site.id],
-                      ...action.site
-                  }
-              }
+                ...state,
+                sites: {
+                    ...state.sites,
+                    [action.site.id]: {
+                        ...action.site
+                    }    
+                },
+                images: {
+                    ...state.images,
+                    ...action.images
+                }
+              };
         case DELETE_SITE:
             const newState = { ...state };
-            delete newState[action.site.siteId];
+            delete newState[action.siteId];            
             return newState;
         default:
             return state

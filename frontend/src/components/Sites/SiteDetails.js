@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, Link } from "react-router-dom";
+import { Redirect, useParams, Link, useHistory } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import { EditSite } from "./EditSiteForm";
@@ -8,6 +8,7 @@ import { EditSite } from "./EditSiteForm";
 export const SiteDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const site = useSelector(state => state.siteState.sites)
     const imageObj = useSelector(state => state.siteState.images)
@@ -32,6 +33,14 @@ export const SiteDetails = () => {
     //         </div>
     //     )
     // }
+
+    const handleDeleteSubmit = (e) => {
+        e.preventDefault();
+
+        dispatch(deleteSite(site.id))
+        history.push('/sites')
+    }
+
     if (showEditForm) {
         content = (
           <EditSite 
@@ -63,7 +72,7 @@ export const SiteDetails = () => {
             {!showEditForm &&
                 <button  onClick={() => setShowEditForm(true)}>Edit</button>
             }
-                <button onClick={() => dispatch(deleteSite(site.id))}>Delete</button>
+                <button onClick={handleDeleteSubmit}>Delete</button>
                 {/* {content} */}
                 {/* {site.userId === sessionUser.id && (
                     <div>

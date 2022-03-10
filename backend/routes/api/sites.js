@@ -51,14 +51,27 @@ router.get('/:id', asyncHandler(async (req,res) => {
 
 
 //edit a site
-router.put('/:id', requireAuth,asyncHandler(async (req,res) => {
+router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
     const id = req.params.id
-    delete req.body.id;
-    await Site.update(req.body, {
-        where: { id },
-        returning: true
-    })
+    const { userId, address, city, state, country, name, price, description, url} = req.body
     const site = await Site.findByPk(id)
+    await site.update({
+        userId,
+        address,
+        city,
+        state,
+        country,
+        price,
+        name,
+        description,
+        url
+    })
+    // delete req.body.id;
+    // await Site.update(req.body, {
+    //     where: { id },
+    //     returning: true
+    // })
+    // const site = await Site.findByPk(id)
     return res.json(site)
 }))
 
@@ -66,18 +79,9 @@ router.put('/:id', requireAuth,asyncHandler(async (req,res) => {
 router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
     const site = await Site.findByPk(req.params.id)
 
-    await Site.destroy({ where: { id: site.id }})
-    await Review.destroy({where: {
-        siteId: site.id
-    }})
-    await Trip.destroy({where: {
-        siteId: site.id
-    }})
-    await Image.destroy(({where: {
-        siteId: site.id
-    }
-    }))
-    return res.json({ id: site.id })
+    await site.destroy()
+    
+    return res.json(site)
 }))
 
 //get all reviews
@@ -89,6 +93,7 @@ router.get('/:id/reviews', asyncHandler(async(req,res) => {
 
 //post a review
 router.post('/:id/reviews', requireAuth, asyncHandler(async(req,res) => {
+    const site = await Site.findByPk(req.params.id)
     
     const { userId, siteId, review, rating } = req.body;
     const newReview = await Review.create({
@@ -97,9 +102,8 @@ router.post('/:id/reviews', requireAuth, asyncHandler(async(req,res) => {
         review,
         rating
     })
-    res.redirect(`${req.baseUrl}/`)
+    res.redirect(`${req.baseUrl}/${site.id}`)
 }))
-
 
 //edit a review
 
