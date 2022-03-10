@@ -7,7 +7,7 @@
 
 
 
-a:hover { 
+a > .nav-container { 
     background-color: #C5c9bb;
 }  
 

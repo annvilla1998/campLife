@@ -10,12 +10,12 @@ export const SiteDetails = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
-    const site = useSelector(state => state.siteState.sites)
+    const site = useSelector(state => state.siteState)
     const imageObj = useSelector(state => state.siteState.images)
     const imageArr = Object.values(imageObj)
     const [showButtons, setShowButtons] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false);
-
+// console.log(site)
     useEffect(() => {
         dispatch(getSiteDetails(id))
         setShowButtons(false)

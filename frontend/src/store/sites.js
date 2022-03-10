@@ -38,12 +38,13 @@ export const getAllSites = () => async dispatch => {
     const sites = await res.json();
     dispatch(getSites(sites))
 }
-
+//thunk
 export const getSiteDetails = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}`)
-
-    const site = await res.json();
-    dispatch(getOne(site))
+    if(res.ok){
+        const site = await res.json();
+        dispatch(getOne(site))
+    }
 }
 
 export const createSite = (data) => async dispatch => {
@@ -93,6 +94,7 @@ const initialState = {
 const siteReducer = (state = initialState, action) => {
     const allSites = {};
     const allImages = {}
+    let newState = {}
     switch(action.type) {
         case GET_SITES:
             action.sites.sites.forEach(site => {
@@ -112,13 +114,19 @@ const siteReducer = (state = initialState, action) => {
                 },
             }
         case GET_ONE:
+            newState = {...state}
+            newState[action.site.id] = action.site;
             return {
-                ...state,
-                sites: {
-                    ...state.sites,
-                    ...action.site
-                }
+                ...newState,
+                site: action.site
             }
+            // return {
+            //     ...state,
+            //     sites: {
+            //         ...state.sites[action.siteId]
+            //         // ...action.site
+            //     }
+            // }
         case POST_SITE:
               return {
                 ...state,
@@ -148,7 +156,7 @@ const siteReducer = (state = initialState, action) => {
                 }
               };
         case DELETE_SITE:
-            const newState = { ...state };
+            newState = { ...state };
             delete newState[action.siteId];            
             return newState;
         default:

@@ -9,7 +9,7 @@ export const SiteList = ({ site }) => {
 
 
     return (
-        <NavLink exact to={`/sites/${site.id}`}>
+        <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
             <li className='site-list'>
                 <div className='site-detail-container'>
                     <span id='images'>
