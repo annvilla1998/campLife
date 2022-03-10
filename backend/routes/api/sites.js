@@ -45,8 +45,16 @@ router.post('/', requireAuth, asyncHandler(async (req,res) => {
 //get site details
 router.get('/:id', asyncHandler(async (req,res) => {
     const siteId = req.params.id;
+    const images = await Image.findAll({
+        where:{
+            siteId: siteId
+        }
+    })
     const site = await Site.findByPk(siteId);
-    return res.json(site)
+    return res.json({
+        site, 
+        images
+    })
 }))
 
 
@@ -64,7 +72,11 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
         price,
         name,
         description,
-        url
+    })
+
+    const image = await Image.create({
+        url,
+        siteId: site.id
     })
     // delete req.body.id;
     // await Site.update(req.body, {

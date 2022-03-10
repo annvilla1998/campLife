@@ -56,8 +56,8 @@ a {
     width: 100%;
     justify-content: flex-end;
     padding: 20px;
-    font-family: 'Fredoka', sans-serif;
-
+    /* font-family: 'Fredoka', sans-serif; */
+    font-family: 'PT Sans', sans-serif;
 }
 
 .nav-bar {

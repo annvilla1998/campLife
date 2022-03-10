@@ -11,9 +11,10 @@ export const getSites = (sites) => ({
     sites
 })
 
-export const getOne = (site) => ({
+export const getOne = (site, images) => ({
     type: GET_ONE,
-    site
+    site,
+    images
 })
 
 export const postSite = (site) => ({
@@ -43,6 +44,7 @@ export const getSiteDetails = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}`)
     if(res.ok){
         const site = await res.json();
+        console.log(site)
         dispatch(getOne(site))
     }
 }
@@ -56,7 +58,7 @@ export const createSite = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newSite = await res.json();
-    console.log(newSite)
+    // console.log(newSite)
     dispatch(postSite(newSite))
     return newSite
 }
@@ -69,7 +71,7 @@ export const editSite = (data) => async dispatch => {
         },
         body: JSON.stringify(data)
     })
-    console.log(res)
+    // console.log(res)
     const site = await res.json();
     dispatch(editOne(site))
     return site
@@ -115,18 +117,12 @@ const siteReducer = (state = initialState, action) => {
             }
         case GET_ONE:
             newState = {...state}
-            newState[action.site.id] = action.site;
+            newState[action.site.site.id] = action.site.site;
             return {
                 ...newState,
-                site: action.site
+                site: action.site.site,
+                images: action.site.images
             }
-            // return {
-            //     ...state,
-            //     sites: {
-            //         ...state.sites[action.siteId]
-            //         // ...action.site
-            //     }
-            // }
         case POST_SITE:
               return {
                 ...state,
