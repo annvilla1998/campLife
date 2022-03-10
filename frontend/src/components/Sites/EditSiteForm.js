@@ -36,8 +36,12 @@ export const EditSite = ({site, hideForm}) => {
             description,
             url
         }
-        
         const updatedSite = await dispatch(editSite(newSite))
+        .catch(async (res) => {
+            const data = await res.json()
+            if(data && data.errors) setErrors(data.errors) 
+        })
+        // console.log(updatedSite)
         if(updatedSite){
             hideForm()
             setErrors([])
