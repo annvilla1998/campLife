@@ -5,6 +5,7 @@ import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
+import { deleteReview } from "../../store/reviews";
 
 
 export const SiteDetails = () => {
@@ -85,14 +86,14 @@ export const SiteDetails = () => {
                         <button id="post-review-button" >Post Review</button>
                     </NavLink>
                 }
-                {reviews.map(({ id, rating, review, siteId, userId}) => (
+                {reviews.map(({ id, rating, review, siteId }) => (
                     <div className="review" key={id}>
                         <div>Rating: {rating} / 5</div>
                         <div>Comments: {review}</div>
                         {!showEditForm && (site?.userId === sessionUser?.id) &&
                             <div id="edit-delete-review">
                                 <button>Edit</button>
-                                <button>Delete</button>
+                                <button onClick={() => dispatch(deleteReview(siteId, id))}>Delete</button>
                         </div>}
                     </div>
                 ))}

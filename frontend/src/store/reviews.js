@@ -17,12 +17,12 @@ export const postReview = (review) => ({
 })
 
 export const editReview = (review) => ({
-    type: POST_REVIEW,
+    type: EDIT_REVIEW,
     review
 })
 
-export const deleteReview = (review) => ({
-    type: POST_REVIEW,
+export const remove = (review) => ({
+    type: DELETE_REVIEW,
     review
 })
 
@@ -43,10 +43,19 @@ export const createReview = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newReview = await res.json()
+    console.log(newReview)
     dispatch(postReview(newReview))
     return newReview
 }
 
+export const deleteReview = (reviewId, siteId) => async dispatch => {
+    const res = await csrfFetch(`/api/sites/reviews/${reviewId}`, {
+        method: 'DELETE'
+    })
+    const { id: deletedReviewId }= await res.json();
+    dispatch(remove(deletedReviewId, siteId))
+    return deletedReviewId;
+}
 
 
 const initialState = {
@@ -69,16 +78,17 @@ const reviewReducer = (state = initialState, action) => {
         case POST_REVIEW:
         return {
             ...state,
-            [action.review.siteId]: {
-                ...state[action.review.siteId],
-                reviews: [...state[action.review.siteId].reviews, action.review.id]
+            reviews: {
+                ...action.review
             }
         }
         
         // case EDIT_REVIEW:
 
-        // case DELETE_REVIEW:
-
+        case DELETE_REVIEW:
+         const newState = {...state}
+         delete newState.reviews[action.review]
+         return newState
         default: 
         return state
     }
