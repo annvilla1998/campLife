@@ -1,38 +1,32 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, Link, useHistory } from "react-router-dom";
+import { Redirect, useParams, NavLink, useHistory } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import { EditSite } from "./EditSiteForm";
+import { allReviews } from "../../store/reviews";
+
 
 export const SiteDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
-    const site = useSelector(state => state.siteState.site)
+    const site = useSelector(state => state.siteState.sites[id])
     const imageObj = useSelector(state => state.siteState.images)
     const imageArr = Object.values(imageObj)
+    const reviews = useSelector(state => state.reviewState.reviews)
+    // const reviewsArr = Object.values(reviews)
     const [showButtons, setShowButtons] = useState(false)
     const [showEditForm, setShowEditForm] = useState(false);
-    // console.log(site)
+    // console.log(reviews)
     useEffect(() => {
         dispatch(getSiteDetails(id))
+        dispatch(allReviews(id))
         setShowButtons(false)
     },[dispatch, id])
     
     let content = null;
-    // if(sessionUser.id === site.userId) {
-        //     setShowButtons(true)
-        // }
-        // if(showButtons) {
-            //     content = (
-                //         <div>
-                //             <button>Edit</button>
-                //             <button>Delete</button>
-                //         </div>
-                //     )
-                // }
                 
     const handleDeleteSubmit = (e) => {
         e.preventDefault();
@@ -44,6 +38,7 @@ export const SiteDetails = () => {
             history.push('/sites')
         }
     }
+
                 
     if (showEditForm) {
         content = (
@@ -72,21 +67,36 @@ export const SiteDetails = () => {
                     <span>State: {site?.state}</span>
                     <span>Country: {site?.country}</span>
                     <span>${site?.price}/night</span>
+                    <span>Description: {site?.description}</span>
                 </div>
+                    {!showEditForm && (site?.userId === sessionUser?.id) &&
                     <div id="edit-delete-site">
-                    {!showEditForm &&
                         <button  onClick={() => setShowEditForm(true)}>Edit</button>
-                    }
                         <button onClick={handleDeleteSubmit}>Delete</button>
-                        {/* {content} */}
-                        {/* {site.userId === sessionUser.id && (
-                            <div>
-                            </div>
-                        )} */}
                     </div>
+                    }
                 </div>
             </div>
             {content}
+            <div className="reviews-list">
+                <h3>Reviews</h3>
+                {sessionUser &&
+                    <NavLink to={`/sites/${site?.id}/review`}>
+                        <button id="post-review-button" >Post Review</button>
+                    </NavLink>
+                }
+                {reviews.map(({ id, rating, review, siteId, userId}) => (
+                    <div className="review" key={id}>
+                        <div>Rating: {rating} / 5</div>
+                        <div>Comments: {review}</div>
+                        {!showEditForm && (site?.userId === sessionUser?.id) &&
+                            <div id="edit-delete-review">
+                                <button>Edit</button>
+                                <button>Delete</button>
+                        </div>}
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

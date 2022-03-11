@@ -7,6 +7,7 @@ import {Navigation} from "./components/Navigation";
 import { Sites } from "./components/Sites"
 import { SiteDetails } from "./components/Sites/SiteDetails";
 import { EditSite } from "./components/Sites/EditSiteForm"
+import { ReviewForm } from "./components/Reviews/ReviewsForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path='/sites/:id'>
           <SiteDetails />  
+        </Route>
+        <Route exact path='/sites/:id/review'>
+          <ReviewForm />
         </Route>
       </Switch>
       )}

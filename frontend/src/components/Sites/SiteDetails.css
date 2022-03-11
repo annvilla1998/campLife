@@ -15,7 +15,7 @@ html {
     /* border: 20px solid #565e47; */
     box-shadow: 0 5px 40px;
     width: 800px;
-    height: 700px;
+    height: 800px;
     
 }
 
@@ -41,6 +41,8 @@ html {
 
 #site-detail-text {
     font-family: 'PT Sans', sans-serif;
+    font-size: 18px;
+    /* font-weight: bold; */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -52,6 +54,35 @@ html {
     flex-direction: row;
     gap: 20px;
     padding: 10px;
+}
+
+.reviews-list {
+    font-family: 'PT Sans', sans-serif;
+    color: black;
+    /* font-weight: bold; */
+    font-size: 18px;;
+    position: relative;
+    top: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px;
+    margin: 0 120px;;
+    gap: 40px;
+}
+.review {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+h3 {
+    font-family: 'PT Sans', sans-serif;
+    color: white;
+}
+
+#post-review-button {
+    width: 100%;
 }
 
 /* #0A0A09
