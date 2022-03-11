@@ -17,15 +17,14 @@ export const SiteDetails = () => {
     const imageObj = useSelector(state => state.siteState.images)
     const imageArr = Object.values(imageObj)
     const reviews = useSelector(state => state.reviewState.reviews)
-    // const reviewsArr = Object.values(reviews)
-    const [showButtons, setShowButtons] = useState(false)
+    const reviewsArr = Object.values(reviews)
     const [showEditForm, setShowEditForm] = useState(false);
-    // console.log(reviews)
+    console.log(reviews)
     useEffect(() => {
-        dispatch(getSiteDetails(id))
         dispatch(allReviews(id))
-        setShowButtons(false)
+        dispatch(getSiteDetails(id))
     },[dispatch, id])
+    
     
     let content = null;
                 
@@ -86,11 +85,11 @@ export const SiteDetails = () => {
                         <button id="post-review-button" >Post Review</button>
                     </NavLink>
                 }
-                {reviews.map(({ id, rating, review, siteId }) => (
+                {reviewsArr.map(({ id, rating, review, siteId }) => (
                     <div className="review" key={id}>
                         <div>Rating: {rating} / 5</div>
                         <div>Comments: {review}</div>
-                        {!showEditForm && (site?.userId === sessionUser?.id) &&
+                        {site?.userId === sessionUser?.id &&
                             <div id="edit-delete-review">
                                 <button>Edit</button>
                                 <button onClick={() => dispatch(deleteReview(siteId, id))}>Delete</button>

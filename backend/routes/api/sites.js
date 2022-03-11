@@ -19,10 +19,10 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 //post a new site
-router.post('/', requireAuth, asyncHandler(async (req,res) => {
+router.post('/', handleValidationErrors, requireAuth, asyncHandler(async (req,res) => {
     // console.log(req)
     const { userId, address, city, state, country, name, price, description, url } = req.body
-    const newSite = await Site.create({
+    const newSite = await Site.build({
         userId,
         address, 
         city, 
@@ -32,18 +32,20 @@ router.post('/', requireAuth, asyncHandler(async (req,res) => {
         price, 
         description
     })
+    await newSite.save()
     const newImage = await Image.create({
         url,
         siteId: newSite.id
     })
-    
-        
-    res.redirect(`${req.baseUrl}/${newSite.id}`)
-    
+
+
+    if(newSite){
+        return res.json(newSite)
+    }        
 }))
 
 
-//get site details and reviews
+//get site details 
 router.get('/:id', asyncHandler(async (req,res) => {
     const siteId = req.params.id;
     const images = await Image.findAll({
@@ -51,16 +53,16 @@ router.get('/:id', asyncHandler(async (req,res) => {
             siteId: siteId
         }
     })
-    const reviews = await Review.findAll({
-        where: {
-            siteId: siteId
-        }
-    })
+    // const reviews = await Review.findAll({
+    //     where: {
+    //         siteId: siteId
+    //     }
+    // })
     const site = await Site.findByPk(siteId);
     return res.json({
         site, 
         images,
-        reviews
+        // reviews
     })
 }))
 
@@ -98,6 +100,18 @@ router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
     return res.json(site)
 }))
 
+//get all reviews
+router.get('/:id/review', requireAuth, asyncHandler(async(req,res) => {
+    const siteId = parseInt(req.params.id, 10)
+    // const site = await Site.findByPk(siteId)
+    const reviews = await Review.findAll({
+        where: {
+            siteId: siteId
+        }
+    })
+
+    return res.json(reviews)
+}))
 
 
 //post a review

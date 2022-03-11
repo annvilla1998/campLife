@@ -27,7 +27,7 @@ export const remove = (review) => ({
 })
 
 export const allReviews = (id) => async dispatch => {
-    const res = await csrfFetch(`/api/sites/${id}`)
+    const res = await csrfFetch(`/api/sites/${id}/review`)
 
     const reviews = await res.json()
     // console.log(reviews)
@@ -59,36 +59,37 @@ export const deleteReview = (reviewId, siteId) => async dispatch => {
 
 
 const initialState = {
-    reviews: []
+    reviews: {}
 }
 
 const reviewReducer = (state = initialState, action) => {
+    let newState;
+    let reviews;
     switch(action.type) {
         case GET_REVIEWS:
-        let allReviews = {};
-        //     action.reviews.reviews.forEach(review => {
-        //         allReviews[review.id] = review
-        // })
-        return {
-            ...state,
-            // ...allReviews,
-            reviews: action.reviews.reviews
-
-        }
+        newState = { ...state}
+        newState.reviews = action.reviews
+        return newState;
+        
         case POST_REVIEW:
-        return {
-            ...state,
-            reviews: {
-                ...action.review
-            }
-        }
+        newState = {...state};
+        let newReviews = {...state.reviews}
+        newReviews[action.review.id] = action.review;
+        newReviews.reviews = newReviews
+        return newState;
+        // return {
+        //     ...state,
+        //     reviews: {
+        //         ...action.review
+        //     }
+        // }
         
         // case EDIT_REVIEW:
 
-        case DELETE_REVIEW:
-         const newState = {...state}
-         delete newState.reviews[action.review]
-         return newState
+        // case DELETE_REVIEW:
+        //  const newState = {...state}
+        //  delete newState.reviews[action.review]
+        //  return newState
         default: 
         return state
     }
