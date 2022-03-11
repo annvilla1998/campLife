@@ -53,16 +53,11 @@ router.get('/:id', asyncHandler(async (req,res) => {
             siteId: siteId
         }
     })
-    // const reviews = await Review.findAll({
-    //     where: {
-    //         siteId: siteId
-    //     }
-    // })
+    
     const site = await Site.findByPk(siteId);
     return res.json({
         site, 
         images,
-        // reviews
     })
 }))
 
@@ -130,18 +125,26 @@ router.post('/:id/review', requireAuth, asyncHandler(async(req,res) => {
 }))
 
 //edit a review
+router.patch('/review/:id', requireAuth, asyncHandler(async(req,res) => {
+    const id = parseInt(req.params.id, 10)
+    const { userId, siteId, rating, review } = req.body
+    const oldReview = await Review.findByPk(id)
+    await oldReview.update({
+        userId,
+        siteId, 
+        rating,
+        review
+    })
+console.log(oldReview)
+    return res.json(oldReview)
+}))
 
 //delete a review
-router.delete('/reviews/:id', requireAuth, asyncHandler(async (req,res) => {
+router.delete('/review/:id', requireAuth, asyncHandler(async (req,res) => {
     const review = await Review.findByPk(req.params.id)
-console.log(review)
-    await review.destroy({
-        where: {
-            id: review.id
-        }
-    })
-    
-    return res.json({ id: review.id })
+
+    await review.destroy()
+    return res.json(review)
 }))
 
 

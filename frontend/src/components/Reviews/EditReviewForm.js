@@ -1,38 +1,40 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink, useHistory, useParams } from "react-router-dom"
-import { createReview } from "../../store/reviews"
-import './ReviewsForm.css'
+import { useHistory, useParams } from "react-router-dom"
+import { editReview } from "../../store/reviews"
 
-export const ReviewForm = () => {
-    const [rating, setRating] = useState('')
-    const [review, setReview] = useState('')
+export const EditReviewForm = ({id, hideForm}) => {
     const sessionUser = useSelector(state => state.session.user);
-    const history = useHistory();
+    const reviewToBeEdited = useSelector(state => state.reviewState.reviews);
+    const singleReview = reviewToBeEdited[0]
+    const [review, setReview] = useState(singleReview.review)
+    const [rating, setRating] = useState(singleReview.rating)
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const siteId = useParams()
-// console.log(siteId)
     const handlePostReview = async (e) => {
         e.preventDefault()
 
         const newReview = {
+            ...singleReview,
             userId: sessionUser.id,
-            siteId: siteId.id,
+            siteId: +siteId.id,
             rating,
             review
         }
-        let createdReview; 
-        createdReview = await dispatch(createReview(newReview))
-        .catch(async (res) => {
-            const data = await res.json()
-            if(data && data.errors) setErrors(data.errors) 
-        })
-        if(createdReview){
+        const updatedReview = await dispatch(editReview(newReview))
+        
+        if(updatedReview){
             setErrors([])
-            history.push(`/sites/${siteId.id}`)
+            hideForm()
         }
     }
+
+    const handleCancelClick = (e) => {
+        e.preventDefault();
+        setErrors([]);
+        hideForm();
+      };
 
     return (
         <section className="post-review-form">
@@ -61,10 +63,10 @@ export const ReviewForm = () => {
                     />
                 </label>
                 <button type="submit">Post</button>
-                <NavLink to={`/sites/${siteId.id}`}>
-                    <button>Cancel</button>
-                </NavLink>
+                <button type="button" onClick={handleCancelClick}>Cancel</button>
             </form>
         </section>
     )
 }
+
+

@@ -6,6 +6,7 @@ import './SiteDetails.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
+import { EditReviewForm } from "../Reviews/EditReviewForm";
 
 
 export const SiteDetails = () => {
@@ -19,7 +20,14 @@ export const SiteDetails = () => {
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
     const [showEditForm, setShowEditForm] = useState(false);
-    console.log(reviews)
+    const [showEditReviewForm, setShowEditReviewForm] = useState(false)
+
+    // const handleDeleteReview = (e) => {
+    //     e.preventDefault()
+
+    //     dispatch(deleteReview(id))
+    // }
+
     useEffect(() => {
         dispatch(allReviews(id))
         dispatch(getSiteDetails(id))
@@ -48,6 +56,17 @@ export const SiteDetails = () => {
           />
         );
       }
+
+    let reviewEdit = null; 
+
+    if(showEditReviewForm){
+        reviewEdit =(
+            <EditReviewForm
+            id={id}
+            hideForm={()=> setShowEditReviewForm(false)}
+            />
+        )
+    }
 
     return (
         <div className="site-detail-container-form">
@@ -91,9 +110,10 @@ export const SiteDetails = () => {
                         <div>Comments: {review}</div>
                         {site?.userId === sessionUser?.id &&
                             <div id="edit-delete-review">
-                                <button>Edit</button>
-                                <button onClick={() => dispatch(deleteReview(siteId, id))}>Delete</button>
+                                <button onClick={() => setShowEditReviewForm(true)}>Edit</button>
+                                <button onClick={() => dispatch(deleteReview(id))}>Delete</button>
                         </div>}
+                        {reviewEdit}
                     </div>
                 ))}
             </div>
