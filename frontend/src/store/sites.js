@@ -44,7 +44,6 @@ export const getSiteDetails = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}`)
     if(res.ok){
         const site = await res.json();
-        console.log(site)
         dispatch(getOne(site))
     }
 }
@@ -117,10 +116,12 @@ const siteReducer = (state = initialState, action) => {
             }
         case GET_ONE:
             newState = {...state}
-            newState[action.site.site.id] = action.site.site;
             return {
                 ...newState,
-                site: action.site.site,
+                sites: {
+                    ...state.sites,
+                    [action.site.site.id]: action.site.site
+                },
                 images: action.site.images
             }
         case POST_SITE:
@@ -142,18 +143,16 @@ const siteReducer = (state = initialState, action) => {
                 ...state,
                 sites: {
                     ...state.sites,
-                    [action.site.id]: {
-                        ...action.site
-                    }    
+                    [action.site.id] : action.site   
                 },
-                images: {
-                    ...state.images,
-                    ...action.images
-                }
+                // images: {
+                //     ...state.images,
+                //     ...action.images
+                // }
               };
         case DELETE_SITE:
             newState = { ...state };
-            delete newState[action.siteId];            
+            delete newState.sites[action.siteId];            
             return newState;
         default:
             return state

@@ -5,6 +5,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Site, Image, Review, Trip } = require('../../db/models');
 
+
 const router = express.Router();
 
 //view all sites
@@ -42,7 +43,7 @@ router.post('/', requireAuth, asyncHandler(async (req,res) => {
 }))
 
 
-//get site details
+//get site details and reviews
 router.get('/:id', asyncHandler(async (req,res) => {
     const siteId = req.params.id;
     const images = await Image.findAll({
@@ -50,10 +51,16 @@ router.get('/:id', asyncHandler(async (req,res) => {
             siteId: siteId
         }
     })
+    const reviews = await Review.findAll({
+        where: {
+            siteId: siteId
+        }
+    })
     const site = await Site.findByPk(siteId);
     return res.json({
         site, 
-        images
+        images,
+        reviews
     })
 }))
 
@@ -78,12 +85,7 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
         url,
         siteId: site.id
     })
-    // delete req.body.id;
-    // await Site.update(req.body, {
-    //     where: { id },
-    //     returning: true
-    // })
-    // const site = await Site.findByPk(id)
+   
     return res.json(site)
 }))
 
@@ -96,30 +98,37 @@ router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
     return res.json(site)
 }))
 
-//get all reviews
-router.get('/:id/reviews', asyncHandler(async(req,res) => {
-    const reviews = await Review.findAll()
 
-    return res.json(reviews)
-}))
 
 //post a review
-router.post('/:id/reviews', requireAuth, asyncHandler(async(req,res) => {
-    const site = await Site.findByPk(req.params.id)
+router.post('/:id/review', requireAuth, asyncHandler(async(req,res) => {
+    // const site = await Site.findByPk(req.params.id)
     
-    const { userId, siteId, review, rating } = req.body;
+    const { userId, review, rating, siteId } = req.body;
     const newReview = await Review.create({
         userId,
         siteId,
         review,
         rating
     })
-    res.redirect(`${req.baseUrl}/${site.id}`)
+
+    res.redirect(`${req.baseUrl}/${siteId}`)
 }))
 
 //edit a review
 
 //delete a review
+router.delete('/reviews/:id', requireAuth, asyncHandler(async (req,res) => {
+    const review = await Review.findByPk(req.params.id)
+console.log(review)
+    await review.destroy({
+        where: {
+            id: review.id
+        }
+    })
+    
+    return res.json({ id: review.id })
+}))
 
 
 module.exports = router
