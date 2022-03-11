@@ -9,6 +9,7 @@ import './Form.css';
 export const CreateSite = ({hideForm}) => {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
+    const newSiteObj = useSelector(state => state.siteState.newSite)
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -20,6 +21,7 @@ export const CreateSite = ({hideForm}) => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState('')
+// console.log(newSite)
     const handleSubmit = async (e) => {
         e.preventDefault();
      
@@ -36,17 +38,14 @@ export const CreateSite = ({hideForm}) => {
         }
         
         let createdSite;
-        createdSite = await dispatch(createSite(newSite))
-        .catch(async (res) => {
-            const data = await res.json()
-            if(data && data.errors) setErrors(data.errors) 
-        })
+        createdSite = dispatch(createSite(newSite))
 
-        if (createdSite) {
-            setErrors([])
-            hideForm()
-            return history.push(`/sites/${createdSite.id}`)
-        }
+        setErrors([])
+        
+    }
+    
+    if(newSiteObj){
+        history.push(`/sites/${newSiteObj.id}`)
     }
 
 

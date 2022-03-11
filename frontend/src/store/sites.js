@@ -93,7 +93,7 @@ const initialState = {
 }
 
 const siteReducer = (state = initialState, action) => {
-    const allSites = {};
+    let allSites = {};
     const allImages = {}
     let newState = {}
     switch(action.type) {
@@ -125,19 +125,20 @@ const siteReducer = (state = initialState, action) => {
                 images: action.site.images
             }
         case POST_SITE:
-              return {
-                ...state,
-                sites: {
-                    ...state.sites,
-                    [action.site.id]: {
-                        ...action.site
-                    }    
-                },
-                images: {
-                    ...state.images,
-                    ...action.images
-                }
-              };
+            newState = {...state};
+            let newSite = {...state.sites}
+            newSite[action.site.id] = action.site;
+            newSite.site = newSite
+            newState["newSite"] = action.site
+            return newState
+            // newState = {...state}
+            // return {
+            //     ...newState,
+            //     sites: {
+            //         ...state.sites,
+            //         [action.site.id]: action.site
+            //     },
+            // }
         case EDIT_SITE:
               return {
                 ...state,
@@ -145,10 +146,6 @@ const siteReducer = (state = initialState, action) => {
                     ...state.sites,
                     [action.site.id] : action.site   
                 },
-                // images: {
-                //     ...state.images,
-                //     ...action.images
-                // }
               };
         case DELETE_SITE:
             newState = { ...state };
