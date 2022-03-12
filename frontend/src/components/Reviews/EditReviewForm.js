@@ -3,20 +3,20 @@ import { useSelector, useDispatch } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { editReview } from "../../store/reviews"
 
-export const EditReviewForm = ({id, hideForm}) => {
+export const EditReviewForm = ({reviewId, hideForm}) => {
     const sessionUser = useSelector(state => state.session.user);
-    const reviewToBeEdited = useSelector(state => state.reviewState.reviews);
-    const singleReview = reviewToBeEdited[0]
-    const [review, setReview] = useState(singleReview.review)
-    const [rating, setRating] = useState(singleReview.rating)
+    const reviewToBeEdited = useSelector(state => state.reviewState.reviews[reviewId]);
+    const [review, setReview] = useState(reviewToBeEdited.review)
+    const [rating, setRating] = useState(reviewToBeEdited.rating)
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const siteId = useParams()
+    // console.log(reviewToBeEdited)
     const handlePostReview = async (e) => {
         e.preventDefault()
 
         const newReview = {
-            ...singleReview,
+            ...reviewToBeEdited,
             userId: sessionUser.id,
             siteId: +siteId.id,
             rating,

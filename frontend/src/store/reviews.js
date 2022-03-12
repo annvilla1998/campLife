@@ -81,7 +81,9 @@ const reviewReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_REVIEWS:
         newState = { ...state}
-        newState.reviews = action.reviews
+        reviews = {}
+        action.reviews.forEach(review=> reviews[review.id] = review)
+        newState.reviews = reviews
         return newState;
         
         case POST_REVIEW:
@@ -92,24 +94,27 @@ const reviewReducer = (state = initialState, action) => {
         return newState;
      
         case EDIT_REVIEW:
+            // newState = {...state}
+            // newState.reviews = reviews
+            // return newState
             return {
                 ...state,
                 reviews: {
-                    ...state.reviews,
+                    // ...state.reviews,
                     [action.review.id] : action.review
                 }
             }
-            // return {
-            //     ...state,
-            //     reviews: {
-            //         ...state.reviews,
-            //         [action.review.id] : action.review  
-            //     },
-            //   };
         case DELETE_REVIEW:
-         newState = {...state}
-         delete newState.reviews[action.reviewId]
-         return newState
+        
+        // newState = {...state};
+        // reviews = Object.values(newState.reviews)
+        //  reviews = newState.reviews.filter(review => !(review.id === action.reviewId) )
+        //  newState.reviews = reviews
+        //  return newState
+        reviews = {...state.reviews};
+        delete reviews[action.review]; 
+        // newState.reviews = reviews
+        return newState;
         default: 
         return state
     }
