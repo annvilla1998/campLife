@@ -57,16 +57,16 @@ export const SiteDetails = () => {
         );
       }
 
-    let reviewEdit = null; 
+    // let reviewEdit = null; 
 
-    if(showEditReviewForm){
-        reviewEdit =(
-            <EditReviewForm
-            id={id}
-            hideForm={()=> setShowEditReviewForm(false)}
-            />
-        )
-    }
+    // if(showEditReviewForm){
+    //     reviewEdit =(
+    //         <EditReviewForm
+    //         id={id}
+    //         hideForm={()=> setShowEditReviewForm(false)}
+    //         />
+    //     )
+    // }
 
     return (
         <div className="site-detail-container-form">
@@ -113,7 +113,8 @@ export const SiteDetails = () => {
                                 <button onClick={() => setShowEditReviewForm(true)}>Edit</button>
                                 <button onClick={() => dispatch(deleteReview(id))}>Delete</button>
                         </div>}
-                        {reviewEdit}
+                        {showEditReviewForm &&
+                            <EditReviewForm reviewId={id} hideForm={()=> setShowEditReviewForm(false)}/>}
                     </div>
                 ))}
             </div>
