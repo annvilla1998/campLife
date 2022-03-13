@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { Route } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import { getAllSites } from "../../store/sites";
 import { CreateSite } from "./CreateSiteForm";
 import { SiteList } from "./SiteList";
@@ -9,8 +9,10 @@ import './Sites.css'
 export const Sites = () => {
     const dispatch = useDispatch();
     const sitesObj = useSelector(state => state.siteState.sites)
+    const sessionUser = useSelector(state => state.session.user);
     const sitesArr = Object.values(sitesObj)
     const [showForm, setShowForm] = useState(false)
+
    
     useEffect(() => {
         dispatch(getAllSites())
@@ -18,7 +20,14 @@ export const Sites = () => {
     return (
        <div className='sites'>
         <h2>Adventure Awaits!</h2>
+        {sessionUser &&
         <div onClick={() => {setShowForm(true)}}>Host New Site</div>
+        }
+        {!sessionUser &&
+            <NavLink to="/signup">
+                <div >Host New Site</div>
+            </NavLink>
+        }
         {showForm ? (
              <CreateSite hideForm={() => setShowForm(false)}/>
         ) : (

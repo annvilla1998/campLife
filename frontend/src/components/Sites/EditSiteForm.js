@@ -58,7 +58,7 @@ export const EditSite = ({site, hideForm}) => {
 
     return (
         <section className='edit-site-form'>
-            <ul>
+            <ul id="errors">
                 {errors.map(error => (
                     <li key={error}>{error}</li>
                 ))}

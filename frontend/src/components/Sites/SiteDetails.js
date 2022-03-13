@@ -22,11 +22,6 @@ export const SiteDetails = () => {
     const [showEditForm, setShowEditForm] = useState(false);
     const [showEditReviewForm, setShowEditReviewForm] = useState(false)
 
-    // const handleDeleteReview = (e) => {
-    //     e.preventDefault()
-
-    //     dispatch(deleteReview(id))
-    // }
 
     useEffect(() => {
         dispatch(allReviews(id))
@@ -57,16 +52,7 @@ export const SiteDetails = () => {
         );
       }
 
-    // let reviewEdit = null; 
 
-    // if(showEditReviewForm){
-    //     reviewEdit =(
-    //         <EditReviewForm
-    //         id={id}
-    //         hideForm={()=> setShowEditReviewForm(false)}
-    //         />
-    //     )
-    // }
 
     return (
         <div className="site-detail-container-form">
@@ -101,6 +87,11 @@ export const SiteDetails = () => {
                 <h3>Reviews</h3>
                 {sessionUser &&
                     <NavLink to={`/sites/${site?.id}/review`}>
+                        <button id="post-review-button" >Post Review</button>
+                    </NavLink>
+                }
+                {!sessionUser &&
+                    <NavLink exact to={`/signup`}>
                         <button id="post-review-button" >Post Review</button>
                     </NavLink>
                 }

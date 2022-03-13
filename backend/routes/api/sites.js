@@ -4,9 +4,30 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Site, Image, Review, Trip } = require('../../db/models');
-
-
 const router = express.Router();
+
+const validateCreateSite = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide an address"),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a city"),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a state"),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a country"),
+    check('name')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a name"),
+    check('price')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a price"),
+    handleValidationErrors
+]
+
 
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
@@ -19,7 +40,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 //post a new site
-router.post('/', handleValidationErrors, requireAuth, asyncHandler(async (req,res) => {
+router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
     const { userId, address, city, state, country, name, price, description, url } = req.body
     const newSite = await Site.build({
         userId,
@@ -95,7 +116,7 @@ router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
 }))
 
 //get all reviews
-router.get('/:id/review', requireAuth, asyncHandler(async(req,res) => {
+router.get('/:id/review', asyncHandler(async(req,res) => {
     const siteId = parseInt(req.params.id, 10)
     // const site = await Site.findByPk(siteId)
     const reviews = await Review.findAll({

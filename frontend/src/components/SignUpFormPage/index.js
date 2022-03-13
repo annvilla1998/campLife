@@ -17,31 +17,39 @@ export const SignUpFormPage = () => {
 
     // if (sessionUser) return <Redirect to="/" />;
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         
-        setErrors([]);
         if(password === confirmPassword) {
             
-            dispatch(sessionActions.signUpUser({
+
+            let newUser = await dispatch(sessionActions.signUpUser({
                 email,
                 username,
                 password
             }))
             .catch(async res => {
                 const data = await res.json();
+                console.log(data.errors)
                 if(data && data.errors) setErrors(data.errors)
             })
-            return history.push('/')
+
+            if(newUser){
+                setErrors([]);
+                history.push('/')
+            }else{
+                return errors
+            }
         }else{ 
             return setErrors(['Passwords must match'])
         }
-    }
+        }
+    
     
     return (
         <form id="sign-up-form" onSubmit={onSubmit}>
             <h2>Sign Up</h2>
-            <ul>
+            <ul id="errors">
                 {errors.map((errors,idx) => (
                     <li key={idx}>{errors}</li>
                 ))}

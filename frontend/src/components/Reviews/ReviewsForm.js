@@ -35,7 +35,7 @@ export const ReviewForm = () => {
 
     return (
         <section className="post-review-form">
-            <ul>
+            <ul id="errors">
                 {errors.map(error => (
                     <li key={error}>{error}</li>
                 ))}

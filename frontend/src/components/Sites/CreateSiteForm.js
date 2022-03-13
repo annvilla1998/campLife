@@ -38,9 +38,14 @@ export const CreateSite = ({hideForm}) => {
         
         let createdSite;
         createdSite = dispatch(createSite(newSite))
-
-        setErrors([])
-        
+        .catch(async res => {
+            const data = await res.json();
+            console.log(data.errors)
+            if(data && data.errors) setErrors(data.errors)
+        })
+        if(createdSite){
+            setErrors([])
+        }
     }
     
     if(newSiteObj){
@@ -57,7 +62,7 @@ export const CreateSite = ({hideForm}) => {
 
     return (
         <section className='create-site-form'>
-            <ul>
+            <ul id="errors">
                 {errors.map(error => (
                     <li key={error}>{error}</li>
                 ))}

@@ -24,7 +24,9 @@ export const signUpUser = (user) => async dispatch => {
         })
     })
     const data = await res.json()
-    dispatch(setSession(data.user))
+    if(res.ok){
+        dispatch(setSession(data.user))
+    }
     return res
 }
 
