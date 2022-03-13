@@ -30,12 +30,7 @@ export const allReviews = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}/review`)
 
     const reviews = await res.json()
-    reviews.reduce((a,b) => {
-        a[b.id] = b
-        return a
-    })
-
-    console.log(reviews)
+    // console.log(reviews)
     dispatch(getReviews(reviews))
 }
 
@@ -105,7 +100,7 @@ const reviewReducer = (state = initialState, action) => {
             return {
                 ...state,
                 reviews: {
-                    // ...state.reviews,
+                    ...state.reviews,
                     [action.review.id] : action.review
                 }
             }
