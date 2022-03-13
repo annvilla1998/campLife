@@ -1,7 +1,6 @@
 {
   "name": "camplife",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
@@ -22,5 +21,6 @@
   "bugs": {
     "url": "https://github.com/annvilla1998/campLife/issues"
   },
-  "homepage": "https://github.com/annvilla1998/campLife#readme"
+  "homepage": "https://github.com/annvilla1998/campLife#readme",
+  "description": ""
 }

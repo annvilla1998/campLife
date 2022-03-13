@@ -21,7 +21,6 @@ export const CreateSite = ({hideForm}) => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState('')
-// console.log(newSite)
     const handleSubmit = async (e) => {
         e.preventDefault();
      

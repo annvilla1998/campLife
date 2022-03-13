@@ -12,7 +12,6 @@ export const ReviewForm = () => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const siteId = useParams()
-// console.log(siteId)
     const handlePostReview = async (e) => {
         e.preventDefault()
 

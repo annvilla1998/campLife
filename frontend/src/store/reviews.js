@@ -30,7 +30,6 @@ export const allReviews = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}/review`)
 
     const reviews = await res.json()
-    // console.log(reviews)
     dispatch(getReviews(reviews))
 }
 
@@ -43,7 +42,6 @@ export const createReview = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newReview = await res.json()
-    console.log(newReview)
     dispatch(postReview(newReview))
     return newReview
 }

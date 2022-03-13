@@ -41,7 +41,6 @@ export const EditSite = ({site, hideForm}) => {
             const data = await res.json()
             if(data && data.errors) setErrors(data.errors) 
         })
-        // console.log(updatedSite)
         if(updatedSite){
             hideForm()
             setErrors([])

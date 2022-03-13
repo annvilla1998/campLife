@@ -11,7 +11,6 @@ export const EditReviewForm = ({reviewId, hideForm}) => {
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
     const siteId = useParams()
-    // console.log(reviewToBeEdited)
     const handlePostReview = async (e) => {
         e.preventDefault()
 

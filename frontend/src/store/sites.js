@@ -57,7 +57,6 @@ export const createSite = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newSite = await res.json();
-    // console.log(newSite)
     dispatch(postSite(newSite))
     return newSite
 }
@@ -70,7 +69,6 @@ export const editSite = (data) => async dispatch => {
         },
         body: JSON.stringify(data)
     })
-    // console.log(res)
     const site = await res.json();
     dispatch(editOne(site))
     return site

@@ -20,7 +20,6 @@ router.get('/', asyncHandler(async (req, res) => {
 
 //post a new site
 router.post('/', handleValidationErrors, requireAuth, asyncHandler(async (req,res) => {
-    // console.log(req)
     const { userId, address, city, state, country, name, price, description, url } = req.body
     const newSite = await Site.build({
         userId,
@@ -135,7 +134,6 @@ router.patch('/review/:id', requireAuth, asyncHandler(async(req,res) => {
         rating,
         review
     })
-console.log(oldReview)
     return res.json(oldReview)
 }))
 
