@@ -20,7 +20,7 @@ module.exports = {
       }
       return reviewArr;
     }
-      return queryInterface.bulkInsert('Reviews', seedReviews(200), {});
+      return queryInterface.bulkInsert('Reviews', seedReviews(400), {});
   },
 
   down: (queryInterface, Sequelize) => {
