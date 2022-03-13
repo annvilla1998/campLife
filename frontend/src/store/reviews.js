@@ -30,7 +30,12 @@ export const allReviews = (id) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${id}/review`)
 
     const reviews = await res.json()
-    // console.log(reviews)
+    reviews.reduce((a,b) => {
+        a[b.id] = b
+        return a
+    })
+
+    console.log(reviews)
     dispatch(getReviews(reviews))
 }
 
