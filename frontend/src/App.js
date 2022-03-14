@@ -9,6 +9,7 @@ import { SiteDetails } from "./components/Sites/SiteDetails";
 import { EditSite } from "./components/Sites/EditSiteForm"
 import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
+import {Homepage} from './components/Homepage/index'
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
       <Navigation isLoaded={isLoaded}/>
       {isLoaded && (
       <Switch>
+        <Route exact path="/">
+          <Homepage />
+        </Route>
         <Route exact path="/signup">
           <SignUpFormPage />
         </Route>

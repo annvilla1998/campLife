@@ -1,0 +1,25 @@
+.homepage {
+    text-align: center;
+    position: relative;
+    top: 200px;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#used {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    padding: 60px;
+    gap: 20px;
+    font-size: 15px;
+}
+
+#businessIcon {
+   padding: 20px;
+   font-size: 100px;
+   color: #C5c9bb;
+
+}
