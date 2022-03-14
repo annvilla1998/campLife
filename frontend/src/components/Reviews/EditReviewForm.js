@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { NavLink, useHistory, useParams } from "react-router-dom"
 import { editReview, getOneReview } from "../../store/reviews"
 import { useLocation } from "react-router-dom"
+import './ReviewsForm.css'
 
 export const EditReviewForm = () => {
     const sessionUser = useSelector(state => state.session.user);
@@ -71,10 +72,12 @@ export const EditReviewForm = () => {
                     onChange={e => setReview(e.target.value)}
                     />
                 </label>
-                <button type="submit">Post</button>
-                <NavLink to={`/sites/${siteId}`}>
-                    <button type="button">Cancel</button>
-                </NavLink>
+                <div id='review-button'>
+                    <button type="submit">Post</button>
+                    <NavLink to={`/sites/${siteId}`}>
+                        <button type="button">Cancel</button>
+                    </NavLink>
+                </div>
             </form>
         </section>
     )

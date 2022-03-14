@@ -11,3 +11,43 @@
     font-family: 'Fredoka', sans-serif;
     border: 3px solid white;
 }
+
+.create-site-form {
+    color: white;
+    width: 400px;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 40px 0px;
+}
+
+#new-site-input {
+    margin: 5px;
+    height: 30px;
+}
+
+/* .create-site */
+
+#newsite {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea {
+    border-radius: 5px;
+}
+
+#create-site-buttons {
+ display: flex;
+ justify-content: center;
+ gap: 20px;
+ padding: 10px 0;
+}
+
+.edit-sites {
+    position: relative;
+    top: 200px;
+}

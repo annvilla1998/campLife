@@ -1,6 +1,12 @@
 .post-review-form {
-    
     color: white;
     position: relative;
     top: 200px;
+}
+
+#review-button {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
 }

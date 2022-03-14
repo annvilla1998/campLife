@@ -5,6 +5,15 @@
 }
 
 
+#login-nav-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: white;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 20px;
+}
+
 
 
 a > .nav-container { 
@@ -31,6 +40,7 @@ a {
     align-items: center;
     width: 100%;
     padding: 10px;
+    justify-content: space-between;
     flex-wrap: nowrap;
     /* background-color: #D1D6C7; */
     background-color: #0A0A09;
@@ -51,18 +61,28 @@ a {
    font-size: 50px;
 }
 
-.nav-menu {
+/* .nav-menu {
+} */
+
+.nav-bar {
     display: flex;
     width: 100%;
     justify-content: flex-end;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 40px;
     padding: 20px;
     /* font-family: 'Fredoka', sans-serif; */
     font-family: 'PT Sans', sans-serif;
-}
-
-.nav-bar {
+    font-size: 20px;
     
 }
+
+#user-buttons {
+    display:flex;
+    gap: 40px;
+}
+
 
 
 

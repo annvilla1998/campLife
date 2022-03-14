@@ -59,10 +59,12 @@ export const ReviewForm = () => {
                     onChange={e => setReview(e.target.value)}
                     />
                 </label>
-                <button type="submit">Post</button>
-                <NavLink to={`/sites/${siteId.id}`}>
-                    <button>Cancel</button>
-                </NavLink>
+                <div id='review-button'>
+                    <button type="submit">Post</button>
+                    <NavLink to={`/sites/${siteId.id}`}>
+                        <button >Cancel</button>
+                    </NavLink>
+                </div>
             </form>
         </section>
     )

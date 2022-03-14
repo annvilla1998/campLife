@@ -29,39 +29,44 @@ function LoginForm() {
 
   return (
     <div>
+      <h2 id="login-h2">Login In</h2>
       <div id="log-in-form">
-      <form  onSubmit={handleSubmit}>
-        <h2 id="login-h2">Login In</h2>
-        <ul id="errors">
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-      <form onSubmit={demoSubmit} >
-          <button className='demo-button'>Demo</button>
-      </form>
 
+          <form onSubmit={handleSubmit}>
+            <div id="log-in-inputs">
+              <ul id="errors">
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+              <label className="login-labels">
+                Username or Email
+                <input
+                  id="login-input"
+                  type="text"
+                  value={credential}
+                  onChange={(e) => setCredential(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="login-labels">
+                Password
+                <input
+                  id="login-input"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              <button type="submit">Log In</button>
+            </div>
+          </form>
+          <form onSubmit={demoSubmit} >
+              <button className='demo-button'>Demo</button>
+          </form>
       </div>
+
     </div>
   );
 }

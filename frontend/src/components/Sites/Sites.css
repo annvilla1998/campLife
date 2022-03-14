@@ -5,12 +5,21 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+
 h2 {
     text-align: center; 
     font-size: 60px; 
     color: white
 }
 
+
+.host-new-site {
+    margin: 50px;
+    color:white;
+    border: 1px solid white;
+    padding: 10px;
+    width: 120px;
+}
 
 
 .site-list-container {

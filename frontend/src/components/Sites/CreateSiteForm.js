@@ -67,57 +67,64 @@ export const CreateSite = ({hideForm}) => {
                     <li key={error}>{error}</li>
                 ))}
             </ul>
-            <form onSubmit={handleSubmit}>
-                <label>Name
+            <form className="create-site" onSubmit={handleSubmit}>
+                <label id="newsite">Name
                     <input
+                    id="new-site-input"
                     type='text'
                     value={name}
                     required
                     onChange={e => setName(e.target.value)} 
                     />
                 </label>
-                <label> Address
+                <label id="newsite"> Address
                     <input
+                    id="new-site-input"
                     type="text"
                     value={address}
                     required
                     onChange={e => setAddress(e.target.value)}
                     />
                 </label>
-                <label>City
+                <label id="newsite">City
                     <input
+                    id="new-site-input"
                     type="text"
                     value={city}
                     required
                     onChange={e => setCity(e.target.value)}
                     />
                 </label>
-                <label>State
+                <label id="newsite">State
                     <input
+                    id="new-site-input"
                     type="text"
                     value={state}
                     required
                     onChange={e => setState(e.target.value)}
                     />
                 </label>
-                <label>Country
+                <label id="newsite">Country
                     <input
+                    id="new-site-input"
                     type="text"
                     value={country}
                     required
                     onChange={e => setCountry(e.target.value)}
                     />
                 </label>
-                <label>Price
+                <label id="newsite">Price
                     <input
+                    id="new-site-input"
                     type="number"
                     value={price}
                     required
                     onChange={e => setPrice(e.target.value)}
                     />
                 </label>
-                <label>Description
+                <label id="newsite">Description
                     <textarea
+                    id="new-site-input"
                     rows="5" 
                     cols="33"
                     value={description}
@@ -125,16 +132,19 @@ export const CreateSite = ({hideForm}) => {
                     onChange={e => setDescription(e.target.value)}
                     />
                 </label>
-                <label>Image URL
+                <label id="newsite">Image URL
                     <input 
+                    id="new-site-input"
                     src="URL"
                     value={url}
                     onChange={e => setUrl(e.target.value)}
                     multiple
                     />
                 </label>
-                <button type='submit'>Host New Site</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <div id="create-site-buttons">
+                    <button type='submit'>Host New Site</button>
+                    <button type="button" onClick={handleCancelClick}>Cancel</button>
+                </div>
             </form>
         </section>
     )

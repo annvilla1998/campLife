@@ -21,11 +21,11 @@ export const Sites = () => {
        <div className='sites'>
         <h2>Adventure Awaits!</h2>
         {sessionUser &&
-        <div onClick={() => {setShowForm(true)}}>Host New Site</div>
+        <div className="host-new-site" onClick={() => {setShowForm(true)}}>Host New Site</div>
         }
         {!sessionUser &&
             <NavLink to="/signup">
-                <div >Host New Site</div>
+                <div className="host-new-site" >Host New Site</div>
             </NavLink>
         }
         {showForm ? (

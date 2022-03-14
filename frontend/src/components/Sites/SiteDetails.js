@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams, NavLink, useHistory, Link } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
+import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
@@ -81,7 +82,9 @@ export const SiteDetails = () => {
                     }
                 </div>
             </div>
-            {content}
+            <div className="edit-sites">
+                {content}
+            </div>
             <div className="reviews-list">
                 <h3>Reviews</h3>
                 {sessionUser &&
@@ -99,7 +102,7 @@ export const SiteDetails = () => {
                         <div>Rating: {rating} / 5</div>
                         <div>Comments: {review}</div>
                         {userId === sessionUser?.id &&
-                            <div id="edit-delete-review">
+                            <div id="review-button">
                                 <Link to={{
                                     pathname: `/review/${id}/edit`,
                                     state: {
@@ -109,7 +112,7 @@ export const SiteDetails = () => {
                                         oldreview: review
                                     }
                                 }}>
-                                    <button>Edit</button>
+                                    <button >Edit</button>
                                 </Link>
                                 <button onClick={() => dispatch(deleteReview(id))}>Delete</button>
                         </div>}
