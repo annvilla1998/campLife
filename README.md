@@ -2,7 +2,7 @@
 Clone of [Hipcamp](https://www.hipcamp.com/en-US).
 
 ### Index
-| [MVP Features List](https://github.com/annvilla1998/campLife/wiki/MVP-List) | [Database Schema](https://github.com/annvilla1998/campLife/wiki/DataBase-Schema) | [API Documentation](https://github.com/annvilla1998/campLife/wiki/Backend-API-Routes)
+| [MVP Features List](https://github.com/annvilla1998/campLife/wiki/MVP-List) | [Database Schema](https://github.com/annvilla1998/campLife/wiki/DataBase-Schema) | [API Documentation](https://github.com/annvilla1998/campLife/wiki/Backend-API-Routes) | [Frontend Routes](https://github.com/annvilla1998/campLife/wiki/Frontend-Routes)
 
 ### Technologies Used
 - Javascript
