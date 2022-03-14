@@ -104,7 +104,9 @@ export const SiteDetails = () => {
                                     pathname: `/review/${id}/edit`,
                                     state: {
                                         reviewId : id,
-                                        siteId: siteId
+                                        siteId: siteId,
+                                        oldrating: rating,
+                                        oldreview: review
                                     }
                                 }}>
                                     <button>Edit</button>

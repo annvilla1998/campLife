@@ -5,7 +5,7 @@ const GET_REVIEWS = '/sites/:id/GET_REVIEWS'
 const POST_REVIEW = '/sites/:id/POST_REVIEW'
 const EDIT_REVIEW = '/sites/:id/EDIT_REVIEW'
 const DELETE_REVIEW = '/sites/:id/DELETE_REVIEW'
-const GET_ONE = '/review/GET_ONE'
+const GET_REVIEW = '/review/GET_REVIEW'
 
 export const getReviews =(reviews) => ({
     type: GET_REVIEWS,
@@ -13,7 +13,7 @@ export const getReviews =(reviews) => ({
 })
 
 export const getOne = (review) => ({
-    type: GET_ONE,
+    type: GET_REVIEW,
     review
 })
 
@@ -103,18 +103,18 @@ const reviewReducer = (state = initialState, action) => {
         newReviews.reviews = newReviews
         return newState;
 
-        case GET_ONE:
-        // newState = {...state}
-        // reviews = {}
-        // reviews[action.review.id] = action.review;
-        // newState.reviews = reviews
-        // return newState
-        return {
-            ...state,
-            reviews: {
-                [action.review.id] : action.review
-            }
-        }
+        case GET_REVIEW:
+        newState = {...state}
+        reviews = {}
+        reviews[action.review.id] = action.review;
+        newState.reviews = reviews
+        return newState
+        // return {
+        //     ...state,
+        //     reviews: {
+        //         [action.review.id] : action.review
+        //     }
+        // }
      
         case EDIT_REVIEW:
             // newState = {...state}
