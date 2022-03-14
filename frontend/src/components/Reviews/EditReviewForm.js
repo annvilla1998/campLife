@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { useHistory, useParams } from "react-router-dom"
-import { editReview } from "../../store/reviews"
+import { NavLink, useHistory, useParams } from "react-router-dom"
+import { editReview, getOneReview } from "../../store/reviews"
+import { useLocation } from "react-router-dom"
 
-export const EditReviewForm = ({reviewId, hideForm}) => {
+export const EditReviewForm = () => {
     const sessionUser = useSelector(state => state.session.user);
+    const location = useLocation();
+    const history = useHistory()
+    const { reviewId, siteId } = location.state;
     const reviewToBeEdited = useSelector(state => state.reviewState.reviews[reviewId]);
-    const [review, setReview] = useState(reviewToBeEdited.review)
-    const [rating, setRating] = useState(reviewToBeEdited.rating)
+    const [review, setReview] = useState(reviewToBeEdited?.review)
+    const [rating, setRating] = useState(reviewToBeEdited?.rating)
     const dispatch = useDispatch();
     const [errors, setErrors] = useState([]);
-    const siteId = useParams()
+
+    useEffect(() => {
+        dispatch(getOneReview(reviewId))
+    },[dispatch])
+
+    // const siteId = useParams()
     const handlePostReview = async (e) => {
         e.preventDefault()
 
         const newReview = {
             ...reviewToBeEdited,
             userId: sessionUser.id,
-            siteId: +siteId.id,
+            siteId: reviewToBeEdited.siteId,
             rating,
             review
         }
@@ -25,15 +34,16 @@ export const EditReviewForm = ({reviewId, hideForm}) => {
         
         if(updatedReview){
             setErrors([])
-            hideForm()
+            history.push(`/sites/${reviewToBeEdited.siteId}`)
+            // hideForm()
         }
     }
 
-    const handleCancelClick = (e) => {
-        e.preventDefault();
-        setErrors([]);
-        hideForm();
-      };
+    // const handleCancelClick = (e) => {
+    //     e.preventDefault();
+    //     setErrors([]);
+    //     // hideForm();
+    //   };
 
     return (
         <section className="post-review-form">
@@ -62,7 +72,9 @@ export const EditReviewForm = ({reviewId, hideForm}) => {
                     />
                 </label>
                 <button type="submit">Post</button>
-                <button type="button" onClick={handleCancelClick}>Cancel</button>
+                <NavLink to={`/sites/${siteId}`}>
+                    <button type="button">Cancel</button>
+                </NavLink>
             </form>
         </section>
     )

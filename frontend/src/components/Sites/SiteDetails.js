@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, NavLink, useHistory } from "react-router-dom";
+import { Redirect, useParams, NavLink, useHistory, Link } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import { EditSite } from "./EditSiteForm";
@@ -21,7 +21,6 @@ export const SiteDetails = () => {
     const reviewsArr = Object.values(reviews)
     const [showEditForm, setShowEditForm] = useState(false);
     const [showEditReviewForm, setShowEditReviewForm] = useState(false)
-
 
     useEffect(() => {
         dispatch(allReviews(id))
@@ -95,17 +94,29 @@ export const SiteDetails = () => {
                         <button id="post-review-button" >Post Review</button>
                     </NavLink>
                 }
-                {reviewsArr.map(({ id, rating, review, siteId }) => (
+                {reviewsArr.map(({ id, rating, review, userId, siteId }) => (
                     <div className="review" key={id}>
                         <div>Rating: {rating} / 5</div>
                         <div>Comments: {review}</div>
-                        {site?.userId === sessionUser?.id &&
+                        {userId === sessionUser?.id &&
                             <div id="edit-delete-review">
-                                <button onClick={() => setShowEditReviewForm(true)}>Edit</button>
+                                <Link to={{
+                                    pathname: `/review/${id}/edit`,
+                                    state: {
+                                        reviewId : id,
+                                        siteId: siteId,
+                                        oldrating: rating,
+                                        oldreview: review
+                                    }
+                                }}>
+                                    <button>Edit</button>
+                                </Link>
                                 <button onClick={() => dispatch(deleteReview(id))}>Delete</button>
                         </div>}
-                        {showEditReviewForm &&
-                            <EditReviewForm reviewId={id} hideForm={()=> setShowEditReviewForm(false)}/>}
+
+                        {/* {showEditReviewForm &&
+
+                            <EditReviewForm reviewId={id} hideForm={()=> setShowEditReviewForm(false)}/>} */}
                     </div>
                 ))}
             </div>

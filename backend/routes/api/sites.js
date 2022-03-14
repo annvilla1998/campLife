@@ -144,6 +144,14 @@ router.post('/:id/review', requireAuth, asyncHandler(async(req,res) => {
     res.redirect(`${req.baseUrl}/${siteId}`)
 }))
 
+//get the review to be edited
+// router.get('/review/:id/edit', asyncHandler(async(req,res)=> {
+//     const id = parseInt(req.params.id, 10);
+//     console.log(id)
+//     const review = await Review.findByPk(id)
+//     return res.json(review)
+// }))
+
 //edit a review
 router.patch('/review/:id', requireAuth, asyncHandler(async(req,res) => {
     const id = parseInt(req.params.id, 10)

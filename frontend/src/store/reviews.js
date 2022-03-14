@@ -5,10 +5,16 @@ const GET_REVIEWS = '/sites/:id/GET_REVIEWS'
 const POST_REVIEW = '/sites/:id/POST_REVIEW'
 const EDIT_REVIEW = '/sites/:id/EDIT_REVIEW'
 const DELETE_REVIEW = '/sites/:id/DELETE_REVIEW'
+const GET_REVIEW = '/review/GET_REVIEW'
 
 export const getReviews =(reviews) => ({
     type: GET_REVIEWS,
     reviews
+})
+
+export const getOne = (review) => ({
+    type: GET_REVIEW,
+    review
 })
 
 export const postReview = (review) => ({
@@ -44,6 +50,12 @@ export const createReview = (data) => async dispatch => {
     const newReview = await res.json()
     dispatch(postReview(newReview))
     return newReview
+}
+
+export const getOneReview = (reviewId) => async dispatch => {
+    const res = await csrfFetch(`/api/review/${reviewId}/edit`)
+    const review = await res.json()
+    dispatch(getOne(review))
 }
 
 export const editReview = (data) => async dispatch => {
@@ -90,6 +102,19 @@ const reviewReducer = (state = initialState, action) => {
         newReviews[action.review.id] = action.review;
         newReviews.reviews = newReviews
         return newState;
+
+        case GET_REVIEW:
+        newState = {...state}
+        reviews = {}
+        reviews[action.review.id] = action.review;
+        newState.reviews = reviews
+        return newState
+        // return {
+        //     ...state,
+        //     reviews: {
+        //         [action.review.id] : action.review
+        //     }
+        // }
      
         case EDIT_REVIEW:
             // newState = {...state}
