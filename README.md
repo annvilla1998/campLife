@@ -4,6 +4,13 @@ Clone of [Hipcamp](https://www.hipcamp.com/en-US).
 ## Heroku Live Link
 [CampLife](https://camplife1.herokuapp.com/)
 
+## Visuals
+
+![image](https://user-images.githubusercontent.com/88516795/158239709-9f44b699-7a4f-45f5-b862-84bbabf8fbc5.png)
+![image](https://user-images.githubusercontent.com/88516795/158239772-dfaeb9e8-0b85-431f-868f-2c37a4142e13.png)
+![image](https://user-images.githubusercontent.com/88516795/158239811-cb2fcc28-d6ed-4570-a686-ffaf105af8d7.png)
+
+
 ### Index
 | [MVP Features List](https://github.com/annvilla1998/campLife/wiki/MVP-List) | [Database Schema](https://github.com/annvilla1998/campLife/wiki/DataBase-Schema) | [API Documentation](https://github.com/annvilla1998/campLife/wiki/Backend-API-Routes) | [Frontend Routes](https://github.com/annvilla1998/campLife/wiki/Frontend-Routes)
 
