@@ -41,18 +41,20 @@ export const ReviewForm = () => {
                 ))}
             </ul>
             <form className="review-form" onSubmit={handlePostReview}>
-                <label>
+                <label id="review-form-input">
                     Rating
                     <input 
+                    id='review-input'
                     type="number"
                     value={rating}
                     required
                     onChange={e => setRating(e.target.value)}
-                    />
+                    /> / 5
                 </label>
-                <label>
+                <label id="review-form-input">
                     Comments
-                    <input
+                    <textarea
+                    id='review-input'
                     type="text"
                     value={review}
                     required

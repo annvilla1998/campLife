@@ -32,7 +32,11 @@ export const EditReviewForm = () => {
             review
         }
         const updatedReview = await dispatch(editReview(newReview))
-        
+        .catch(async (res) => {
+            const data = await res.json()
+            if(data && data.errors) setErrors(data.errors) 
+        })
+
         if(updatedReview){
             setErrors([])
             history.push(`/sites/${reviewToBeEdited.siteId}`)
@@ -57,15 +61,17 @@ export const EditReviewForm = () => {
                 <label>
                     Rating
                     <input 
+                    id='review-input'
                     type="number"
                     value={rating}
                     required
                     onChange={e => setRating(e.target.value)}
-                    />
+                    /> / 5
                 </label>
                 <label>
                     Comments
-                    <input
+                    <textarea
+                    id='review-input'
                     type="text"
                     value={review}
                     required

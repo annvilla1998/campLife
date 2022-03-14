@@ -28,6 +28,15 @@ const validateCreateSite = [
     handleValidationErrors
 ]
 
+const validatePostReview = [
+    check('rating')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a rating")
+        .isInt({ min: 0, max: 5 })
+        .withMessage("Please enter a number 1-5"),
+    handleValidationErrors
+]
+
 
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
@@ -130,7 +139,7 @@ router.get('/:id/review', asyncHandler(async(req,res) => {
 
 
 //post a review
-router.post('/:id/review', requireAuth, asyncHandler(async(req,res) => {
+router.post('/:id/review', requireAuth, validatePostReview, asyncHandler(async(req,res) => {
     // const site = await Site.findByPk(req.params.id)
     
     const { userId, review, rating, siteId } = req.body;
@@ -153,7 +162,7 @@ router.post('/:id/review', requireAuth, asyncHandler(async(req,res) => {
 // }))
 
 //edit a review
-router.patch('/review/:id', requireAuth, asyncHandler(async(req,res) => {
+router.patch('/review/:id', requireAuth, validatePostReview, asyncHandler(async(req,res) => {
     const id = parseInt(req.params.id, 10)
     const { userId, siteId, rating, review } = req.body
     const oldReview = await Review.findByPk(id)

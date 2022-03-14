@@ -10,3 +10,16 @@
     gap: 10px;
     margin: 10px;
 }
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    font-family: 'PT Sans', sans-serif;
+    gap: 10px;
+    width: 200px;
+    margin: auto;
+}
+
+#review-input {
+    height: 40px;
+}
