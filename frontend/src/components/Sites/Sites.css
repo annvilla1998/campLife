@@ -24,15 +24,10 @@ h2 {
 
 .site-list-container {
     display:block;
-    /* position: relative; */
-    /* top: 50px; */
-    /* left: 70px; */
-    
+    justify-content: center;
     margin: auto;
-    /* margin: 30px; */
     padding: 50px;
     width:100%;
-    /* padding-top: 100px; */
     display: grid;
     grid-template-areas:
     "a b c";
@@ -46,13 +41,10 @@ li.site-list{
     height: 500px;
     width: 450px;
     display: grid;
-    /* border: 0 solid white; */
-    /* box-shadow: 0 0 50px; */
 }
 
 img {
     width: 100%;
-    border-radius: 5px;
 }
 
 #site-list-text {
@@ -67,12 +59,10 @@ img {
 #images {
     display: flex;
     gap: 15px;
-    /* border: 1px solid  white; */
     width: 400px;
     height: 300px;
-    overflow-x: auto;
+    overflow-x: hidden;
     box-shadow: 0 5px 40px;
-    border-radius: 5px;
 }
 
 

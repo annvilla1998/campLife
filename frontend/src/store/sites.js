@@ -86,30 +86,21 @@ export const deleteSite = (siteId) => async dispatch => {
 
 
 const initialState = {
-    sites : {},
-    images: {}
+    sites : {}
 }
 
 const siteReducer = (state = initialState, action) => {
     let allSites = {};
-    const allImages = {}
     let newState = {}
     switch(action.type) {
         case GET_SITES:
             action.sites.sites.forEach(site => {
                 allSites[site.id] = site
             })
-            action.sites.images.forEach(image => {
-                allImages[image.id] = image
-            })
             return {
                 sites: {
                     ...allSites,
                     ...state.sites
-                },
-                images: {
-                    ...allImages,
-                    ...state.images
                 },
             }
         case GET_ONE:
@@ -119,8 +110,7 @@ const siteReducer = (state = initialState, action) => {
                 sites: {
                     ...state.sites,
                     [action.site.site.id]: action.site.site
-                },
-                images: action.site.images
+                }
             }
         case POST_SITE:
             newState = {...state};

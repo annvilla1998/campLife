@@ -2,23 +2,27 @@ import { NavLink } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getAllSites } from "../../store/sites"
+import { Images } from "./Images";
+
 
 export const SiteList = ({ site }) => {
-    const imageObj = useSelector(state => state.siteState.images)
-    const imagesArr = Object.values(imageObj)
-
+//     const sites = useSelector(state => state.siteState.sites)
+//     const sitesArr = Object.values(sites[site.id])
+console.log(site.images)
 
     return (
         <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
             <li className='site-list'>
                 <div className='site-list-detail-container'>
-                    <span id='images'>
-                        {imagesArr.map(({ siteId, url }) => (
-                            siteId === site.id ? (
-                                <img key={url} src={url}/>
-                            )
-                        : null))}
-                    </span>
+                    <i className="fa-solid fa-angle-right"></i>
+                        <span id='images'>
+                            {site.images.map(image => (
+                                    <div key={image}>
+                                        <Images image={image} />
+                                    </div> 
+                            ))} 
+                        </span>
+                    <i className="fa-solid fa-angle-left"></i> 
                     <div id='site-list-text'>
                         <span>Site: {site.name}</span>
                         <span>Address: {site.address}</span>
