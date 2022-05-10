@@ -1,28 +1,36 @@
 import { NavLink } from "react-router-dom"
-import { useSelector, useDispatch } from "react-redux"
-import { useEffect } from "react"
-import { getAllSites } from "../../store/sites"
-import { Images } from "./Images";
+import { useState } from "react"
 
 
 export const SiteList = ({ site }) => {
-//     const sites = useSelector(state => state.siteState.sites)
-//     const sitesArr = Object.values(sites[site.id])
-console.log(site.images)
+    const [currentImage, setCurrentImage] = useState(0)
+
+
+    const swipeRight = () => {
+        if(currentImage !== site.images.length - 1){
+            setCurrentImage(currentImage + 1)
+        }
+    }
+
+    const swipeLeft = () => {
+        if(currentImage !== 0){
+            setCurrentImage(currentImage - 1)
+        }
+    }
 
     return (
-        <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
-            <li className='site-list'>
+        <li className='site-list'>
                 <div className='site-list-detail-container'>
-                    <i className="fa-solid fa-angle-right"></i>
                         <span id='images'>
-                            {site.images.map(image => (
-                                    <div key={image}>
-                                        <Images image={image} />
-                                    </div> 
-                            ))} 
+                            <img src={site.images[currentImage]} />
+                            {currentImage !== 0 && site.images.length > 1 &&
+                                <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
+                            }
+                            {currentImage !== site.images.length - 1 && site.images.length > 1 &&
+                                <i className="fa-solid fa-angle-right" onClick={swipeRight}></i>
+                            }
                         </span>
-                    <i className="fa-solid fa-angle-left"></i> 
+                <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
                     <div id='site-list-text'>
                         <span>Site: {site.name}</span>
                         <span>Address: {site.address}</span>
@@ -31,8 +39,8 @@ console.log(site.images)
                         <span>Country: {site.country}</span>
                         <span>${site.price}/night</span>
                     </div>
+                </NavLink>
                 </div>
             </li>
-        </NavLink>
     )
 }

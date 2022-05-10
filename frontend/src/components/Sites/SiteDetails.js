@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, NavLink, useHistory, Link } from "react-router-dom";
+import { useParams, NavLink, useHistory, Link } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
-import { EditReviewForm } from "../Reviews/EditReviewForm";
 
 
 export const SiteDetails = () => {

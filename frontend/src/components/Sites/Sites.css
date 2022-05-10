@@ -45,6 +45,7 @@ li.site-list{
 
 img {
     width: 100%;
+    
 }
 
 #site-list-text {
@@ -58,12 +59,34 @@ img {
 
 #images {
     display: flex;
-    gap: 15px;
+    /* gap: 15px; */
     width: 400px;
     height: 300px;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     box-shadow: 0 5px 40px;
+    position: relative;
 }
 
+#images .fa-angle-right {
+    position:absolute;
+    top: 140px;
+    left: 390px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid grey;
+    background-color: grey;
+    border-radius: 50%;
+    padding: 5px
+}
 
-
+#images .fa-angle-left {
+    position:absolute;
+    top: 140px;
+    right: 390px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid grey;
+    background-color: grey;
+    border-radius: 50%;
+    padding: 5px
+}
