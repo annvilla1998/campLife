@@ -19,12 +19,12 @@ function LoginForm() {
     );
   };
 
-  const demoSubmit = (e) => {
+  const demoLogin = (e) => {
     e.preventDefault();
     setErrors([]);
-    setCredential('Demo-lition')
-    setPassword('password')
-    dispatch(sessionActions.login({ credential, password }))
+    // setCredential('Demo-lition')
+    // setPassword('password')
+    dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
   }
 
   return (
@@ -62,9 +62,7 @@ function LoginForm() {
               <button type="submit">Log In</button>
             </div>
           </form>
-          <form onSubmit={demoSubmit} >
-              <button className='demo-button'>Demo</button>
-          </form>
+              <button onClick={demoLogin} className='demo-button'>Demo</button>
       </div>
 
     </div>

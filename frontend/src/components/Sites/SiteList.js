@@ -32,7 +32,7 @@ export const SiteList = ({ site }) => {
                         </span>
                 <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
                     <div id='site-list-text'>
-                        <span>Site: {site.name}</span>
+                        <span className="site-name">{site.name}</span>
                         <span>Address: {site.address}</span>
                         <span>City: {site.city}</span>
                         <span>State: {site.state}</span>

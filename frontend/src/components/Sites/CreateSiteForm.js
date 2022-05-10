@@ -52,8 +52,6 @@ export const CreateSite = ({hideForm}) => {
         history.push(`/sites/${newSiteObj.id}`)
     }
 
-
-
     const handleCancelClick = (e) => {
         e.preventDefault();
         setErrors([]);
