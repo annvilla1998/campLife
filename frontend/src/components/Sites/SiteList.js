@@ -37,7 +37,7 @@ export const SiteList = ({ site }) => {
                         <span>City: {site.city}</span>
                         <span>State: {site.state}</span>
                         <span>Country: {site.country}</span>
-                        <span>${site.price}/night</span>
+                        <span className="price">${site.price}/night</span>
                     </div>
                 </NavLink>
                 </div>

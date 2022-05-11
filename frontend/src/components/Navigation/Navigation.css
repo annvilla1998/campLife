@@ -37,7 +37,7 @@ a > .nav-container {
     color: white;
 }
 
-.nav-container a:hover {
+.nav-menu a:hover {
     text-decoration: underline;
 } 
 

@@ -19,24 +19,24 @@ html {
 
 .stars {
 	z-index: -3;
-	background: #000 url('https://image.ibb.co/mjnygo/stars.png') repeat top center;
+	background: #000 url('https://pixy.org/src/37/378081.jpg') repeat top center;
 }
 
-.twinkling{
+/* .twinkling{
 	z-index: -2;
-	background:transparent url('https://image.ibb.co/ir1DE8/twinkling.png') repeat top center;
+	background:transparent url('') repeat top center;
 	animation: move-twink-back 200s linear infinite;
 }
 
 .clouds{
 	z-index: -1;
-    background:transparent url('https://image.ibb.co/bT4N7T/clouds.png') repeat top center;
+    background:transparent url('campLife/frontend/logo/clouds.png') repeat top center;
 	animation: move-clouds-back 200s linear infinite;
-}
+} */
 
 
 
-@keyframes move-twink-back {
+/* @keyframes move-twink-back {
 	from {background-position:0 0;}
 	to {background-position:-10000px 5000px;}
 }
@@ -44,4 +44,4 @@ html {
 @keyframes move-clouds-back {
 	from {background-position:0 0;}
 	to {background-position:10000px 0;}
-}
+} */

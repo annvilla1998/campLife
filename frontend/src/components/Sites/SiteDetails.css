@@ -14,8 +14,10 @@ html {
     justify-content: center;
     /* border: 20px solid #565e47; */
     box-shadow: 0 5px 40px;
+    background-color: black;
     width: 800px;
-    height: 800px;
+    height: 1050px;
+    flex-grow:1;
     
 }
 
@@ -32,12 +34,49 @@ html {
 #image-detail-page {
     display: flex;
     gap: 15px;
-    width: 500px;
-    height: 400px;
-    overflow-x: auto;
+    width: 600px;
+    height: 500px;
+    /* overflow-x: auto; */
     /* box-shadow: 0 5px 40px; */
-    border-radius: 5px;
+    position: relative;
 }
+
+#image-detail-page .fa-angle-right {
+    position:absolute;
+    top: 250px;
+    left: 610px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid grey;
+    background-color: grey;
+    border-radius: 50%;
+    padding: 5px 10px;
+    transition: 200ms ease-in-out;
+    z-index: 200;
+}
+
+
+#image-detail-page .fa-angle-right:hover {
+    opacity: 0.5;
+}
+
+#image-detail-page .fa-angle-left {
+    position:absolute;
+    top: 250px;
+    right: 610px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid grey;
+    background-color: grey;
+    border-radius: 50%;
+    padding: 5px 10px;
+    transition: 200ms ease-in-out;
+}
+
+#image-detail-page .fa-angle-left:hover {
+    opacity: 0.5;
+}
+
 
 #site-detail-text {
     font-family: 'PT Sans', sans-serif;
@@ -46,7 +85,8 @@ html {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 10px;
+    padding: 50px;
+    line-height: 1.5;
 }
 
 #edit-delete-site {
@@ -83,6 +123,15 @@ h3 {
 
 #post-review-button {
     width: 100%;
+}
+
+.rating {
+    font-weight:bold;
+    margin: 15px 0px;
+}
+
+.review-comments {
+    margin: 15px 0px;
 }
 
 /* #0A0A09

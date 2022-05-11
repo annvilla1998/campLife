@@ -5,6 +5,8 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Site, Review, Trip } = require('../../db/models');
 const router = express.Router();
+const AWS = require('aws-sdk');
+const keys = require('../../utils/keys.js')
 
 const validateCreateSite = [
     check('address')
@@ -38,6 +40,73 @@ const validatePostReview = [
 ]
 
 
+// //AWS
+// // configuring the DiscStorage engine.
+// const storage = multer.diskStorage({
+//     destination : 'uploads/',
+//     filename: function (req, file, cb) {
+//       cb(null, file.originalname);
+//     }
+//   });
+//   const upload = multer({ storage: storage });
+  
+// //setting the credentials
+// AWS.config.update({
+// accessKeyId: keys.iam_access_id,
+// secretAccessKey: keys.iam_secret,
+// region: 'us-west-1',
+// });
+
+
+// //Creating a new instance of S3:
+// const s3= new AWS.S3();
+
+// //The uploadFile function
+// function uploadFile(source,targetName,res){
+//     console.log('preparing to upload...');
+//     fs.readFile(source, function (err, filedata) {
+//       if (!err) {
+//         const putParams = {
+//             Bucket      : 'sample-bucket-name',
+//             Key         : targetName,
+//             Body        : filedata
+//         };
+//         s3.putObject(putParams, function(err, data){
+//           if (err) {
+//             console.log('Could nor upload the file. Error :',err);
+//             return res.send({success:false});
+//           } 
+//           else{
+//             fs.unlink(source);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
+//             console.log('Successfully uploaded the file');
+//             return res.send({success:true});
+//           }
+//         });
+//       }
+//       else{
+//         console.log({'err':err});
+//       }
+//     });
+//   }
+
+// //The retrieveFile function
+// function retrieveFile(filename,res){
+
+//     const getParams = {
+//       Bucket: 'sample-bucket-name',
+//       Key: filename
+//     };
+  
+//     s3.getObject(getParams, function(err, data) {
+//       if (err){
+//         return res.status(400).send({success:false,err:err});
+//       }
+//       else{
+//         return res.send(data.Body);
+//       }
+//     });
+//   }
+
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
     const sites = await Site.findAll();
@@ -47,25 +116,30 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 //post a new site
+// router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
+//     const { userId, address, city, state, country, name, price, description, images } = req.body
+//     const newSite = await Site.build({
+//         userId,
+//         address, 
+//         city, 
+//         state, 
+//         country, 
+//         name, 
+//         price, 
+//         description,
+//         images
+//     })
+//     await newSite.save()
+
+
+//     if(newSite){
+//         return res.json(newSite)
+//     }        
+// }))
+
 router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
-    const { userId, address, city, state, country, name, price, description, images } = req.body
-    const newSite = await Site.build({
-        userId,
-        address, 
-        city, 
-        state, 
-        country, 
-        name, 
-        price, 
-        description,
-        images
-    })
-    await newSite.save()
 
-
-    if(newSite){
-        return res.json(newSite)
-    }        
+    uploadFile(req.file.path, req.file.filename ,res);
 }))
 
 
