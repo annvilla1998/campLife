@@ -21,36 +21,54 @@ export const CreateSite = ({hideForm}) => {
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState("")
     const [url, setUrl] = useState('')
+    const [images, setImages] = useState([])
+
+
+    const uploadImages = async(e) => {
+        const file = e.target.files[0]
+        setImages([...images,file])
+        console.log(file)
+    }
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
-     
-        const newSite = {
-            userId: sessionUser.id,
-            address,
-            city,
-            state,
-            country,
-            name,
-            price,
-            description,
-            url
-        }
-        
-        let createdSite;
-        createdSite = dispatch(createSite(newSite))
-        .catch(async res => {
-            const data = await res.json();
-            console.log(data.errors)
-            if(data && data.errors) setErrors(data.errors)
+        let data = new FormData();
+        images.forEach(image => {
+            data.append("file[]", image)
         })
-        if(createdSite){
-            setErrors([])
-        }
+        console.log(data)
+        dispatch(createSite(data));
     }
+
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+     
+    //     const newSite = {
+    //         userId: sessionUser.id,
+    //         address,
+    //         city,
+    //         state,
+    //         country,
+    //         name,
+    //         price,
+    //         description,
+    //         url
+    //     }
+        
+    //     let createdSite;
+    //     createdSite = dispatch(createSite(newSite))
+    //     .catch(async res => {
+    //         const data = await res.json();
+    //         console.log(data.errors)
+    //         if(data && data.errors) setErrors(data.errors)
+    //     })
+    //     if(createdSite){
+    //         setErrors([])
+    //     }
+    // }
     
-    if(newSiteObj){
-        history.push(`/sites/${newSiteObj.id}`)
-    }
+    // if(newSiteObj){
+    //     history.push(`/sites/${newSiteObj.id}`)
+    // }
 
     const handleCancelClick = (e) => {
         e.preventDefault();
@@ -65,8 +83,8 @@ export const CreateSite = ({hideForm}) => {
                     <li key={error}>{error}</li>
                 ))}
             </ul>
-            <form className="create-site" onSubmit={handleSubmit}>
-                <label id="newsite">Name
+            <form onSubmit={handleSubmit} className="create-site">
+                {/* <label id="newsite">Name
                     <input
                     id="new-site-input"
                     type='text'
@@ -129,15 +147,16 @@ export const CreateSite = ({hideForm}) => {
                     required
                     onChange={e => setDescription(e.target.value)}
                     />
-                </label>
-                <label id="newsite">Image URL
-                    <input 
-                    id="new-site-input"
-                    src="URL"
-                    value={url}
-                    onChange={e => setUrl(e.target.value)}
-                    multiple
-                    />
+                </label> */}
+                <label id="newsite">Upload Images
+                <input
+                    type='file'
+                    required
+                    name="images"
+                    accept='image/*'
+                    id='add-photo-1'
+                    onChange={uploadImages}> 
+                </input>
                 </label>
                 <div id="create-site-buttons">
                     <button type='submit'>Host New Site</button>

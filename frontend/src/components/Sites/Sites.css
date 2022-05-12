@@ -35,8 +35,7 @@ h2 {
     padding: 50px;
     width:100%;
     display: grid;
-    grid-template-areas:
-    "a b c";
+    grid-template-columns: repeat(auto-fill, 500px);
     color:white;
     overflow: hidden;
     grid-gap: 150px;
@@ -48,7 +47,7 @@ li.site-list{
     height: 500px;
     width: 450px;
     display: grid;
-    
+    margin: 20px 0;
 }
 
 img {

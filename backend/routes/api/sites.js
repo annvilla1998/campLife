@@ -5,29 +5,35 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Site, Review, Trip } = require('../../db/models');
 const router = express.Router();
-const AWS = require('aws-sdk');
-const keys = require('../../utils/keys.js')
+// const fs = require('fs')
+// const util = require('util')
+// const unlinkFile = util.promisify(fs.unlink)
+// const multer  = require('multer');
+// const upload = multer({ dest: 'uploads/' })
+const { uploadFile } = require('../../utils/s3')
+
+
 
 const validateCreateSite = [
-    check('address')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide an address"),
-    check('city')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a city"),
-    check('state')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a state"),
-    check('country')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a country"),
-    check('name')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a name"),
-    check('price')
-        .exists({ checkFalsy: true })
-        .withMessage("Please provide a price"),
-    handleValidationErrors
+    // check('address')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide an address"),
+    // check('city')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide a city"),
+    // check('state')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide a state"),
+    // check('country')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide a country"),
+    // check('name')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide a name"),
+    // check('price')
+    //     .exists({ checkFalsy: true })
+    //     .withMessage("Please provide a price"),
+    // handleValidationErrors
 ]
 
 const validatePostReview = [
@@ -39,73 +45,6 @@ const validatePostReview = [
     handleValidationErrors
 ]
 
-
-// //AWS
-// // configuring the DiscStorage engine.
-// const storage = multer.diskStorage({
-//     destination : 'uploads/',
-//     filename: function (req, file, cb) {
-//       cb(null, file.originalname);
-//     }
-//   });
-//   const upload = multer({ storage: storage });
-  
-// //setting the credentials
-// AWS.config.update({
-// accessKeyId: keys.iam_access_id,
-// secretAccessKey: keys.iam_secret,
-// region: 'us-west-1',
-// });
-
-
-// //Creating a new instance of S3:
-// const s3= new AWS.S3();
-
-// //The uploadFile function
-// function uploadFile(source,targetName,res){
-//     console.log('preparing to upload...');
-//     fs.readFile(source, function (err, filedata) {
-//       if (!err) {
-//         const putParams = {
-//             Bucket      : 'sample-bucket-name',
-//             Key         : targetName,
-//             Body        : filedata
-//         };
-//         s3.putObject(putParams, function(err, data){
-//           if (err) {
-//             console.log('Could nor upload the file. Error :',err);
-//             return res.send({success:false});
-//           } 
-//           else{
-//             fs.unlink(source);// Deleting the file from uploads folder(Optional).Do Whatever you prefer.
-//             console.log('Successfully uploaded the file');
-//             return res.send({success:true});
-//           }
-//         });
-//       }
-//       else{
-//         console.log({'err':err});
-//       }
-//     });
-//   }
-
-// //The retrieveFile function
-// function retrieveFile(filename,res){
-
-//     const getParams = {
-//       Bucket: 'sample-bucket-name',
-//       Key: filename
-//     };
-  
-//     s3.getObject(getParams, function(err, data) {
-//       if (err){
-//         return res.status(400).send({success:false,err:err});
-//       }
-//       else{
-//         return res.send(data.Body);
-//       }
-//     });
-//   }
 
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
@@ -136,10 +75,39 @@ router.get('/', asyncHandler(async (req, res) => {
 //         return res.json(newSite)
 //     }        
 // }))
+// router.get('/images/:key', (res, req) => {
+//     const key = req.params.key
+//     const readStream = getFileStream(key)
 
-router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
+//     readStream.pipe(res)
+// })
 
-    uploadFile(req.file.path, req.file.filename ,res);
+
+router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
+    const file = req.file
+    console.log("file", file)
+    const result = await uploadFile(file)
+    // upload(file);
+    console.log(result)
+
+    console.log("in backend")
+    // const { userId, address, city, state, country, name, price, description, images } = req.body
+    // const newSite = await Site.build({
+    //     userId,
+    //     address, 
+    //     city, 
+    //     state, 
+    //     country, 
+    //     name, 
+    //     price, 
+    //     description,
+    //     images
+    // })
+    // await newSite.save()
+
+    // if(newSite){
+    //     return res.json(newSite)
+    // }        
 }))
 
 

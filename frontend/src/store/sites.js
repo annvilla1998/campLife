@@ -51,11 +51,9 @@ export const getSiteDetails = (id) => async dispatch => {
 export const createSite = (data) => async dispatch => {
     const res = await csrfFetch('/api/sites', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify(data)
     })
+    // console.log(data)
     const newSite = await res.json();
     dispatch(postSite(newSite))
     return newSite
