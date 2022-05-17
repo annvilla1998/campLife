@@ -3,8 +3,17 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { Site, Image, Review, Trip } = require('../../db/models');
+const { Site, Review, Trip } = require('../../db/models');
 const router = express.Router();
+// const fs = require('fs')
+// const util = require('util')
+// const unlinkFile = util.promisify(fs.unlink)
+// const multer  = require('multer');
+// const upload = multer({ dest: 'uploads/' })
+const { multipleMulterUpload,
+    multiplePublicFileUpload } = require('../../utils/s3')
+
+
 
 const validateCreateSite = [
     check('address')
@@ -41,16 +50,42 @@ const validatePostReview = [
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
     const sites = await Site.findAll();
-    const images = await Image.findAll();
     return res.json({
-        sites,
-        images
+        sites
     })
 }))
 
 //post a new site
-router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
-    const { userId, address, city, state, country, name, price, description, url } = req.body
+// router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) => {
+//     const { userId, address, city, state, country, name, price, description, images } = req.body
+//     const newSite = await Site.build({
+//         userId,
+//         address, 
+//         city, 
+//         state, 
+//         country, 
+//         name, 
+//         price, 
+//         description,
+//         images
+//     })
+//     await newSite.save()
+
+
+//     if(newSite){
+//         return res.json(newSite)
+//     }        
+// }))
+// router.get('/images/:key', (res, req) => {
+//     const key = req.params.key
+//     const readStream = getFileStream(key)
+
+//     readStream.pipe(res)
+// })
+
+
+router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
+    const { userId, address, city, state, country, name, price, description, images } = req.body
     const newSite = await Site.build({
         userId,
         address, 
@@ -59,14 +94,10 @@ router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) =
         country, 
         name, 
         price, 
-        description
+        description,
+        images
     })
     await newSite.save()
-    const newImage = await Image.create({
-        url,
-        siteId: newSite.id
-    })
-
 
     if(newSite){
         return res.json(newSite)
@@ -76,17 +107,10 @@ router.post('/', requireAuth, validateCreateSite, asyncHandler(async (req,res) =
 
 //get site details 
 router.get('/:id', asyncHandler(async (req,res) => {
-    const siteId = req.params.id;
-    const images = await Image.findAll({
-        where:{
-            siteId: siteId
-        }
-    })
-    
+    const siteId = req.params.id;    
     const site = await Site.findByPk(siteId);
     return res.json({
-        site, 
-        images,
+        site
     })
 }))
 
@@ -94,7 +118,7 @@ router.get('/:id', asyncHandler(async (req,res) => {
 //edit a site
 router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
     const id = req.params.id
-    const { userId, address, city, state, country, name, price, description, url} = req.body
+    const { userId, address, city, state, country, name, price, description, images} = req.body
     const site = await Site.findByPk(id)
     await site.update({
         userId,
@@ -105,11 +129,7 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
         price,
         name,
         description,
-    })
-
-    const image = await Image.create({
-        url,
-        siteId: site.id
+        images
     })
    
     return res.json(site)

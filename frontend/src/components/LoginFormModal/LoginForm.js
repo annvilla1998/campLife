@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import './loginModal.css'
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -19,16 +20,16 @@ function LoginForm() {
     );
   };
 
-  const demoSubmit = (e) => {
+  const demoLogin = (e) => {
     e.preventDefault();
     setErrors([]);
-    setCredential('Demo-lition')
-    setPassword('password')
-    dispatch(sessionActions.login({ credential, password }))
+    // setCredential('Demo-lition')
+    // setPassword('password')
+    dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
   }
 
   return (
-    <div>
+    <div className="login-modal">
       <h2 id="login-h2">Login In</h2>
       <div id="log-in-form">
 
@@ -62,9 +63,7 @@ function LoginForm() {
               <button type="submit">Log In</button>
             </div>
           </form>
-          <form onSubmit={demoSubmit} >
-              <button className='demo-button'>Demo</button>
-          </form>
+              <button onClick={demoLogin} className='demo-button'>Demo</button>
       </div>
 
     </div>

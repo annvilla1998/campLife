@@ -1,33 +1,49 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useParams, NavLink, useHistory, Link } from "react-router-dom";
+import { useParams, NavLink, useHistory, Link } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
 import './SiteDetails.css'
 import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
-import { EditReviewForm } from "../Reviews/EditReviewForm";
+import { Modal } from '../../context/Modal'
+
 
 
 export const SiteDetails = () => {
-    const { id } = useParams();
+    const [currentImage, setCurrentImage] = useState(0)
+    // const [showEditForm, setShowEditForm] = useState(false);
     const dispatch = useDispatch()
+    const { id } = useParams();
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
-    const site = useSelector(state => state.siteState.sites[id])
-    const imageObj = useSelector(state => state.siteState.images)
-    const imageArr = Object.values(imageObj)
+    const site = useSelector(state => state.siteState?.sites[id])
+    const images = site?.images
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
-    const [showEditForm, setShowEditForm] = useState(false);
     const [showEditReviewForm, setShowEditReviewForm] = useState(false)
+    const [showSiteModal, setShowSiteModal] = useState(false)
 
     useEffect(() => {
-        dispatch(allReviews(id))
+        console.log('dispatched')
         dispatch(getSiteDetails(id))
-    },[dispatch, id])
+        dispatch(allReviews(id))
+    },[dispatch])
     
+
+    const swipeRight = () => {
+        if(currentImage !== images.length - 1){
+            setCurrentImage(currentImage + 1)
+        }
+    }
+
+    const swipeLeft = () => {
+        if(currentImage !== 0){
+            setCurrentImage(currentImage - 1)
+        }
+    }
+
     
     let content = null;
                 
@@ -43,15 +59,14 @@ export const SiteDetails = () => {
     }
 
                 
-    if (showEditForm) {
-        content = (
-          <EditSite 
-            site={site} 
-            hideForm={() => setShowEditForm(false)} 
-          />
-        );
-      }
-
+    // if (showEditForm) {
+    //     content = (
+    //       <EditSite 
+    //         site={site} 
+    //         hideForm={() => setShowEditForm(false)} 
+    //       />
+    //     );
+    //   }
 
 
     return (
@@ -60,23 +75,34 @@ export const SiteDetails = () => {
                 <div id="site-details">
                     <h2 id="site-details-h2">{site?.name}</h2>
                 <span id='image-detail-page'>
-                    {imageArr.map(({ siteId, url }) => (
-                        siteId === site?.id ? (
-                            <img key={url} src={url}/>
-                        )
-                    : null))}
+                    {images && (
+                        <>
+                            <img src={images[currentImage]}/>
+                            {currentImage !== 0 && images.length > 1 &&
+                                <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
+                            }
+                            {currentImage !== images.length - 1 && images.length > 1 &&
+                                <i className="fa-solid fa-angle-right" onClick={swipeRight}></i>
+                            }
+                        </>
+                    )}
                 </span>
                 <div id="site-detail-text">
+                    <span className="price">${site?.price} / night</span>
                     <span>Address: {site?.address}</span>
                     <span>City: {site?.city}</span>
                     <span>State: {site?.state}</span>
                     <span>Country: {site?.country}</span>
-                    <span>${site?.price}/night</span>
                     <span>Description: {site?.description}</span>
                 </div>
-                    {!showEditForm && (site?.userId === sessionUser?.id) &&
+                    {(site?.userId === sessionUser?.id) &&
                     <div id="edit-delete-site">
-                        <button  onClick={() => setShowEditForm(true)}>Edit</button>
+                        <button  onClick={() => setShowSiteModal(true)}>Edit</button>
+                        {showSiteModal && (
+                            <Modal onClose={() => setShowSiteModal(false)}>
+                                <EditSite site={site} setShowSiteModal={setShowSiteModal}/>
+                            </Modal>
+                        )}
                         <button onClick={handleDeleteSubmit}>Delete</button>
                     </div>
                     }
@@ -99,8 +125,8 @@ export const SiteDetails = () => {
                 }
                 {reviewsArr.map(({ id, rating, review, userId, siteId }) => (
                     <div className="review" key={id}>
-                        <div>Rating: {rating} / 5</div>
-                        <div>Comments: {review}</div>
+                        <div className="rating">Rating: {rating} / 5</div>
+                        <div className="review-comments">{review}</div>
                         {userId === sessionUser?.id &&
                             <div id="review-button">
                                 <Link to={{

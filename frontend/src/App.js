@@ -10,6 +10,7 @@ import { EditSite } from "./components/Sites/EditSiteForm"
 import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
 import {Homepage} from './components/Homepage/index'
+import { ProfilePage } from './components/ProfilePage'
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,9 @@ function App() {
         </Route>
         <Route exact path="/signup">
           <SignUpFormPage />
+        </Route>
+        <Route exact path="/:id/profile">
+          <ProfilePage />
         </Route>
         <Route exact path="/sites">
           <Sites />  

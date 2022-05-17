@@ -33,6 +33,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: true
     },
+    images: {
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      allowNull: false
+    }
   }, {});
   Site.associate = function(models) {
     // associations can be defined here
@@ -41,10 +45,10 @@ module.exports = (sequelize, DataTypes) => {
     onDelete: 'CASCADE',
     hooks: true
   })
-    Site.hasMany(models.Image, { foreignKey: 'siteId',
-      onDelete: 'CASCADE',
-      hooks: true
-    })
+    // Site.hasMany(models.Image, { foreignKey: 'siteId',
+    //   onDelete: 'CASCADE',
+    //   hooks: true
+    // })
     Site.hasMany(models.Review, { foreignKey: 'siteId',
       onDelete: 'CASCADE',
       hooks: true

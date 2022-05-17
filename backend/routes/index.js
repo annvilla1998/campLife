@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 
+
 router.use('/api', apiRouter);
 
 // Static routes
@@ -34,5 +35,7 @@ if (process.env.NODE_ENV !== 'production') {
     return res.json({});
   });
 }
+
+
 
 module.exports = router;

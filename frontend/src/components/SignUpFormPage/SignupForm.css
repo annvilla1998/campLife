@@ -13,10 +13,6 @@
     font-family: 'Fredoka', sans-serif;
 }
 
-input {
-    border-radius: 10px;
-    height: 25px;
-}
 
 button {
     color: black;
@@ -25,7 +21,7 @@ button {
     font-size: 15px;
 }
 
-h2 {
+.sign-up-form h2 {
     padding: 10px;
     padding-bottom: 20px;
     /* font-family: 'Fredoka', sans-serif; */
