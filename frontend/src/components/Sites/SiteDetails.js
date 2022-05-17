@@ -7,11 +7,13 @@ import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
+import { Modal } from '../../context/Modal'
+
 
 
 export const SiteDetails = () => {
     const [currentImage, setCurrentImage] = useState(0)
-    const [showEditForm, setShowEditForm] = useState(false);
+    // const [showEditForm, setShowEditForm] = useState(false);
     const dispatch = useDispatch()
     const { id } = useParams();
     const history = useHistory()
@@ -21,6 +23,7 @@ export const SiteDetails = () => {
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
     const [showEditReviewForm, setShowEditReviewForm] = useState(false)
+    const [showSiteModal, setShowSiteModal] = useState(false)
 
     useEffect(() => {
         console.log('dispatched')
@@ -56,14 +59,14 @@ export const SiteDetails = () => {
     }
 
                 
-    if (showEditForm) {
-        content = (
-          <EditSite 
-            site={site} 
-            hideForm={() => setShowEditForm(false)} 
-          />
-        );
-      }
+    // if (showEditForm) {
+    //     content = (
+    //       <EditSite 
+    //         site={site} 
+    //         hideForm={() => setShowEditForm(false)} 
+    //       />
+    //     );
+    //   }
 
 
     return (
@@ -92,9 +95,14 @@ export const SiteDetails = () => {
                     <span>Country: {site?.country}</span>
                     <span>Description: {site?.description}</span>
                 </div>
-                    {!showEditForm && (site?.userId === sessionUser?.id) &&
+                    {(site?.userId === sessionUser?.id) &&
                     <div id="edit-delete-site">
-                        <button  onClick={() => setShowEditForm(true)}>Edit</button>
+                        <button  onClick={() => setShowSiteModal(true)}>Edit</button>
+                        {showSiteModal && (
+                            <Modal onClose={() => setShowSiteModal(false)}>
+                                <EditSite site={site} setShowSiteModal={setShowSiteModal}/>
+                            </Modal>
+                        )}
                         <button onClick={handleDeleteSubmit}>Delete</button>
                     </div>
                     }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import './loginModal.css'
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function LoginForm() {
   }
 
   return (
-    <div>
+    <div className="login-modal">
       <h2 id="login-h2">Login In</h2>
       <div id="log-in-form">
 

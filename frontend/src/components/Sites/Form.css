@@ -12,42 +12,117 @@
     border: 3px solid white;
 }
 
+
 .create-site-form {
-    color: white;
-    width: 400px;
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    padding: 40px 0px;
+    width: 70vw;
+    height: 70vh;
+    background-color: white;
+    color: black;
+    font-family: 'PT Sans', sans-serif;  
+    overflow: auto;
 }
 
-#new-site-input {
+.create-site-form h2 {
+    color: black;
+    padding-top:15px;
+}
+
+.form-info {
+    display: inline-grid;
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+    padding: 20px;
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    height: 80%;
+}
+
+.form-info input {
+    padding: 10px 5px;
+    border: 1px solid rgb(0, 0, 0, 0.5);
+    width: 80%;
+}
+
+.upload-images {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    position: relative;
+    display: flex;
+}
+
+
+.upload-images input[type="file"] {
+    display: none;
+} 
+
+.upload-images label {
+    position: absolute;
+    bottom: 20px;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius:20px;
+}
+
+.create-site {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 4fr 1fr;
+    width: 100%;
+    max-height: 80%;
+    padding: 20px;
+}
+
+
+#newsite{
+    display: flex;
+    justify-content: space-between;
     margin: 5px;
-    height: 30px;
+
 }
 
-/* .create-site */
-
-#newsite {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-textarea {
-    border-radius: 5px;
-}
 
 #create-site-buttons {
- display: flex;
- justify-content: center;
- gap: 20px;
- padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2 / 3;
+    grid-column: 1 / 3;
+    padding: 10px 0;
+}
+
+#create-site-buttons button {
+    margin: 20px;
+    width: 150px;
 }
 
 .edit-sites {
     position: relative;
     top: 200px;
+}
+
+.photo-preview-container {
+    border: 1px solid black;
+    height: 80%;
+    max-height: 320px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.photo-preview-container i {
+    background-color: grey;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 20px;
+    position: absolute;
+    margin: 5px;
+}
+
+.photo-preview-container i:hover {
+    opacity: 0.5;
 }

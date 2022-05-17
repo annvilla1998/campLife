@@ -49,11 +49,11 @@ export const getSiteDetails = (id) => async dispatch => {
 }
 
 export const createSite = (data) => async dispatch => {
-    const res = await csrfFetch('/api/sites', {
-        method: 'POST',
+    const res = await csrfFetch(`/api/sites`, {
+        method: "POST",
         body: JSON.stringify(data)
-    })
-    // console.log(data)
+        })
+      
     const newSite = await res.json();
     dispatch(postSite(newSite))
     return newSite
@@ -62,9 +62,6 @@ export const createSite = (data) => async dispatch => {
 export const editSite = (data) => async dispatch => {
     const res = await csrfFetch(`/api/sites/${data.id}`, {
         method: "PATCH",
-        headers: {
-            'Content-Type': 'application/json'
-        },
         body: JSON.stringify(data)
     })
     const site = await res.json();

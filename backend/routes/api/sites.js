@@ -10,30 +10,31 @@ const router = express.Router();
 // const unlinkFile = util.promisify(fs.unlink)
 // const multer  = require('multer');
 // const upload = multer({ dest: 'uploads/' })
-const { uploadFile } = require('../../utils/s3')
+const { multipleMulterUpload,
+    multiplePublicFileUpload } = require('../../utils/s3')
 
 
 
 const validateCreateSite = [
-    // check('address')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide an address"),
-    // check('city')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide a city"),
-    // check('state')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide a state"),
-    // check('country')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide a country"),
-    // check('name')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide a name"),
-    // check('price')
-    //     .exists({ checkFalsy: true })
-    //     .withMessage("Please provide a price"),
-    // handleValidationErrors
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide an address"),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a city"),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a state"),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a country"),
+    check('name')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a name"),
+    check('price')
+        .exists({ checkFalsy: true })
+        .withMessage("Please provide a price"),
+    handleValidationErrors
 ]
 
 const validatePostReview = [
@@ -84,30 +85,23 @@ router.get('/', asyncHandler(async (req, res) => {
 
 
 router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
-    const file = req.file
-    console.log("file", file)
-    const result = await uploadFile(file)
-    // upload(file);
-    console.log(result)
+    const { userId, address, city, state, country, name, price, description, images } = req.body
+    const newSite = await Site.build({
+        userId,
+        address, 
+        city, 
+        state, 
+        country, 
+        name, 
+        price, 
+        description,
+        images
+    })
+    await newSite.save()
 
-    console.log("in backend")
-    // const { userId, address, city, state, country, name, price, description, images } = req.body
-    // const newSite = await Site.build({
-    //     userId,
-    //     address, 
-    //     city, 
-    //     state, 
-    //     country, 
-    //     name, 
-    //     price, 
-    //     description,
-    //     images
-    // })
-    // await newSite.save()
-
-    // if(newSite){
-    //     return res.json(newSite)
-    // }        
+    if(newSite){
+        return res.json(newSite)
+    }        
 }))
 
 
