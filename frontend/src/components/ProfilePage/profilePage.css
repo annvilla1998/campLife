@@ -1,9 +1,39 @@
 
 .host-new-site {
     cursor: pointer;
+    color:white;
+    border: 1px solid white;
+    padding: 10px;
+    width: 120px;
+    margin: 20px 0 0 15px;
 }
+
+
+.host-new-site:hover {
+    color:#7C8265;
+    border: 2px solid #7C8265;
+}
+
 
 .profile-page {
     padding-top: 100px;
+    color: white;
+    font-family: 'PT Sans', sans-serif;
+}
 
+.trips h2 {
+    padding: 0;
+}
+
+.trips a {
+    color: #7C8265;
+    text-decoration: none;
+}
+
+.trips a:hover {
+    text-decoration: underline;
+}
+
+.trips {
+    margin: 0px 50px;
 }

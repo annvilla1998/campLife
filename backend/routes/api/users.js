@@ -3,7 +3,8 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, Trip } = require('../../db/models');
+const { Op } = require("sequelize");
 
 const router = express.Router();
 
@@ -45,6 +46,17 @@ router.post(
     })
   );
 
+router.get('/:id/trips',asyncHandler(async (req,res) => {
+    const userId = req.params.id
+    const trips = await Trip.findAll({
+      where: {
+        userId: {
+          [Op.eq]:userId
+        }
+      }
+    })
+    return res.json(trips)
+}))
 
 
 module.exports = router;

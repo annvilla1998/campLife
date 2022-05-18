@@ -38,9 +38,7 @@ export const ProfileButton = ({user}) => {
                 <NavLink to={`/${user.id}/profile`} >
                     Profile
                     </NavLink>  
-                <li>
-                    <button onClick={logout}>Log Out</button>
-                </li>    
+                <div id='logout-button' onClick={logout}>Log Out</div>
             </ul>
         )}
         </>

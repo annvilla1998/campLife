@@ -12,10 +12,11 @@
     color: white;
     font-family: 'PT Sans', sans-serif;
     font-size: 20px;
+    cursor: pointer;
 }
 
 #login-nav-button:hover {
-    text-decoration: underline;
+    border-bottom: 2px solid #7C8265;
 }
 
 
@@ -23,22 +24,59 @@ a > .nav-container {
     background-color: #C5c9bb;
 }  
 
+.fa-user {
+    position: relative;
+}
 
 .profile-dropdown {
-    color: white;
+    color: black;
+    position: absolute;
+    background-color: white;
+    bottom: -45px;
+    display:flex;
+    flex-direction: column;
+    padding: 5px    
+}
+
+.profile-dropdown a {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+}
+
+.profile-dropdown a:hover {
+    border-bottom: 2px solid #7C8265;
+}
+
+#logout-button {
+    padding: 5px;
+}
+
+#logout-button:hover {
+    cursor: pointer;
+    border-bottom: 2px solid #7C8265;
 }
 
 #logo {
     width: 80px;
 }
 
-.nav-container a {
+#sites {
     text-decoration: none;
     color: white;
 }
 
-.nav-menu a:hover {
-    text-decoration: underline;
+#sites:hover {
+    border-bottom: 2px solid #7C8265;
+}
+
+#sign-up {
+    text-decoration: none;
+    color: white;
+}
+
+#sign-up:hover {
+    border-bottom: 2px solid #7C8265;
 } 
 
 .nav-container {

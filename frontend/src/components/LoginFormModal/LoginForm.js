@@ -60,10 +60,12 @@ function LoginForm() {
                   required
                 />
               </label>
-              <button type="submit">Log In</button>
+              <div className="login-demo">
+                <button type="submit">Log In</button>
+                <button onClick={demoLogin} className='demo-button'>Demo</button>
+              </div>
             </div>
           </form>
-              <button onClick={demoLogin} className='demo-button'>Demo</button>
       </div>
 
     </div>
