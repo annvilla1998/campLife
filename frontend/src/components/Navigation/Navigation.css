@@ -16,7 +16,7 @@
 }
 
 #login-nav-button:hover {
-    border-bottom: 2px solid #7C8265;
+    border-bottom: 2px solid #91a058;
 }
 
 
@@ -35,7 +35,8 @@ a > .nav-container {
     bottom: -45px;
     display:flex;
     flex-direction: column;
-    padding: 5px    
+    padding: 5px;
+    width: 200px;    
 }
 
 .profile-dropdown a {
@@ -45,7 +46,7 @@ a > .nav-container {
 }
 
 .profile-dropdown a:hover {
-    border-bottom: 2px solid #7C8265;
+    border-bottom: 2px solid #91a058;
 }
 
 #logout-button {
@@ -54,7 +55,7 @@ a > .nav-container {
 
 #logout-button:hover {
     cursor: pointer;
-    border-bottom: 2px solid #7C8265;
+    border-bottom: 2px solid #91a058;
 }
 
 #logo {
@@ -67,7 +68,7 @@ a > .nav-container {
 }
 
 #sites:hover {
-    border-bottom: 2px solid #7C8265;
+    border-bottom: 2px solid #91a058;
 }
 
 #sign-up {
@@ -76,7 +77,7 @@ a > .nav-container {
 }
 
 #sign-up:hover {
-    border-bottom: 2px solid #7C8265;
+    border-bottom: 2px solid #91a058;
 } 
 
 .nav-container {
@@ -90,7 +91,7 @@ a > .nav-container {
     background-color: #0A0A09;
     height: 100px;
     position: fixed;
-    z-index: 100;
+    z-index: 50;
 }
 
 
@@ -100,7 +101,7 @@ a > .nav-container {
    align-items: center;
    font-family: 'Fredoka', sans-serif;
    font-weight: bold;
-   color: #7C8265;
+   color: #91a058;
    gap: 10px;
    font-size: 50px;
 }

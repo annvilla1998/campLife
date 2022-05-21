@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import * as sessionActions from '../../store/session'
 import './SignupForm.css';
 import { useHistory } from 'react-router-dom';
+import collage from '../../assets/collage.png'
 
 export const SignUpFormPage = () => {
     const dispatch = useDispatch()
@@ -47,46 +48,54 @@ export const SignUpFormPage = () => {
     
     
     return (
-        <form id="sign-up-form" onSubmit={onSubmit}>
-            <h2>Sign Up</h2>
-            <ul id="errors">
-                {errors.map((errors,idx) => (
-                    <li key={idx}>{errors}</li>
-                ))}
-            </ul>
-            <label>
-                Username 
-                <input
-                type="text"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                required />
-            </label>
-            <label>
-                Email
-                <input
-                type="text"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required/>
-            </label>
-            <label>
-                Password
-                <input
-                type="password"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required />
-            </label>
-            <label>
-                Confirm Password
-                <input
-                type="password"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                required/>
-            </label>
-            <button type='submit'>Sign Up</button>
-        </form>
+        <div className="sign-up-page">
+            <div id="outer-signup">
+            <img src={collage} ></img>
+
+            <form id="sign-up-form" onSubmit={onSubmit}>
+                <h2>Sign Up</h2>
+                <ul id="errors">
+                    {errors.map((errors,idx) => (
+                        <li key={idx}>{errors}</li>
+                    ))}
+                </ul>
+                <div id="log-in-inputs">
+                <label className="sign-up-label">
+                    Username 
+                    <input
+                    type="text"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                    required />
+                </label>
+                <label className="sign-up-label">
+                    Email
+                    <input
+                    type="text"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    required/>
+                </label>
+                <label className="sign-up-label">
+                    Password
+                    <input
+                    type="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    required />
+                </label>
+                <label className="sign-up-label">
+                    Confirm Password
+                    <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={e => setConfirmPassword(e.target.value)}
+                    required/>
+                </label>
+                </div>  
+                <button className="sign-up-button" type='submit'>Sign Up</button>
+            </form>
+            </div>
+        </div>
     )
 }

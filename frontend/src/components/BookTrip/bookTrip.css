@@ -1,0 +1,51 @@
+.book-modal {
+    width: 40vw;
+    height: 70vh;
+    background-color: rgb(5, 49, 15)
+    color: black;
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'PT Sans', sans-serif;
+    border-radius: 10px;
+}
+
+.date-picker {
+    display: flex;
+    margin: 25px;
+}
+
+.book-trip-header {
+    margin: 20px;
+    font-size: 30px;
+    font-weight: 550;
+}
+
+
+.date {
+    margin: 20px;
+}
+
+.continue-button {
+    border: 1px solid #91a058;
+    background-color: #91a058;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    transition: all 1s; 
+}
+
+.continue-button:hover {
+    color:#333820;
+    background-color: #cbe66d;
+}
+
+.book-trip-background-image {
+    position: relative;
+    width: 400px;
+    
+    
+}

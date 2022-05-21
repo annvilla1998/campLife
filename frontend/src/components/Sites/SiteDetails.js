@@ -8,12 +8,12 @@ import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
 import { Modal } from '../../context/Modal'
+import { BookTrip } from '../BookTrip'
 
 
 
 export const SiteDetails = () => {
     const [currentImage, setCurrentImage] = useState(0)
-    // const [showEditForm, setShowEditForm] = useState(false);
     const dispatch = useDispatch()
     const { id } = useParams();
     const history = useHistory()
@@ -24,6 +24,8 @@ export const SiteDetails = () => {
     const reviewsArr = Object.values(reviews)
     const [showEditReviewForm, setShowEditReviewForm] = useState(false)
     const [showSiteModal, setShowSiteModal] = useState(false)
+    const [showBookModal, setShowBookModal] = useState(false)
+
 
     useEffect(() => {
         console.log('dispatched')
@@ -58,22 +60,11 @@ export const SiteDetails = () => {
         }
     }
 
-                
-    // if (showEditForm) {
-    //     content = (
-    //       <EditSite 
-    //         site={site} 
-    //         hideForm={() => setShowEditForm(false)} 
-    //       />
-    //     );
-    //   }
-
-
+    
     return (
         <div className="site-detail-container-form">
             <div className="site-detail-container">
                 <div id="site-details">
-                    <h2 id="site-details-h2">{site?.name}</h2>
                 <span id='image-detail-page'>
                     {images && (
                         <>
@@ -88,7 +79,16 @@ export const SiteDetails = () => {
                     )}
                 </span>
                 <div id="site-detail-text">
-                    <span className="price">${site?.price} / night</span>
+                    <h2 >{site?.name}</h2>
+                    <div id='book-container'>
+                        <span className="price">${site?.price} per night</span>
+                        <div onClick={() => setShowBookModal(true)} className="book-button">Book</div>
+                        {showBookModal && (
+                            <Modal onClose={() => setShowBookModal(false)}>
+                                <BookTrip site={site} setShowBookModal={setShowBookModal} />
+                            </Modal>
+                        )}
+                    </div>
                     <span>Address: {site?.address}</span>
                     <span>City: {site?.city}</span>
                     <span>State: {site?.state}</span>

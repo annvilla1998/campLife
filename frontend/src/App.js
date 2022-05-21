@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import {SignUpFormPage} from "./components/SignUpFormPage";
+import { SignUpFormPage } from "./components/SignUpFormPage";
 import * as sessionActions from "./store/session";
-import {Navigation} from "./components/Navigation";
+import { Navigation } from "./components/Navigation";
 import { Sites } from "./components/Sites"
 import { SiteDetails } from "./components/Sites/SiteDetails";
 import { EditSite } from "./components/Sites/EditSiteForm"
 import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
-import {Homepage} from './components/Homepage/index'
+import { Homepage } from './components/Homepage/index'
 import { ProfilePage } from './components/ProfilePage'
+import ProtectedRoute from './components/LoginFormModal/ProtectedRoute.js'
 
 function App() {
   const dispatch = useDispatch();
@@ -31,21 +32,21 @@ function App() {
         <Route exact path="/signup">
           <SignUpFormPage />
         </Route>
-        <Route exact path="/:id/profile">
+        <ProtectedRoute exact path="/:id/profile">
           <ProfilePage />
-        </Route>
+        </ProtectedRoute>
         <Route exact path="/sites">
           <Sites />  
         </Route>
         <Route exact path='/sites/:id'>
           <SiteDetails />  
         </Route>
-        <Route exact path='/sites/:id/review'>
+        <ProtectedRoute exact path='/sites/:id/review'>
           <ReviewForm />
-        </Route>
-        <Route exact path='/review/:id/edit'>
+        </ProtectedRoute>
+        <ProtectedRoute exact path='/review/:id/edit'>
           <EditReviewForm />
-        </Route>
+        </ProtectedRoute>
       </Switch>
       )}
     </>
