@@ -1,7 +1,7 @@
 .book-modal {
-    width: 40vw;
-    height: 70vh;
-    background-color: rgb(5, 49, 15)
+    width: 50vw;
+    height: 80vh;
+    background-color: white;
     color: black;
     display: flex;
     padding: 20px;
@@ -9,6 +9,8 @@
     align-items: center;
     font-family: 'PT Sans', sans-serif;
     border-radius: 10px;
+    overflow: auto;
+    margin-top:100px;
 }
 
 .date-picker {
@@ -47,5 +49,95 @@
     position: relative;
     width: 400px;
     
-    
 }
+
+.book-forms {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.payment-modal {
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    height: 70vh;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.camper-details {
+    display:flex;
+    flex-direction: column;
+    margin: 10px
+}
+
+.payment-form {
+    display:flex;
+    flex-direction: column;
+    margin: 10px
+}
+
+.completed-gif-modal {
+    width: 500px;
+    height: 500px;
+    overflow: auto;
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    justify-content:center;
+    font-size:18px;
+    align-items:center;
+    color: black;
+    flex-direction: column;
+    padding: 30px;
+    margin-top: 100px;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.completed-gif-modal img {
+    width: 300px;
+    align-self: center;
+}
+
+.completed-text-gif {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+    margin-top: 5px
+}
+
+.camper-details label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.camper-details input {
+    height: 30px;
+    padding: 10px 5px;
+}
+
+.payment-form label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.payment-form input {
+    height: 30px;
+    padding: 10px 5px;
+}
+
+

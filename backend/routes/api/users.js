@@ -56,7 +56,11 @@ router.get('/:id/trips',asyncHandler(async (req,res) => {
       }
     })
 
-    return res.json(trips)
+    const sites = await Site.findAll()
+
+    return res.json({
+      sites, trips
+    })
 }))
 
 
