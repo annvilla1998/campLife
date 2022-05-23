@@ -6,9 +6,12 @@ Clone of [Hipcamp](https://www.hipcamp.com/en-US).
 
 ## Visuals
 
-![image](https://user-images.githubusercontent.com/88516795/158239709-9f44b699-7a4f-45f5-b862-84bbabf8fbc5.png)
-![image](https://user-images.githubusercontent.com/88516795/158239772-dfaeb9e8-0b85-431f-868f-2c37a4142e13.png)
-![image](https://user-images.githubusercontent.com/88516795/158239811-cb2fcc28-d6ed-4570-a686-ffaf105af8d7.png)
+![image](https://user-images.githubusercontent.com/88516795/169902042-98a7079a-fba9-4297-889e-3a5f4321769f.png)
+![image](https://user-images.githubusercontent.com/88516795/169902102-2ce95f86-5c58-417d-8646-d079b16a0c61.png)
+![image](https://user-images.githubusercontent.com/88516795/169902151-bbe1a672-5813-40d0-b3ae-15b53ffeb8ed.png)
+![image](https://user-images.githubusercontent.com/88516795/169902206-9c0718fb-2e64-4af1-8acb-6c88d801e2a4.png)
+![image](https://user-images.githubusercontent.com/88516795/169902288-534febb1-dd6f-4ca0-bcb8-00c6bc934201.png)
+
 
 
 ### Index
@@ -47,3 +50,5 @@ Clone of [Hipcamp](https://www.hipcamp.com/en-US).
   Logged in users can:
    - Create/Read/Update/Delete Campsites
    - Create/Read/Update/Delete Reviews
+   - Create/Read Trips
+   
