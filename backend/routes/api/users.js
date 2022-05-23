@@ -48,19 +48,16 @@ router.post(
 
 router.get('/:id/trips',asyncHandler(async (req,res) => {
     const userId = req.params.id
-    const trips = await Trip.findAll({
+    let trips = await Trip.findAll({
       where: {
         userId: {
           [Op.eq]:userId
         }
-      }
+      },
+      include: [Site]
     })
-
-    const sites = await Site.findAll()
-
-    return res.json({
-      sites, trips
-    })
+  
+    return res.json(trips)
 }))
 
 
@@ -72,11 +69,36 @@ router.post('/:id/trips',asyncHandler(async (req,res) => {
       startDate,
       endDate,
     })
-    await newTrip.save()
+    let tripExists = false
 
-    if(newTrip) {
+    let userTrips = await Trip.findAll({
+      where: {
+        userId: {
+          [Op.eq]:userId
+        }
+      }
+    })
+
+    for(let i = 0; i < userTrips.length; i++){
+      let trip = userTrips[i]
+      if(trip.siteId === siteId){
+        tripExists = true
+    }
+  }
+    
+    if(tripExists) {
+      return res.json({"errors": ["You already have a scheduled trip to this Campsite!"]});
+    }else{
+      await newTrip.save()
       return res.json(newTrip)
     }
+
+    // })
+    // if() {
+    //   return res.json(newTrip)
+    // }else {
+    //   return 
+    // }
 
 }))
 

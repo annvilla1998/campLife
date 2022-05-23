@@ -37,3 +37,41 @@
 .trips {
     margin: 0px 50px;
 }
+
+.table {
+    padding: 10px 80px;
+    margin: 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(auto-fill);
+    background-color:rgba(255, 255, 255, 0.671);
+    color: black;
+    justify-items: center;
+    align-items: center;
+    row-gap: 20px;
+    column-gap: 5px;
+}
+
+.table img {
+    width: 300px;
+    grid-column: 1 / 2;
+}
+
+.header {
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+.name {
+    grid-column: 2 / 3;
+    font-weight: bold;
+}
+
+.start {
+    grid-column: 3 / 4;
+}
+
+.end {
+    grid-column: 4 / 5;
+}
+

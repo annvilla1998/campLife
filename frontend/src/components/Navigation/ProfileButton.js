@@ -31,7 +31,7 @@ export const ProfileButton = ({user}) => {
     return (
         <>
         <button onClick={showMenu}>
-            <i class="fa-solid fa-user"></i>
+            <i className="fa-solid fa-user"></i>
         </button>
         {dropdown && (
             <ul className="profile-dropdown">

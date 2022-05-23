@@ -18,8 +18,10 @@
     gap: 10px;
     width: 200px;
     margin: auto;
+
 }
 
 #review-input {
     height: 40px;
+    padding: 8px 5px;
 }

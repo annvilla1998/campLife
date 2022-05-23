@@ -29,27 +29,34 @@ export const createTrip = (data) => async dispatch => {
         body: JSON.stringify(data)
     })
     const newTrip = await res.json()
-    dispatch(postTrip(newTrip))
+    if(!newTrip.errors){
+        dispatch(postTrip(newTrip))
+    }
     return newTrip
 }
 
 
 const initialState = {
     trips: {},
-    sites: {}
 }
 
 export const tripsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_TRIPS:
-            action.trips.trips.forEach(trip => {
+            action.trips.forEach(trip => {
                 state.trips[trip.id] = trip
             })
-            action.trips.sites.forEach(site => {
-                state.sites[site.id] = site
-            })
             return {
-                ...state
+                ...state,
+            }
+        case POST_TRIP:
+            state.trips[action.trip.id] = action.trip
+            return {
+                ...state,
+                trips: {
+                    ...state.trips,
+                    [action.trip.id]: action.trip
+                }
             }
         default:
             return state

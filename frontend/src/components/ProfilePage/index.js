@@ -10,13 +10,13 @@ import { getAllTrips } from '../../store/trips'
 export const ProfilePage = () => {
     const [showSiteModal, setShowSiteModal] = useState(false)
     const dispatch = useDispatch()
-    const trips = useSelector(state => state.tripState.trips)
+    const trips = useSelector(state => state.tripState.trips)    
     const tripsArr = Object.values(trips)
     const { id } = useParams()
 
     useEffect(() => {
         dispatch(getAllTrips(id))
-    },[dispatch])
+    },[dispatch, id])
 
     return (
         <div className="profile-page">
@@ -31,18 +31,20 @@ export const ProfilePage = () => {
                 {(trips.length === 0) ? (
                     <div>You have no trips. Let's get you <NavLink to="/sites">outside!</NavLink></div>
                 ):
-                    <table>
-                        <tr>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                        </tr>
+                    <div className="table">
+                            <div className="header"></div>
+                            <div className="header">Campsite Name</div>
+                            <div className="header">Start Date</div>
+                            <div className="header">End Date</div>
                         {tripsArr.map(trip => (
-                        <tr key={trip.id}>
-                            <td>{trip.startDate}</td>
-                            <td>{trip.endDate}</td>
-                        </tr>
+                            <>
+                                <img key={trip.id} src={trip.Site.images[0]}></img>
+                                <div className="name">{trip.Site.name}</div>
+                                <div className="start date">{trip.startDate}</div>
+                                <div className="end date">{trip.endDate}</div>
+                            </>
                         ))}
-                    </table>
+                    </div>
                 }
             </div>
         </div>

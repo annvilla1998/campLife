@@ -38,7 +38,6 @@ export const BookTrip = ({site, setShowBookModal}) => {
         }
     }
 
-console.log(completedPayment)
     const handleBookTrip = async(e) => {
         e.preventDefault();
 
@@ -49,11 +48,15 @@ console.log(completedPayment)
             endDate
         }
 
-        await dispatch(createTrip(newTrip)).then(() => {
-            setCompletedPayment(true)      
+        await dispatch(createTrip(newTrip)).then(trip => {
+            if(trip.errors) {
+                setErrors(trip.errors)
+            }else {
+                setErrors([])
+                setCompletedPayment(true) 
+            }
         })
-
-
+        
     }
 
     return (
@@ -122,6 +125,7 @@ console.log(completedPayment)
                                 <input
                                 type="text"
                                 required
+                                placeholder="xxx - xxx - xxxx"
                                 />
                             </label>
                             <label>Vehicles
