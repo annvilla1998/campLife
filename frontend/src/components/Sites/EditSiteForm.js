@@ -1,9 +1,8 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { editSite } from "../../store/sites";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import './Form.css';
 
 
@@ -11,7 +10,6 @@ export const EditSite = ({site, setShowSiteModal}) => {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
-    const history = useHistory();
     const [address, setAddress] = useState(site.address);
     const [city, setCity] = useState(site.city)
     const [state, setState] = useState(site.state)
@@ -20,7 +18,6 @@ export const EditSite = ({site, setShowSiteModal}) => {
     const [price, setPrice] = useState(site.price)
     const [description, setDescription] = useState(site.description)
     const [images, setImages] = useState([...site.images])
-    const [firstImageUploaded, setFirstImageUploaded] = useState(false)
 
 
 
@@ -175,7 +172,7 @@ export const EditSite = ({site, setShowSiteModal}) => {
                             return (
                                 <div key={i}>
                                     <i onClick={(e) => deleteImage(e, i)} className="fa-solid fa-xmark"></i>
-                                    <img src={ele}></img>
+                                    <img alt="site" src={ele}></img>
                                 </div>
 
                             )

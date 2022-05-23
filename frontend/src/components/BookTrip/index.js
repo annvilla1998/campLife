@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './bookTrip.css'
 import { DatePicker } from 'react-rainbow-components';
-import { render } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createTrip } from '../../store/trips'
 
@@ -200,7 +199,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
                 <div className="completed-gif-modal">
                     <div className="completed-text-gif">
                         <div>Payment Completed</div>
-                        <img src="https://media0.giphy.com/media/ibolLe3mOqHE3PQTtk/giphy.gif?cid=ecf05e47wt6jikigymk0nyb6zyv07u5g3lfnpzgpfmy1xkmw&rid=giphy.gif&ct=g"></img>
+                        <img alt="completed" src="https://media0.giphy.com/media/ibolLe3mOqHE3PQTtk/giphy.gif?cid=ecf05e47wt6jikigymk0nyb6zyv07u5g3lfnpzgpfmy1xkmw&rid=giphy.gif&ct=g"></img>
                     </div>
                     <div className="continue-button" onClick={() => setShowBookModal(false)}>Close</div>
                 </div>

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import './Homepage.css'
 
 
@@ -11,7 +10,7 @@ export const Homepage = () => {
                 <i id="businessIcon" className="fa-solid fa-user-tie"></i>
             </a>
             <a id="github" href='https://github.com/annvilla1998/campLife'>
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img>
+                <img alt="github" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img>
             </a>
             <div id="used">
                 <p>React</p>

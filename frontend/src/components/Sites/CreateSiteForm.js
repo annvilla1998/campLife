@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createSite } from "../../store/sites";
 import { useSelector } from "react-redux";
@@ -187,7 +187,7 @@ export const CreateSite = ({setShowSiteModal}) => {
                             return (
                                 <div key={i}>
                                     <i onClick={(e) => deleteImage(e, i)} className="fa-solid fa-xmark"></i>
-                                    <img src={URL.createObjectURL(ele)}></img>
+                                    <img alt="site" src={URL.createObjectURL(ele)}></img>
                                 </div>
 
                             )

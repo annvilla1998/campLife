@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import * as sessionActions from '../../store/session'
 import './SignupForm.css';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +8,6 @@ import collage from '../../assets/collage.png'
 export const SignUpFormPage = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const sessionUser = useSelector(state => state.session.user)
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -50,7 +48,7 @@ export const SignUpFormPage = () => {
     return (
         <div className="sign-up-page">
             <div id="outer-signup">
-            <img src={collage} ></img>
+            <img alt="collage" src={collage} ></img>
 
             <form id="sign-up-form" onSubmit={onSubmit}>
                 <h2>Sign Up</h2>

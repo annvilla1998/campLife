@@ -22,7 +22,7 @@ export const SiteList = ({ site }) => {
         <li className='site-list'>
                 <div className='site-list-detail-container'>
                         <span id='images'>
-                            <img src={site.images[currentImage]} />
+                            <img alt="site" src={site.images[currentImage]} />
                             {currentImage !== 0 && site.images.length > 1 &&
                                 <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
                             }

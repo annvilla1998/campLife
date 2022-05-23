@@ -22,16 +22,14 @@ export const SiteDetails = () => {
     const images = site?.images
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
-    const [showEditReviewForm, setShowEditReviewForm] = useState(false)
     const [showSiteModal, setShowSiteModal] = useState(false)
     const [showBookModal, setShowBookModal] = useState(false)
 
 
     useEffect(() => {
-        console.log('dispatched')
         dispatch(getSiteDetails(id))
         dispatch(allReviews(id))
-    },[dispatch])
+    },[dispatch, id])
     
 
     const swipeRight = () => {

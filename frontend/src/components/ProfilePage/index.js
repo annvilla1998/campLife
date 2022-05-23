@@ -38,7 +38,7 @@ export const ProfilePage = () => {
                             <div className="header">End Date</div>
                         {tripsArr.map(trip => (
                             <>
-                                <img key={trip.id} src={trip.Site.images[0]}></img>
+                                <img alt="site" key={trip.id} src={trip.Site.images[0]}></img>
                                 <div className="name">{trip.Site.name}</div>
                                 <div className="start date">{trip.startDate}</div>
                                 <div className="end date">{trip.endDate}</div>

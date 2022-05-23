@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { NavLink, useHistory, useParams } from "react-router-dom"
+import { NavLink, useHistory } from "react-router-dom"
 import { editReview, getOneReview } from "../../store/reviews"
 import { useLocation } from "react-router-dom"
 import './ReviewsForm.css'
@@ -18,7 +18,7 @@ export const EditReviewForm = () => {
 
     useEffect(() => {
         dispatch(getOneReview(reviewId))
-    },[dispatch])
+    },[dispatch, reviewId])
 
     // const siteId = useParams()
     const handlePostReview = async (e) => {
