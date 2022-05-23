@@ -43,11 +43,15 @@ const initialState = {
 export const tripsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_TRIPS:
+            let trips = {};
             action.trips.forEach(trip => {
-                state.trips[trip.id] = trip
+                trips[trip.id] = trip
             })
             return {
                 ...state,
+                trips: {
+                    ...trips
+                }
             }
         case POST_TRIP:
             state.trips[action.trip.id] = action.trip

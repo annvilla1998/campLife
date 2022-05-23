@@ -15,6 +15,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
     const today = Date.now()
     const date = new Date(today)
 
+
     const validate = () => {
         const validationErrors = [];
         

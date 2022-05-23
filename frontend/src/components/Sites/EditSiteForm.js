@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { editSite } from "../../store/sites";
 import { useSelector } from "react-redux";
 import './Form.css';

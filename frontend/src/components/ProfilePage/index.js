@@ -10,9 +10,9 @@ import { getAllTrips } from '../../store/trips'
 export const ProfilePage = () => {
     const [showSiteModal, setShowSiteModal] = useState(false)
     const dispatch = useDispatch()
+    const { id } = useParams()
     const trips = useSelector(state => state.tripState.trips)    
     const tripsArr = Object.values(trips)
-    const { id } = useParams()
 
     useEffect(() => {
         dispatch(getAllTrips(id))

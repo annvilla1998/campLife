@@ -78,19 +78,27 @@ router.post('/:id/trips',asyncHandler(async (req,res) => {
         }
       }
     })
-
+    
+    
     for(let i = 0; i < userTrips.length; i++){
       let trip = userTrips[i]
       if(trip.siteId === siteId){
         tripExists = true
+      }
     }
-  }
     
     if(tripExists) {
       return res.json({"errors": ["You already have a scheduled trip to this Campsite!"]});
     }else{
       await newTrip.save()
-      return res.json(newTrip)
+
+      let trip = await Trip.findOne({
+        where: {
+          id: newTrip.id
+        },
+        include: [Site]
+      })
+      return res.json(trip)
     }
 
     // })
