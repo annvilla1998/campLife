@@ -24,7 +24,7 @@ export const EditSite = ({site, setShowSiteModal}) => {
     const uploadImages = async(e) => {
         const file = e.target.files[0]
         setImages([...images,file])
-        setFirstImageUploaded(true)
+        // setFirstImageUploaded(true)
     }
     
     const updateImage = (e) => {
