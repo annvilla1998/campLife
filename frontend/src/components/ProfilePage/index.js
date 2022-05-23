@@ -31,20 +31,22 @@ export const ProfilePage = () => {
                 {(trips.length === 0) ? (
                     <div>You have no trips. Let's get you <NavLink to="/sites">outside!</NavLink></div>
                 ):
+                <>
                     <div className="table">
                             <div className="header"></div>
                             <div className="header">Campsite Name</div>
                             <div className="header">Start Date</div>
                             <div className="header">End Date</div>
-                        {tripsArr.map(trip => (
-                            <>
-                                <img alt="site" key={trip.id} src={trip.Site.images[0]}></img>
+                    </div>
+                        {tripsArr.map((trip, i) => (
+                            <div className="trip" key={i}>
+                                <img alt="site" src={trip.Site.images[0]}></img>
                                 <div className="name">{trip.Site.name}</div>
                                 <div className="start date">{trip.startDate}</div>
                                 <div className="end date">{trip.endDate}</div>
-                            </>
+                            </div>
                         ))}
-                    </div>
+                </>
                 }
             </div>
         </div>
