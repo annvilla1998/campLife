@@ -1,8 +1,14 @@
 'use strict';
 const faker = require('faker')
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
+    options.tableName = 'Sites';
     const seedSites = (num) => {
       let i = 0;
       let campsites = ["https://thumbs.dreamstime.com/b/travel-trailer-rv-camping-campground-pickup-vacation-summer-62617458.jpg","https://thumbs.dreamstime.com/b/camping-alaska-i-took-picture-northern-lights-below-miles-down-denali-hwy-cantwell-78121574.jpg","https://thumbs.dreamstime.com/b/desert-camping-airstream-mountains-distance-remote-boondocking-dry-blm-location-borrego-springs-california-129307650.jpg","https://thumbs.dreamstime.com/b/luxury-tent-campsite-sunset-full-bed-rugs-perfect-glamping-glamping-tent-site-desert-sunset-183897073.jpg","https://thumbs.dreamstime.com/b/glamping-lifestyle-boiling-kettle-steam-near-big-retro-camping-tent-luxury-travel-accomodation-forest-133376071.jpg","https://thumbs.dreamstime.com/b/jul-kanchanaburi-thailand-luxurious-camping-resort-nature-forest-glamping-vacation-tropical-asian-country-luxurious-camping-122128601.jpg","https://thumbs.dreamstime.com/b/lovely-romantic-glamping-two-wild-seashore-unique-way-to-celebrate-your-love-romantic-camping-trip-two-116285011.jpg","https://thumbs.dreamstime.com/b/luxury-accommodation-glamping-chile-south-modern-tent-national-park-torres-del-paine-chilenian-patagonia-158939546.jpg","https://thumbs.dreamstime.com/b/jul-kanchanaburi-thailand-luxurious-camping-resort-nature-forest-glamping-vacation-tropical-asian-country-luxurious-camping-122128751.jpg","https://thumbs.dreamstime.com/b/glamping-cabin-woods-campsite-canvas-tent-fully-furnished-fire-pit-picnic-area-forest-64927468.jpg","https://thumbs.dreamstime.com/b/glamping-bali-beach-bubble-house-transparent-walls-white-wooden-double-bed-mosquito-net-inside-honeymoon-inflatable-173033747.jpg"]
@@ -30,11 +36,12 @@ module.exports = {
       }
       return sitesArr
     }
-    return queryInterface.bulkInsert('Sites', seedSites(50), {});
+    return queryInterface.bulkInsert(options, seedSites(50), {});
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Sites', null, {});
+    options.tableName = 'Sites';
+    return queryInterface.bulkDelete(options, null, {});
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.

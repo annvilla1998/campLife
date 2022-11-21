@@ -1,6 +1,11 @@
 'use strict';
 const faker = require('faker');
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   // up: (queryInterface, Sequelize) => {
   //   return queryInterface.bulkInsert('Trips', [
@@ -21,6 +26,7 @@ module.exports = {
   //   */
   // },
   up: (queryInterface, Sequelize) => {
+    options.tableName = 'Trips';
     const seedTrips = (num) => {
       let i = 0;
       let tripArr = [];
@@ -44,16 +50,17 @@ module.exports = {
       }
       return tripArr;
     }
-      return queryInterface.bulkInsert('Trips', seedTrips(6), {});
+      return queryInterface.bulkInsert(options, seedTrips(6), {});
   },
 
   down: (queryInterface, Sequelize) => {
+    options.tableName = 'Trips';
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
 
       Example:
       */
-   return queryInterface.bulkDelete('Trips', null, {});
+   return queryInterface.bulkDelete(options, null, {});
   }
 };
