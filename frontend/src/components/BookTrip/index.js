@@ -61,7 +61,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
 
     return (
         <div>
-            {!finishedFirstPage && (
+            {(!finishedFirstPage) && (
                 <div className="book-modal">
                     <img className="book-trip-background-image" src={site.images[0]}></img>
                     <div className="book-trip-header">

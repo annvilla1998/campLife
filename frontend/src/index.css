@@ -1,4 +1,9 @@
 /* TODO Add site wide styles */
+
+* {
+	font-family: 'PT Sans', sans-serif;
+}
+
 html {
 	height:100%;
 }
