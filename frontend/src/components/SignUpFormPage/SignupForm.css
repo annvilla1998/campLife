@@ -1,17 +1,15 @@
 
-
-
 #sign-up-form {
     font-family: 'PT Sans', sans-serif;
     background-color: white;
     color: black;
-    /* height: 100vh; */
-    /* margin: 0 300px; */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 600px;
-    height: 550px;
+    width: 40vw;
+    height: 70vh;
+    min-width: 550px;
+    min-height: 600px;
     max-height: 700px;
     padding: 5px;
     position: absolute;
@@ -20,52 +18,70 @@
     bottom: 0;
     right: 0;
     margin: auto;
-    border-radius: 10px;
-    margin-top: 300px;
 }
 
-button {
+#log-in-container button {
     color: black;
     width: 150px;
     padding: 5px;
     font-size: 15px;
+
 }
 
 #sign-up-form h2 {
     color: black;
-    padding-bottom: 40px;
+    padding: 20px 0 40px 0;
+}
+
+
+.sign-up-button {
+    margin-top: 15px;
 }
 
 .sign-up-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin: 5px;
+    display:flex;
+    flex-direction: column;
 }
 
-.sign-up-button {
-    margin-top: 60px;
-}
-
-
-.sign-up-page img{
+.sign-up-label input {
     width: 100%;
-    height: 100%;
-    position: relative;
-    object-fit: scale-down;
-    z-index: -1;
-    text-align: center;
 }
 
-.sign-up-page {
-    padding-top: 100px;
-    width: 100%;
-    height: 100%;
+
+.sign-up-page{
+    position:fixed;
+	display:block;
+	top:100px; 
+    bottom:0;
+	left:0; 
+    right:0;
+	width:100%; 
+    height:100%;
+    background-image: url('../../assets/collage.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
+
 
 #outer-signup {
     background-color: rgb(0, 0, 0, 0.4);
-    width: 100%;
-    height: 100%;
+    position:fixed;
+	display:block;
+	top:100px; 
+    bottom:0;
+	left:0; 
+    right:0;
+	width:100%; 
+    height:100%;
     z-index:1;
 
+}
+
+.sign-up-button-container {
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    width: 80%;
 }

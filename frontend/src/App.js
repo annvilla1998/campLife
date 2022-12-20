@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { SignUpFormPage } from "./components/SignUpFormPage";
+import LoginForm from './components/LoginForm'
 import * as sessionActions from "./store/session";
 import { Navigation } from "./components/Navigation";
 import { Sites } from "./components/Sites"
@@ -11,7 +12,7 @@ import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
 import { Homepage } from './components/Homepage/index'
 import { ProfilePage } from './components/ProfilePage'
-import ProtectedRoute from './components/LoginFormModal/ProtectedRoute.js'
+import ProtectedRoute from './components/LoginForm/ProtectedRoute.js'
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route exact path="/signup">
           <SignUpFormPage />
+        </Route>
+        <Route exact path="/login">
+          <LoginForm />
         </Route>
         <ProtectedRoute exact path="/:id/profile">
           <ProfilePage />

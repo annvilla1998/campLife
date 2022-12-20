@@ -104,6 +104,7 @@ a > .nav-container {
    color: #91a058;
    gap: 10px;
    font-size: 50px;
+   text-decoration: none;
 }
 
 /* .nav-menu {

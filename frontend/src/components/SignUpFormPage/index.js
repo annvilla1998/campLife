@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as sessionActions from '../../store/session'
 import './SignupForm.css';
 import { useHistory } from 'react-router-dom';
-import collage from '../../assets/collage.png'
+import { NavLink } from 'react-router-dom';
 
 export const SignUpFormPage = () => {
     const dispatch = useDispatch()
@@ -14,14 +14,11 @@ export const SignUpFormPage = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [errors,setErrors] = useState([])
 
-    // if (sessionUser) return <Redirect to="/" />;
-
     const onSubmit = async (e) => {
         e.preventDefault();
         
         if(password === confirmPassword) {
             
-
             let newUser = await dispatch(sessionActions.signUpUser({
                 email,
                 username,
@@ -48,50 +45,54 @@ export const SignUpFormPage = () => {
     return (
         <div className="sign-up-page">
             <div id="outer-signup">
-            <img alt="collage" src={collage} ></img>
 
             <form id="sign-up-form" onSubmit={onSubmit}>
-                <h2>Sign Up</h2>
-                <ul id="errors">
-                    {errors.map((errors,idx) => (
-                        <li key={idx}>{errors}</li>
-                    ))}
-                </ul>
-                <div id="log-in-inputs">
-                <label className="sign-up-label">
-                    Username 
-                    <input
-                    type="text"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    required />
-                </label>
-                <label className="sign-up-label">
-                    Email
-                    <input
-                    type="text"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required/>
-                </label>
-                <label className="sign-up-label">
-                    Password
-                    <input
-                    type="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    required />
-                </label>
-                <label className="sign-up-label">
-                    Confirm Password
-                    <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={e => setConfirmPassword(e.target.value)}
-                    required/>
-                </label>
-                </div>  
-                <button className="sign-up-button" type='submit'>Sign Up</button>
+                <div id="log-in-container" >
+                    <h2>Sign Up</h2>
+                    <ul id="errors">
+                        {errors.map((errors,idx) => (
+                            <li key={idx}>{errors}</li>
+                        ))}
+                    </ul>
+                    <div id="log-in-inputs">
+                        <label className="sign-up-label">
+                            Username 
+                            <input
+                            type="text"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            required />
+                        </label>
+                        <label className="sign-up-label">
+                            Email
+                            <input
+                            type="text"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            required/>
+                        </label>
+                        <label className="sign-up-label">
+                            Password
+                            <input
+                            type="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            required />
+                        </label>
+                        <label className="sign-up-label">
+                            Confirm Password
+                            <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
+                            required/>
+                        </label>
+                    </div>
+                    <div className="sign-up-button-container">
+                        <button className="sign-up-button" type='submit'>Sign Up</button>
+                        <NavLink to="/login">Already have an account?</NavLink>
+                    </div>  
+                </div>
             </form>
             </div>
         </div>
