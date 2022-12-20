@@ -7,8 +7,9 @@ import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
-import { Modal } from '../../context/Modal'
-import { BookTrip } from '../BookTrip'
+import { Modal } from '../../context/Modal';
+import { BookTrip } from '../BookTrip';
+import ProtectedRoute from '../LoginForm/ProtectedRoute';
 
 
 
@@ -80,7 +81,9 @@ export const SiteDetails = () => {
                     <h2 >{site?.name}</h2>
                     <div id='book-container'>
                         <span className="price">${site?.price} per night</span>
-                        <div onClick={() => setShowBookModal(true)} className="book-button">Book</div>
+                        <ProtectedRoute>
+                            <div onClick={() => setShowBookModal(true)} className="book-button">Book</div>
+                        </ProtectedRoute>
                         {showBookModal && (
                             <Modal onClose={() => setShowBookModal(false)}>
                                 <BookTrip site={site} setShowBookModal={setShowBookModal} />

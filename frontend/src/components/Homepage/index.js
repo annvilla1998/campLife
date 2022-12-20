@@ -36,20 +36,7 @@ export const Homepage = () => {
                     </GoogleMapReact>
                 </div>
             </div> */}
-            <a href="https://www.linkedin.com/in/anabel-villalobos-5772ab196/">
-                <i id="businessIcon" className="fa-solid fa-user-tie"></i>
-            </a>
-            <a id="github" href='https://github.com/annvilla1998/campLife'>
-                <img alt="github" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img>
-            </a>
-            <div id="used">
-                <p>React</p>
-                <p>Redux</p>
-                <p>Javascript</p>
-                <p>Postgres</p>
-                <p>CSS</p>
-                <p>HTML</p>
-            </div>
+            
         </div>
     )
 }

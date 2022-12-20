@@ -93,6 +93,23 @@ export const SignUpFormPage = () => {
                         <NavLink to="/login">Already have an account?</NavLink>
                     </div>  
                 </div>
+                <footer>
+                <div id="technologies-used">
+                    <p>Javascript</p>
+                    <p>React</p>
+                    <p>Redux</p>
+                    <p>PostgreSQL</p>
+                    <p>CSS</p>
+                    <p>HTML</p>
+                    <p>Node.js/Express.js</p>
+                </div>
+                <a href="https://www.linkedin.com/in/anabel-villalobos-5772ab196/">
+                    <i className="fa-brands fa-linkedin"></i>
+                </a>
+                <a id="github" href='https://github.com/annvilla1998/campLife'>
+                  <i className="fa-brands fa-github"></i>
+                </a>
+            </footer>
             </form>
             </div>
         </div>

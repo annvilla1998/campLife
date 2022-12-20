@@ -85,3 +85,28 @@
     justify-content:space-between;
     width: 80%;
 }
+
+.sign-up-page footer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#technologies-used {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    gap: 20px;
+    font-size: 12px;
+}
+
+.sign-up-page footer i {
+    font-size: 30px;
+    color: rgb(198, 196, 196);
+    cursor: pointer;
+    transition: all 200ms ease;
+}
+
+.sign-up-page footer i:hover {
+    color: black;
+}

@@ -32,7 +32,7 @@ export const Navigation = ({isLoaded}) => {
                         <div id="user-buttons">
                             {isLoaded && sessionLinks}
                         </div>
-                        <NavLink id='sites' to="/sites">Sites</NavLink>                        
+                        <NavLink id='sites' to="/sites">Browse</NavLink>                        
                 </div>    
             </div>
         </div>
