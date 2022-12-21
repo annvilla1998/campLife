@@ -2,32 +2,44 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import './LoginForm.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
+    // if(localStorage.getItem('location')){
+    //   let href = localStorage.getItem('location');
+    //   console.log(href)
+    // }
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
       }
-    );
-  };
+      );
+    };
+    
+    const demoLogin = (e) => {
+      e.preventDefault();
 
-  const demoLogin = (e) => {
-    e.preventDefault();
-    setErrors([]);
-    // setCredential('Demo-lition')
-    // setPassword('password')
-    dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
-  }
+      setErrors([]);
+      dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
+      
+      // if(localStorage.getItem('location')){
+      //   let href = localStorage.getItem('location');
+      //   console.log(href)
+      //   history.push(`${href}`)
+      // }
+  
+    }
   
   
   return (
