@@ -27,26 +27,11 @@ html {
 	background: #000 url('https://pixy.org/src/37/378081.jpg') repeat top center;
 }
 
-/* .twinkling{
-	z-index: -2;
-	background:transparent url('') repeat top center;
-	animation: move-twink-back 200s linear infinite;
-}
+button {
+    font-family: 'Fredoka', sans-serif;
+    padding: 5px;
+  }
 
-.clouds{
-	z-index: -1;
-    background:transparent url('campLife/frontend/logo/clouds.png') repeat top center;
-	animation: move-clouds-back 200s linear infinite;
-} */
-
-
-
-/* @keyframes move-twink-back {
-	from {background-position:0 0;}
-	to {background-position:-10000px 5000px;}
-}
-
-@keyframes move-clouds-back {
-	from {background-position:0 0;}
-	to {background-position:10000px 0;}
-} */
+  button:hover {
+    background-color: #adb0a8;
+  }

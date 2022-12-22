@@ -29,12 +29,4 @@
   }
   
 
-  button {
-    font-family: 'Fredoka', sans-serif;
-    padding: 5px;
-    border-radius: 15px;
-  }
 
-  button:hover {
-    background-color: #73766D;
-  }

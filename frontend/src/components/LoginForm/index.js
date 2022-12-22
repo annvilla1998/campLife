@@ -32,6 +32,7 @@ function LoginForm() {
 
       setErrors([]);
       dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
+      history.push('/')
       
       // if(localStorage.getItem('location')){
       //   let href = localStorage.getItem('location');
