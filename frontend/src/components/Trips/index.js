@@ -1,4 +1,4 @@
-import './profilePage.css'
+import './Trips.css'
 import { useState } from 'react'
 import { Modal } from '../../context/Modal'
 import { CreateSite } from '../Sites/CreateSiteForm'
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getAllTrips } from '../../store/trips'
 
-export const ProfilePage = () => {
+export const Trips = () => {
     const [showSiteModal, setShowSiteModal] = useState(false)
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -32,20 +32,23 @@ export const ProfilePage = () => {
                     <div>You have no trips. Let's get you <NavLink to="/sites">outside!</NavLink></div>
                 ):
                 <>
-                    <div className="table">
+                    {/* <div className="table">
                             <div className="header"></div>
                             <div className="header">Campsite Name</div>
                             <div className="header">Start Date</div>
                             <div className="header">End Date</div>
-                    </div>
-                        {tripsArr.map((trip, i) => (
+                    </div> */}
+                        {tripsArr.map((trip, i) => {
+                            
+
+                            return(
                             <div className="trip" key={i}>
                                 <img alt="site" src={trip.Site.images[0]}></img>
                                 <div className="name">{trip.Site.name}</div>
                                 <div className="start date">{trip.startDate}</div>
                                 <div className="end date">{trip.endDate}</div>
                             </div>
-                        ))}
+                        )})}
                 </>
                 }
             </div>

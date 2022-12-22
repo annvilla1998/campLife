@@ -35,8 +35,11 @@ export const ProfileButton = ({user}) => {
         </button>
         {dropdown && (
             <ul className="profile-dropdown">
-                <NavLink to={`/${user.id}/profile`} >
-                    Profile
+                <NavLink to={`/${user.id}/profile/trips`} >
+                    Trips
+                    </NavLink>  
+                <NavLink to={`/${user.id}/profile/about`} >
+                    Account
                     </NavLink>  
                 <div id='logout-button' onClick={logout}>Log Out</div>
             </ul>

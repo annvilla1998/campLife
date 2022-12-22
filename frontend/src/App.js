@@ -11,7 +11,8 @@ import { EditSite } from "./components/Sites/EditSiteForm"
 import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
 import { Homepage } from './components/Homepage/index'
-import { ProfilePage } from './components/ProfilePage'
+import { Trips } from './components/Trips'
+import { About } from './components/Account'
 import ProtectedRoute from './components/LoginForm/ProtectedRoute.js'
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
       {isLoaded && (
       <Switch>
         <Route exact path="/">
-          <Homepage />
+          <Sites />  
         </Route>
         <Route exact path="/signup">
           <SignUpFormPage />
@@ -36,12 +37,15 @@ function App() {
         <Route exact path="/login">
           <LoginForm />
         </Route>
-        <ProtectedRoute exact path="/:id/profile">
-          <ProfilePage />
+        <ProtectedRoute exact path="/:id/profile/about">
+          <About/>
         </ProtectedRoute>
-        <Route exact path="/sites">
+        <ProtectedRoute exact path="/:id/profile/trips">
+          <Trips />
+        </ProtectedRoute>
+        {/* <Route exact path="/sites">
           <Sites />  
-        </Route>
+        </Route> */}
         <Route exact path='/sites/:id'>
           <SiteDetails />  
         </Route>

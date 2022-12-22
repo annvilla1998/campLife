@@ -1,0 +1,43 @@
+.account-page {
+    padding-top: 100px;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.account-info-container {
+    display: flex;
+    justify-content: flex-start;
+    color: black;
+    margin: 20px;
+    height: 95%;
+}
+
+.account-background {
+    width: 80vw;
+    box-shadow: 0 5px 40px;
+    height: 100%;
+    background-color: white;
+    opacity: 0.8;
+}
+
+.account-info-container img {
+    width: 200px;
+    height: 200px;
+}
+
+.account-photo {
+    padding: 100px;
+}
+
+.introduction {
+    padding: 100px;
+    line-height: 50px;
+}
+
+.account-username {
+    font-size: 30px;
+}
+
+

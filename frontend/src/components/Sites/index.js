@@ -18,7 +18,6 @@ export const Sites = () => {
 
     return (
        <div className='sites'>
-        <h2>Adventure Awaits!</h2>
         <ul className="site-list-container">
             {sitesArr.map(site => (
                 <SiteList key={site.id} site={site}/>

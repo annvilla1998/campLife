@@ -1,11 +1,12 @@
 
 .host-new-site {
     cursor: pointer;
-    color:white;
+    color:black;
     border: 1px solid white;
     padding: 10px;
-    width: 120px;
+    width: 130px;
     margin: 20px 0 0 15px;
+    background-color: white;
 }
 
 
@@ -21,6 +22,8 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+
+/* 
 .trips h2 {
     padding: 0;
 }
@@ -49,7 +52,7 @@
     align-items: center;
     row-gap: 20px;
     column-gap: 5px;
-}
+} */
 
 .trip img {
     width: 300px;
@@ -57,7 +60,7 @@
     display: inline-grid;
 
 }
-
+/* 
 .header {
     font-size: 20px;
     margin: 5px 0px;
@@ -94,4 +97,4 @@
     align-items: center;
     row-gap: 20px;
     column-gap: 5px;
-}
+} */
