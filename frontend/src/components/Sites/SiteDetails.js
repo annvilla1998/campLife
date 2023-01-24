@@ -55,7 +55,7 @@ export const SiteDetails = () => {
         deletedSite = dispatch(deleteSite(site.id))
 
         if(deletedSite){
-            history.push('/sites')
+            history.push('/')
         }
     }
 
