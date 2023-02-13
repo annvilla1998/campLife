@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createSite } from "../../store/sites";
 import { useSelector } from "react-redux";
-// import AWS from 'aws-sdk'
 import './Form.css';
 
 
@@ -35,7 +34,6 @@ export const CreateSite = ({setShowSiteModal}) => {
         const file = e.target.files[0]
         setImages([...images, file])
         e.target.value = null;
-        
     }
     
 
@@ -46,7 +44,7 @@ export const CreateSite = ({setShowSiteModal}) => {
         images.forEach(image => {
             imageArr.push(URL.createObjectURL(image))
         })
-        console.log(imageArr)
+
         const newSite = {
             userId: sessionUser.id,
             address,
@@ -64,7 +62,7 @@ export const CreateSite = ({setShowSiteModal}) => {
         createdSite = dispatch(createSite(newSite))
         .catch(async res => {
             const data = await res.json();
-            console.log(data.errors)
+
             if(data && data.errors) setErrors(data.errors)
         })
         if(createdSite){
@@ -78,14 +76,11 @@ export const CreateSite = ({setShowSiteModal}) => {
 
     const deleteImage = async(e, i) => {
         e.preventDefault()
-        // setIndex(i)
-        // console.log('passed',i)
-        // console.log('i',index)
-        // console.log(images)
+
         let newImages = images.filter((image,index) => {
             return i !== index
         })
-        // console.log("new",newImages)
+  
         setImages(newImages)
     }
 
