@@ -110,6 +110,18 @@ router.post('/:id/trips',asyncHandler(async (req,res) => {
 
 }))
 
+router.delete('/:id/trips/:id',asyncHandler(async (req, res) => {
+  const url = req.url;
+  const params = url.split('/');
+  const tripId = params[3];
+  const siteId = params[1];
+  const trip = await Trip.findByPk(tripId);
+
+  await trip.destroy();
+  
+  return res.json(trip)
+}))
+
 
 module.exports = router;
 
