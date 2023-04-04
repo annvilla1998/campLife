@@ -105,9 +105,6 @@ const siteReducer = (state = initialState, action) => {
                     [action.site.site.id]: action.site.site
                 }
             }
-            // return { 
-            //     sites:action.site.site
-            // }
         case POST_SITE:
             newState = {...state};
             let newSite = {...state.sites}
@@ -115,14 +112,6 @@ const siteReducer = (state = initialState, action) => {
             newSite.site = newSite
             newState["newSite"] = action.site
             return newState
-            // newState = {...state}
-            // return {
-            //     ...newState,
-            //     sites: {
-            //         ...state.sites,
-            //         [action.site.id]: action.site
-            //     },
-            // }
         case EDIT_SITE:
               return {
                 ...state,

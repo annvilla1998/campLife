@@ -54,3 +54,12 @@
 .trip img {
     width: 200px;
 }
+
+.trip i {
+    cursor: pointer;
+    color: red;
+}
+
+.trip i:hover {
+    opacity: 0.5;
+}
