@@ -62,7 +62,6 @@ export const tripsReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_TRIPS:
             let trips = {};
-            console.log(action.trips)
             action.trips.forEach(trip => {
                 trips[trip.id] = trip
             })
