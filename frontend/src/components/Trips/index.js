@@ -32,23 +32,21 @@ export const Trips = () => {
                     <div>You have no trips. Let's get you <NavLink to="/sites">outside!</NavLink></div>
                 ):
                 <>
-                    {/* <div className="table">
-                            <div className="header"></div>
-                            <div className="header">Campsite Name</div>
-                            <div className="header">Start Date</div>
-                            <div className="header">End Date</div>
-                    </div> */}
+                    <div className="trips-list-container">
                         {tripsArr.map((trip, i) => {
-                            
-
+                            const startDate = new Date(trip.startDate).toDateString();
+                            const endDate = new Date(trip.endDate).toDateString();
                             return(
-                            <div className="trip" key={i}>
-                                <img alt="site" src={trip.Site.images[0]}></img>
-                                <div className="name">{trip.Site.name}</div>
-                                <div className="start date">{trip.startDate}</div>
-                                <div className="end date">{trip.endDate}</div>
-                            </div>
+                                <div className="trip" key={i}>
+                                    <img alt="site" src={trip.Site.images[0]}></img>
+                                    <div className="trip-description">
+                                        <div className="name">{trip.Site.name}</div>
+                                        <div className="start date"><strong>Arrival Date: </strong>{startDate}</div>
+                                        <div className="end date"><strong>Departure: </strong>{endDate}</div>
+                                    </div>
+                                </div>
                         )})}
+                    </div>
                 </>
                 }
             </div>
