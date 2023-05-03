@@ -21,9 +21,10 @@ export const SiteList = ({ site }) => {
     return (
         <li className='site-list'>
                 <div className='site-list-detail-container'>
-                    <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
                         <span id='images'>
-                            <img alt="site" src={site.images[currentImage]} />
+                            <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
+                                <img alt="site" src={site.images[currentImage]} />
+                            </NavLink>
                             {currentImage !== 0 && site.images.length > 1 &&
                                 <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
                             }
@@ -31,15 +32,16 @@ export const SiteList = ({ site }) => {
                                 <i className="fa-solid fa-angle-right" onClick={swipeRight}></i>
                             }
                         </span>
-                    <div id='site-list-text'>
-                        <span className="site-name">{site.name}</span>
-                        <span>Address: {site.address}</span>
-                        <span>City: {site.city}</span>
-                        <span>State: {site.state}</span>
-                        <span>Country: {site.country}</span>
-                        <span className="price">${site.price}/night</span>
-                    </div>
-                </NavLink>
+                    <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
+                        <div id='site-list-text'>
+                            <span className="site-name">{site.name}</span>
+                            <span>Address: {site.address}</span>
+                            <span>City: {site.city}</span>
+                            <span>State: {site.state}</span>
+                            <span>Country: {site.country}</span>
+                            <span className="price">${site.price}/night</span>
+                        </div>
+                    </NavLink>
                 </div>
             </li>
     )
