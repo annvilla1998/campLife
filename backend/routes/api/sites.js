@@ -10,8 +10,8 @@ const router = express.Router();
 // const unlinkFile = util.promisify(fs.unlink)
 // const multer  = require('multer');
 // const upload = multer({ dest: 'uploads/' })
-const { multipleMulterUpload,
-    multiplePublicFileUpload } = require('../../utils/s3')
+// const { multipleMulterUpload,
+//     multiplePublicFileUpload } = require('../../utils/s3')
 
 
 
@@ -50,6 +50,7 @@ const validatePostReview = [
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
     const sites = await Site.findAll();
+    console.log(sites)
     return res.json({
         sites
     })
