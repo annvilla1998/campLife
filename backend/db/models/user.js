@@ -1,12 +1,14 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../config/database');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('./index');
 const { Validator } = require("sequelize");
 
 const bcrypt = require('bcryptjs');
 
-const User = sequelize.define('User', {
+class User extends Model { }
+
+User.init({
   username: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     validate: {
       len: [4, 30],
@@ -18,14 +20,14 @@ const User = sequelize.define('User', {
     }
   },
   email: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
     validate: {
       len: [3, 256]
     }
   },
   hashedPassword: {
-    type: Sequelize.STRING.BINARY,
+    type: DataTypes.STRING.BINARY,
     allowNull: false,
     validate: {
       len: [60, 60]
@@ -33,6 +35,8 @@ const User = sequelize.define('User', {
   }
 },
   {
+    sequelize,
+    modelName: "user",
     defaultScope: {
       attributes: {
         exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']

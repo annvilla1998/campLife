@@ -1,27 +1,32 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../config/database');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('./index');
 
-const Review = sequelize.define('Review', {
+class Review extends Model {}
+
+Review.init({
   userId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   siteId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   review: {
-    type: Sequelize.STRING(255),
+    type: DataTypes.STRING(255),
     allowNull: false
 
   },
   rating: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     max: 5,
     min: 0
   }
-}, {});
+}, {
+  sequelize,
+  modelName: "review"
+});
 Review.associate = function (models) {
   // associations can be defined here
   Review.belongsTo(models.User, { foreignKey: "userId" })

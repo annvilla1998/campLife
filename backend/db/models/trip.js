@@ -1,25 +1,29 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../../config/database');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('./index');
 
+class Trip extends Model { }
 
-const Trip = sequelize.define('Trip', {
+Trip.init({
   siteId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   userId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   startDate: {
-    type: Sequelize.DATEONLY,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
   endDate: {
-    type: Sequelize.DATEONLY,
+    type: DataTypes.DATEONLY,
     allowNull: false
   },
-}, {});
+}, {
+  sequelize,
+  modelName: "trip"
+});
 Trip.associate = function (models) {
   // associations can be defined here
   Trip.belongsTo(models.Site, { foreignKey: 'siteId' })

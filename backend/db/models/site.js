@@ -1,44 +1,49 @@
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+const { Model, DataTypes } = require('sequelize');
+const { sequelize } = require('./index');
 
-const Site = sequelize.define('Site', {
+class Site extends Model { }
+
+Site.init({
   userId: {
-    type: Sequelize.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   address: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   city: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   state: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   country: {
-    type: Sequelize.STRING(100),
+    type: DataTypes.STRING(100),
     allowNull: false,
   },
   name: {
-    type: Sequelize.STRING(255),
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   price: {
-    type: Sequelize.DECIMAL(20, 2),
+    type: DataTypes.DECIMAL(20, 2),
     allowNull: false,
   },
   description: {
-    type: Sequelize.STRING(255),
+    type: DataTypes.STRING(255),
     allowNull: true
   },
   images: {
-    type: Sequelize.ARRAY(Sequelize.TEXT),
+    type: DataTypes.ARRAY(DataTypes.TEXT),
     allowNull: false
   }
-}, {});
+}, {
+  sequelize,
+  modelName: "site"
+});
 
 
 Site.associate = function (models) {

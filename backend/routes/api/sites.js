@@ -3,17 +3,9 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { Site, Review, Trip } = require('../../db/models');
+const Site = require('../../db/models/site');
+const Review = require('../../db/models/review');
 const router = express.Router();
-// const fs = require('fs')
-// const util = require('util')
-// const unlinkFile = util.promisify(fs.unlink)
-// const multer  = require('multer');
-// const upload = multer({ dest: 'uploads/' })
-// const { multipleMulterUpload,
-//     multiplePublicFileUpload } = require('../../utils/s3')
-
-
 
 const validateCreateSite = [
     check('address')
@@ -50,7 +42,6 @@ const validatePostReview = [
 //view all sites
 router.get('/', asyncHandler(async (req, res) => {
     const sites = await Site.findAll();
-    console.log(sites)
     return res.json({
         sites
     })
