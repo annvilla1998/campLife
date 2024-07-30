@@ -4,7 +4,7 @@ const { User } = require('../db/models');
 
 const { secret, expiresIn } = jwtConfig;
 
-const setTokenCookie = (res, user) => {
+const setTokenCookie = async (res, user) => {
     // Create the token.
     const token = jwt.sign(
       { data: user.toSafeObject() },
@@ -28,15 +28,15 @@ const setTokenCookie = (res, user) => {
 const restoreUser = (req, res, next) => {
 // token parsed from cookies
     const { token } = req.cookies;
-
     return jwt.verify(token, secret, null, async (err, jwtPayload) => {
-        if (err) {
+      if (err) {
         return next();
-        }
-
-        try {
+      }
+      
+      try {
+        // console.log(await User.getCurrentUserById(id))
         const { id } = jwtPayload.data;
-        req.user = await User.scope('currentUser').findByPk(id);
+        req.user = await User.getCurrentUserById(id);
         } catch (e) {
         res.clearCookie('token');
         return next();

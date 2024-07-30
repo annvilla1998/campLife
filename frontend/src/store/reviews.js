@@ -1,10 +1,10 @@
 import { csrfFetch } from "./csrf";
 
 
-const GET_REVIEWS = '/sites/:id/GET_REVIEWS'
-const POST_REVIEW = '/sites/:id/POST_REVIEW'
-const EDIT_REVIEW = '/sites/:id/EDIT_REVIEW'
-const DELETE_REVIEW = '/sites/:id/DELETE_REVIEW'
+const GET_REVIEWS = '/reviews/:id/GET_REVIEWS'
+const POST_REVIEW = '/reviews/:id/POST_REVIEW'
+const EDIT_REVIEW = '/reviews/:id/EDIT_REVIEW'
+const DELETE_REVIEW = '/reviews/:id/DELETE_REVIEW'
 const GET_REVIEW = '/review/GET_REVIEW'
 
 export const getReviews =(reviews) => ({
@@ -33,33 +33,34 @@ export const remove = (reviewId) => ({
 })
 
 export const allReviews = (id) => async dispatch => {
-    const res = await csrfFetch(`/api/sites/${id}/review`)
+    const res = await csrfFetch(`/api/reviews/${id}/review`)
 
     const reviews = await res.json()
     dispatch(getReviews(reviews))
 }
 
 export const createReview = (data) => async dispatch => {
-    const res = await csrfFetch(`/api/sites/${data.siteId}/review`,{
+    const res = await csrfFetch(`/api/reviews/${data.siteId}/review`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
     })
+    console.log(res)
     const newReview = await res.json()
     dispatch(postReview(newReview))
     return newReview
 }
 
 export const getOneReview = (reviewId) => async dispatch => {
-    const res = await csrfFetch(`/api/review/${reviewId}/edit`)
+    const res = await csrfFetch(`/api/reviews/review/${reviewId}/edit`)
     const review = await res.json()
     dispatch(getOne(review))
 }
 
 export const editReview = (data) => async dispatch => {
-    const res = await csrfFetch(`/api/sites/review/${data.id}`, {
+    const res = await csrfFetch(`/api/reviews/review/${data.id}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json'
@@ -72,7 +73,7 @@ export const editReview = (data) => async dispatch => {
 }
 
 export const deleteReview = (reviewId) => async dispatch => {
-    const res = await csrfFetch(`/api/sites/review/${reviewId}`, {
+    const res = await csrfFetch(`/api/reviews/review/${reviewId}`, {
         method: 'DELETE'
     })
     const review= await res.json();
