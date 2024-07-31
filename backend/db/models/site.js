@@ -36,10 +36,22 @@ Site.init({
     type: DataTypes.STRING(255),
     allowNull: true
   },
-  images: {
-    type: DataTypes.ARRAY(DataTypes.TEXT),
+  image1: {
+    type: DataTypes.STRING(255),
     allowNull: false
-  }
+  },
+  image2: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  image3: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
+  image4: {
+    type: DataTypes.STRING(255),
+    allowNull: true
+  },
 }, {
   sequelize,
   modelName: "site"
@@ -50,7 +62,7 @@ Site.associate = function (models) {
   // associations can be defined here
   Site.belongsTo(models.User, { foreignKey: 'userId' })
   Site.hasMany(models.Trip, {
-    foreignKey: 'siteId',
+    foreignKey: 'tripId',
     onDelete: 'CASCADE',
     hooks: true
   })
@@ -59,7 +71,7 @@ Site.associate = function (models) {
   //   hooks: true
   // })
   Site.hasMany(models.Review, {
-    foreignKey: 'siteId',
+    foreignKey: 'reviewId',
     onDelete: 'CASCADE',
     hooks: true
   })

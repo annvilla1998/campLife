@@ -20,7 +20,7 @@ export const SiteDetails = () => {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const site = useSelector(state => state.siteState?.sites[id])
-    const images = site?.images
+    const images = [site.image1, site.image2, site.image3, site.image4];
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
     const [showSiteModal, setShowSiteModal] = useState(false)

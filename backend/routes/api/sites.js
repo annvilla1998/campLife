@@ -4,7 +4,6 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const Site = require('../../db/models/site');
-const Review = require('../../db/models/review');
 const router = express.Router();
 
 const validateCreateSite = [
@@ -50,7 +49,10 @@ router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) =
         name, 
         price, 
         description,
-        images
+        image1,
+        image2,
+        image3,
+        image4
     })
     await newSite.save()
 
@@ -84,7 +86,10 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
         price,
         name,
         description,
-        images
+        image1,
+        image2,
+        image3,
+        image4,
     })
    
     return res.json(site)

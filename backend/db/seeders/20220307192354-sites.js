@@ -42,7 +42,10 @@ module.exports = {
           name: faker.address.streetName(),
           price: faker.commerce.price(50, 500),
           description: faker.fake('{{random.arrayElement(["Come visit our spot off the grid!", "Use our place as a base camp and explore the region", "Ecological campsite in the heart of the forest a paradise for hikers and nature lovers.", "Whether you are looking for a romantic getaway or rest and relaxation,  look no further."])}}'),
-          images: [faker.fake(campsites[Math.floor(Math.random() * campsites.length)])],
+          image1: faker.fake(campsites[Math.floor(Math.random() * campsites.length)]),
+          image2: faker.fake(campsites[Math.floor(Math.random() * campsites.length)]),
+          image3: faker.fake(campsites[Math.floor(Math.random() * campsites.length)]),
+          image4: faker.fake(campsites[Math.floor(Math.random() * campsites.length)]),
           createdAt: new Date(),
           updatedAt: new Date(),
         }

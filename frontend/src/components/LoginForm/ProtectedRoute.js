@@ -5,7 +5,6 @@ import { Route, Redirect, useLocation } from 'react-router-dom';
 const ProtectedRoute = props => {
 
   const user = useSelector(state => state.session.user);
-  // localStorage.setItem('location', location.href)
 
   return (
     <Route {...props}>

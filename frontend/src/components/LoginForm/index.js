@@ -15,10 +15,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    // if(localStorage.getItem('location')){
-    //   let href = localStorage.getItem('location');
-    //   console.log(href)
-    // }
+
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
         const data = await res.json();
@@ -33,13 +30,6 @@ function LoginForm() {
       setErrors([]);
       dispatch(sessionActions.login({ credential:'Demo-lition', password: 'password' }))
       history.push('/')
-      
-      // if(localStorage.getItem('location')){
-      //   let href = localStorage.getItem('location');
-      //   console.log(href)
-      //   history.push(`${href}`)
-      // }
-  
     }
   
   

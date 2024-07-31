@@ -47,7 +47,6 @@ export const createReview = (data) => async dispatch => {
         },
         body: JSON.stringify(data)
     })
-    console.log(res)
     const newReview = await res.json()
     dispatch(postReview(newReview))
     return newReview

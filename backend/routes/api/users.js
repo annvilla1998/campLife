@@ -5,6 +5,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const User = require('../../db/models/user');
 const Trip = require('../../db/models/trip');
+const Site = require('../../db/models/site');
 const Review = require('../../db/models/review');
 const { Op } = require("sequelize");
 

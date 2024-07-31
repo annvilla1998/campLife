@@ -48,17 +48,31 @@ module.exports = {
                 type: Sequelize.STRING(255),
                 allowNull: true
             },
-            images: {
-                type: Sequelize.ARRAY(Sequelize.TEXT),
+            image1: {
+                type: Sequelize.STRING(255),
                 allowNull: false
             },
+            image2: {
+                type: Sequelize.STRING(255),
+                allowNull: true
+            },
+            image3: {
+                type: Sequelize.STRING(255),
+                allowNull: true
+            },
+            image4: {
+                type: Sequelize.STRING(255),
+                allowNull: true
+            },
             createdAt: {
+                type: Sequelize.DATEONLY,
                 allowNull: false,
-                type: Sequelize.DATE
+                defaultValue: Sequelize.NOW
             },
             updatedAt: {
+                type: Sequelize.DATEONLY,
                 allowNull: false,
-                type: Sequelize.DATE
+                defaultValue: Sequelize.NOW
             }
         }, options);
     },

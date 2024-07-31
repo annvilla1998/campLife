@@ -32,7 +32,15 @@ User.init({
     validate: {
       len: [60, 60]
     }
-  }
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
 },
   {
     sequelize,
@@ -51,7 +59,7 @@ User.init({
       }
     }
   });
-  
+
 User.associate = function (models) {
   // associations can be defined here
   User.hasMany(models.Site, { foreignKey: 'userId' })

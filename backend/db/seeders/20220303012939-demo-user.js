@@ -9,12 +9,12 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     options.tableName = 'Users';
-    
+
     // Check existing data to avoid unique constraint conflicts
     const existingUsers = await queryInterface.sequelize.query(
       `SELECT email, username FROM Users WHERE email IN ('demo@user.io', 'user1@user.io', 'user2@user.io') OR username IN ('Demo-lition', 'FakeUser1', 'FakeUser2')`
     );
-    
+
     if (existingUsers[0].length > 0) {
       console.log('Existing users found:', existingUsers[0]);
       throw new Error('Duplicate data found. Seeder cannot be applied.');
@@ -26,16 +26,22 @@ module.exports = {
         email: 'demo@user.io',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'user1@user.io',
         username: 'FakeUser1',
-        hashedPassword: bcrypt.hashSync('password2', 10)
+        hashedPassword: bcrypt.hashSync('password2', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
         email: 'user2@user.io',
         username: 'FakeUser2',
-        hashedPassword: bcrypt.hashSync('password3', 10)
+        hashedPassword: bcrypt.hashSync('password3', 10),
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ];
 

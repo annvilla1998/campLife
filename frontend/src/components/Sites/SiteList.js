@@ -3,11 +3,12 @@ import { useState } from "react"
 
 
 export const SiteList = ({ site }) => {
-    const [currentImage, setCurrentImage] = useState(0)
+    const [currentImage, setCurrentImage] = useState(0);
+    const images = [site.image1, site.image2, site.image3, site.image4];
 
 
     const swipeRight = () => {
-        if(currentImage !== site.images.length - 1){
+        if(currentImage !== images.length - 1){
             setCurrentImage(currentImage + 1)
         }
     }
@@ -23,12 +24,12 @@ export const SiteList = ({ site }) => {
                 <div className='site-list-detail-container'>
                         <span id='images'>
                             <NavLink className="site-list-link" exact to={`/sites/${site.id}`}>
-                                <img alt="site" src={site.images[currentImage]} />
+                                <img alt="site" src={images[currentImage]} />
                             </NavLink>
-                            {currentImage !== 0 && site.images.length > 1 &&
+                            {currentImage !== 0 && images.length > 1 &&
                                 <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
                             }
-                            {currentImage !== site.images.length - 1 && site.images.length > 1 &&
+                            {currentImage !== images.length - 1 && images.length > 1 &&
                                 <i className="fa-solid fa-angle-right" onClick={swipeRight}></i>
                             }
                         </span>
