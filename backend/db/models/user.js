@@ -51,6 +51,7 @@ User.init({
       }
     }
   });
+  
 User.associate = function (models) {
   // associations can be defined here
   User.hasMany(models.Site, { foreignKey: 'userId' })

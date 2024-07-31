@@ -35,7 +35,7 @@ router.post('/:id/review', requireAuth, validatePostReview, asyncHandler(async(r
     // const site = await Site.findByPk(req.params.id)
     
     const { userId, review, rating, siteId } = req.body;
-    console.log(review)
+
     const newReview = await Review.create({
         userId,
         siteId,
@@ -43,7 +43,7 @@ router.post('/:id/review', requireAuth, validatePostReview, asyncHandler(async(r
         rating
     })
 
-    res.redirect(`${req.baseUrl}/${siteId}`)
+    res.redirect(`/api/sites/${siteId}`)
 }))
 
 // Edit a review
