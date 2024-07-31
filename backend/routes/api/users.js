@@ -3,10 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const User = require('../../db/models/user');
-const Trip = require('../../db/models/trip');
-const Site = require('../../db/models/site');
-const Review = require('../../db/models/review');
+const { models } = require('../../db/models');
 const { Op } = require("sequelize");
 
 const router = express.Router();
@@ -39,7 +36,7 @@ router.post(
     validateSignup,
     asyncHandler(async (req, res) => {
       const { email, password, username } = req.body;
-      const user = await User.signup({ email, username, password });
+      const user = await models.User.signup({ email, username, password });
   
       await setTokenCookie(res, user);
   
@@ -50,14 +47,15 @@ router.post(
   );
 
 router.get('/:id/trips',asyncHandler(async (req,res) => {
+  
     const userId = req.params.id
-    let trips = await Trip.findAll({
+    let trips = await models.Trip.findAll({
       where: {
         userId: {
           [Op.eq]:userId
         }
       },
-      include: [Site]
+      include: [models.Site]
     })
   
     return res.json(trips)
@@ -66,7 +64,7 @@ router.get('/:id/trips',asyncHandler(async (req,res) => {
 
 router.post('/:id/trips',asyncHandler(async (req,res) => {
     const { userId, siteId, startDate, endDate } = req.body
-    const newTrip = await Trip.build({ 
+    const newTrip = await models.Trip.build({ 
       userId,
       siteId,
       startDate,
@@ -74,7 +72,7 @@ router.post('/:id/trips',asyncHandler(async (req,res) => {
     })
     let tripExists = false
 
-    let userTrips = await Trip.findAll({
+    let userTrips = await models.Trip.findAll({
       where: {
         userId: {
           [Op.eq]:userId
@@ -95,11 +93,11 @@ router.post('/:id/trips',asyncHandler(async (req,res) => {
     }else{
       await newTrip.save()
 
-      let trip = await Trip.findOne({
+      let trip = await models.Trip.findOne({
         where: {
           id: newTrip.id
         },
-        include: [Site]
+        include: [models.Site]
       })
       return res.json(trip)
     }
@@ -118,7 +116,7 @@ router.delete('/:id/trips/:id',asyncHandler(async (req, res) => {
   const params = url.split('/');
   const tripId = params[3];
   const siteId = params[1];
-  const trip = await Trip.findByPk(tripId);
+  const trip = await models.Trip.findByPk(tripId);
 
   await trip.destroy();
   

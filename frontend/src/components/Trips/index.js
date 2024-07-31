@@ -27,8 +27,6 @@ export const Trips = () => {
         })
         setShowConfirmTripDelete(false);
     }
-    
-
 
     return (
         <div className="profile-page">
@@ -57,9 +55,9 @@ export const Trips = () => {
                                             <button onClick={() => setShowConfirmTripDelete(false)}>No</button>
                                         </Modal>
                                     )}
-                                    <img alt="site" src={trip.Site.images[0]}></img>
+                                    <img alt="site" src={trip.site?.image1}></img>
                                     <div className="trip-description">
-                                        <div className="name">{trip.Site.name}</div>
+                                        <div className="name">{trip.Site?.name}</div>
                                         <div className="start date"><strong>Arrival Date: </strong>{startDate}</div>
                                         <div className="end date"><strong>Departure: </strong>{endDate}</div>
                                         <i className="fa-regular fa-trash-can" onClick={() => setShowConfirmTripDelete(true)}></i>

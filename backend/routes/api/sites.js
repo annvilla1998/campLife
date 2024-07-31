@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const Site = require('../../db/models/site');
+const { models } = require('../../db/models');
 const router = express.Router();
 
 const validateCreateSite = [
@@ -31,7 +31,7 @@ const validateCreateSite = [
 
 // View all sites
 router.get('/', asyncHandler(async (req, res) => {
-    const sites = await Site.findAll();
+    const sites = await models.Site.findAll();
     return res.json({
         sites
     })
@@ -40,7 +40,7 @@ router.get('/', asyncHandler(async (req, res) => {
 // Post a new site
 router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
     const { userId, address, city, state, country, name, price, description, images } = req.body
-    const newSite = await Site.build({
+    const newSite = await models.Site.build({
         userId,
         address, 
         city, 
@@ -65,7 +65,7 @@ router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) =
 // Get site details 
 router.get('/:id', asyncHandler(async (req,res) => {
     const siteId = req.params.id;    
-    const site = await Site.findByPk(siteId);
+    const site = await models.Site.findByPk(siteId);
     return res.json({
         site
     })
@@ -76,7 +76,7 @@ router.get('/:id', asyncHandler(async (req,res) => {
 router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
     const id = req.params.id
     const { userId, address, city, state, country, name, price, description, images} = req.body
-    const site = await Site.findByPk(id)
+    const site = await models.Site.findByPk(id)
     await site.update({
         userId,
         address,
@@ -97,7 +97,7 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
 
 // Delete a site route
 router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
-    const site = await Site.findByPk(req.params.id)
+    const site = await models.Site.findByPk(req.params.id)
 
     await site.destroy()
     

@@ -18,15 +18,23 @@
     height: 70vh;
     background-color: white;
     color: black;
-    font-family: 'PT Sans', sans-serif;  
+    font-family: 'PT Sans', sans-serif;
     overflow: auto;
 }
 
+.image-upload-error-container {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+}
 
+.image-upload-error-container p {
+    color: red;
+}
 
 .create-site-form h2 {
     color: black;
-    padding-top:15px;
+    padding-top: 15px;
 }
 
 .form-info {
@@ -34,7 +42,7 @@
     grid-row: 1 / 2;
     grid-column: 1 / 2;
     padding: 20px;
-    display:flex;
+    display: flex;
     flex-direction: column;
     width: 90%;
     height: 80%;
@@ -51,21 +59,27 @@
     grid-column: 2 / 3;
     position: relative;
     display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 
 .upload-images input[type="file"] {
     display: none;
-} 
+}
 
 .upload-images label {
-    position: absolute;
-    bottom: 20px;
     border: 1px solid black;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
-    border-radius:20px;
+    text-align: center;
+    border-radius: 20px;
+
+    &.max-images {
+        background: rgb(205, 203, 203);
+        pointer-events: none;
+    }
 }
 
 .create-site {
@@ -78,7 +92,7 @@
 }
 
 
-#newsite{
+#newsite {
     display: flex;
     justify-content: space-between;
     margin: 5px;

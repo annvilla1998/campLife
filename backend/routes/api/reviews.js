@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const Review = require('../../db/models/review');
+const { models } = require('../../db/models');
 const router = express.Router();
 
 
@@ -20,7 +20,7 @@ const validatePostReview = [
 router.get('/:id/review', asyncHandler(async(req,res) => {
     const siteId = parseInt(req.params.id, 10)
     // const site = await Site.findByPk(siteId)
-    const reviews = await Review.findAll({
+    const reviews = await models.Review.findAll({
         where: {
             siteId: siteId
         }
@@ -36,7 +36,7 @@ router.post('/:id/review', requireAuth, validatePostReview, asyncHandler(async(r
     
     const { userId, review, rating, siteId } = req.body;
 
-    const newReview = await Review.create({
+    const newReview = await models.Review.create({
         userId,
         siteId,
         review,
@@ -50,7 +50,7 @@ router.post('/:id/review', requireAuth, validatePostReview, asyncHandler(async(r
 router.patch('/review/:id', requireAuth, validatePostReview, asyncHandler(async(req,res) => {
     const id = parseInt(req.params.id, 10)
     const { userId, siteId, rating, review } = req.body
-    const oldReview = await Review.findByPk(id)
+    const oldReview = await models.Review.findByPk(id)
     await oldReview.update({
         userId,
         siteId, 
@@ -62,7 +62,7 @@ router.patch('/review/:id', requireAuth, validatePostReview, asyncHandler(async(
 
 // Delete a review
 router.delete('/review/:id', requireAuth, asyncHandler(async (req,res) => {
-    const review = await Review.findByPk(req.params.id)
+    const review = await models.Review.findByPk(req.params.id)
 
     await review.destroy()
     return res.json(review)

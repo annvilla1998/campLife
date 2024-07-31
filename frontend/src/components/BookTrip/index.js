@@ -12,6 +12,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
     const [completedPayment, setCompletedPayment] = useState(false)
     const [errors, setErrors] = useState([])
     const sessionUser = useSelector(state => state.session.user);
+    const images = [site?.image1, site?.image2, site?.image3, site?.image4];
     const today = Date.now()
     const date = new Date(today)
 
@@ -63,7 +64,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
         <div>
             {(!finishedFirstPage) && (
                 <div className="book-modal">
-                    <img className="book-trip-background-image" src={site.images[0]}></img>
+                    <img className="book-trip-background-image" src={images[0]}></img>
                     <div className="book-trip-header">
                         Book a trip to {site.name}
                     </div>
