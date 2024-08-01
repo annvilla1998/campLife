@@ -20,12 +20,11 @@ export const SiteDetails = () => {
     const history = useHistory()
     const sessionUser = useSelector(state => state.session.user);
     const site = useSelector(state => state.siteState?.sites[id]);
-    const images = [site?.image1, site?.image2, site?.image3, site?.image4];
+    const images = [site?.image1, site?.image2, site?.image3, site?.image4].filter(image => image);
     const reviews = useSelector(state => state.reviewState.reviews)
     const reviewsArr = Object.values(reviews)
     const [showSiteModal, setShowSiteModal] = useState(false)
     const [showBookModal, setShowBookModal] = useState(false)
-
 
     useEffect(() => {
         dispatch(getSiteDetails(id))

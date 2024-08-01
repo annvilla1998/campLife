@@ -4,7 +4,7 @@ import { useState } from "react"
 
 export const SiteList = ({ site }) => {
     const [currentImage, setCurrentImage] = useState(0);
-    const images = [site?.image1, site?.image2, site?.image3, site?.image4];
+    const images = [site?.image1, site?.image2, site?.image3, site?.image4].filter(image => image);
 
 
     const swipeRight = () => {

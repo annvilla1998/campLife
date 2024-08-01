@@ -55,6 +55,7 @@ export const EditSite = ({ site, setShowSiteModal }) => {
                 if (data && data.errors) setErrors(data.errors)
             })
         if (updatedSite) {
+            setShowSiteModal(false);
             setErrors([])
         }
 
@@ -159,10 +160,9 @@ export const EditSite = ({ site, setShowSiteModal }) => {
                             </input>
                         </label>
                     )}
-                    {images.length && (
+                    {images.length ? (
                         <>
                             <div className='photo-preview-container'>
-
                                 {images.map((ele, i) => {
                                     return (
                                         <div key={i}>
@@ -188,7 +188,7 @@ export const EditSite = ({ site, setShowSiteModal }) => {
                                 </label>
                             </div>
                         </>
-                    )}
+                    ) : null}
                 </div>
                 <div id="create-site-buttons">
                     <button type='submit'>Host New Site</button>
