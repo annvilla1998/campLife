@@ -39,7 +39,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // Post a new site
 router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
-    const { userId, address, city, state, country, name, price, description, images } = req.body
+    const { userId, address, city, state, country, name, price, description, image1, image2, image3, image4 } = req.body
     const newSite = await models.Site.build({
         userId,
         address, 
@@ -75,7 +75,7 @@ router.get('/:id', asyncHandler(async (req,res) => {
 // Edit a site
 router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
     const id = req.params.id
-    const { userId, address, city, state, country, name, price, description, images} = req.body
+    const { userId, address, city, state, country, name, price, description, image1, image2, image3, image4} = req.body
     const site = await models.Site.findByPk(id)
     await site.update({
         userId,

@@ -24,26 +24,20 @@ export const CreateSite = ({setShowSiteModal}) => {
     const [images, setImages] = useState([])
 
 
-    const uploadImages = async(e) => {
+    const uploadImages = async (e) => {
         const file = e.target.files[0]
-        setImages([...images,file])
-        setFirstImageUploaded(true)
+        setImages([...images, URL.createObjectURL(file)])
     }
-    
+
     const updateImage = (e) => {
         const file = e.target.files[0]
-        setImages([...images, file])
+        setImages([...images, URL.createObjectURL(file)])
         e.target.value = null;
     }
     
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        let imageArr = [];
-        images.forEach(image => {
-            imageArr.push(URL.createObjectURL(image))
-        })
 
         const newSite = {
             userId: sessionUser.id,
@@ -54,7 +48,10 @@ export const CreateSite = ({setShowSiteModal}) => {
             name,
             price,
             description,
-            images: imageArr
+            image1: images[0],
+            image2: images[1],
+            image3: images[2],
+            image4: images[3]
         }
 
 
