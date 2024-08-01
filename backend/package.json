@@ -9,7 +9,7 @@
     "start": "per-env",
     "start:development": "nodemon -r dotenv/config ./bin/www",
     "start:production": "node ./bin/www",
-    "build": "node syncdb.js && npx sequelize-cli db:migrate db:seed:all"
+    "build": "node syncdb.js && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
