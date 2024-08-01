@@ -7,10 +7,8 @@ import * as sessionActions from "./store/session";
 import { Navigation } from "./components/Navigation";
 import { Sites } from "./components/Sites"
 import { SiteDetails } from "./components/Sites/SiteDetails";
-import { EditSite } from "./components/Sites/EditSiteForm"
 import { ReviewForm } from "./components/Reviews/ReviewsForm";
 import { EditReviewForm } from './components/Reviews/EditReviewForm'
-import { Homepage } from './components/Homepage/index'
 import { Trips } from './components/Trips'
 import { About } from './components/Account'
 import ProtectedRoute from './components/LoginForm/ProtectedRoute.js'

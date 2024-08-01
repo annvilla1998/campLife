@@ -64,7 +64,7 @@ export const BookTrip = ({site, setShowBookModal}) => {
         <div>
             {(!finishedFirstPage) && (
                 <div className="book-modal">
-                    <img className="book-trip-background-image" src={images[0]}></img>
+                    <img alt="book trip" className="book-trip-background-image" src={images[0]}></img>
                     <div className="book-trip-header">
                         Book a trip to {site.name}
                     </div>

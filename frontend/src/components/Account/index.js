@@ -9,7 +9,7 @@ export const About = () => {
             <div className="account-background">
                 <div className='account-info-container'>
                     <div className='account-photo'>
-                        <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'></img>
+                        <img alt="profile-picture" src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'></img>
                     </div>
                     <hr/>
                     <div className='introduction'>

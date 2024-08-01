@@ -65,7 +65,7 @@ export const SiteDetails = () => {
                 <span id='image-detail-page'>
                     {images && (
                         <>
-                            <img src={images[currentImage]}/>
+                            <img alt="site-image" src={images[currentImage]}/>
                             {currentImage !== 0 && images.length > 1 &&
                                 <i className="fa-solid fa-angle-left" onClick={swipeLeft}></i>
                             }

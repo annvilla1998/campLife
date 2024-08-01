@@ -21,8 +21,7 @@ export const Trips = () => {
 
 
     const handleDeleteTrip = (trip) => {
-        let deletedTrip;
-        deletedTrip = dispatch(deleteTrip(trip)).then(() => {
+        dispatch(deleteTrip(trip)).then(() => {
             dispatch(getAllTrips(id))
         })
         setShowConfirmTripDelete(false);
