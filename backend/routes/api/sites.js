@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-const { models } = require('../../db/models');
+const { models, sequelize } = require('../../db/models');
 const router = express.Router();
 
 const validateCreateSite = [
@@ -38,16 +38,16 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 // Post a new site
-router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) => {
+router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req, res) => {
     const { userId, address, city, state, country, name, price, description, image1, image2, image3, image4 } = req.body
     const newSite = await models.Site.build({
         userId,
-        address, 
-        city, 
-        state, 
-        country, 
-        name, 
-        price, 
+        address,
+        city,
+        state,
+        country,
+        name,
+        price,
         description,
         image1,
         image2,
@@ -56,15 +56,15 @@ router.post('/', validateCreateSite, requireAuth, asyncHandler(async (req,res) =
     })
     await newSite.save()
 
-    if(newSite){
+    if (newSite) {
         return res.json(newSite)
-    }        
+    }
 }))
 
 
 // Get site details 
-router.get('/:id', asyncHandler(async (req,res) => {
-    const siteId = req.params.id;    
+router.get('/:id', asyncHandler(async (req, res) => {
+    const siteId = req.params.id;
     const site = await models.Site.findByPk(siteId);
     return res.json({
         site
@@ -73,9 +73,9 @@ router.get('/:id', asyncHandler(async (req,res) => {
 
 
 // Edit a site
-router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
+router.patch('/:id', requireAuth, asyncHandler(async (req, res) => {
     const id = req.params.id
-    const { userId, address, city, state, country, name, price, description, image1, image2, image3, image4} = req.body
+    const { userId, address, city, state, country, name, price, description, image1, image2, image3, image4 } = req.body
     const site = await models.Site.findByPk(id)
     await site.update({
         userId,
@@ -91,16 +91,23 @@ router.patch('/:id', requireAuth,asyncHandler(async (req,res) => {
         image3,
         image4,
     })
-   
+
     return res.json(site)
 }))
 
 // Delete a site route
-router.delete('/:id', requireAuth, asyncHandler(async (req,res) => {
+router.delete('/:id', requireAuth, asyncHandler(async (req, res) => {
     const site = await models.Site.findByPk(req.params.id)
 
-    await site.destroy()
-    
+    const transaction = await sequelize.transaction();
+    try {
+      await models.Site.destroy({ where: { id: req.params.id } }, { transaction });
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
+
     return res.json(site)
 }))
 

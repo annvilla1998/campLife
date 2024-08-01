@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink, useHistory, Link } from "react-router-dom";
 import { getSiteDetails, deleteSite } from "../../store/sites";
-import './SiteDetails.css'
-import '../Reviews/ReviewsForm.css'
 import { EditSite } from "./EditSiteForm";
 import { allReviews } from "../../store/reviews";
 import { deleteReview } from "../../store/reviews";
 import { Modal } from '../../context/Modal';
 import { BookTrip } from '../BookTrip';
 import ProtectedRoute from '../LoginForm/ProtectedRoute';
-
+import './SiteDetails.css';
+import '../Reviews/ReviewsForm.css';
 
 
 export const SiteDetails = () => {

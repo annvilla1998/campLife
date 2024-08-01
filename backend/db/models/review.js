@@ -10,7 +10,8 @@ module.exports = (sequelize) => {
     },
     siteId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      onDelete: 'CASCADE'
     },
     review: {
       type: DataTypes.STRING(255),
@@ -22,7 +23,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       max: 5,
       min: 0
-    }
+    },
   }, {
     sequelize,
     modelName: "review"
