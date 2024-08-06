@@ -1,7 +1,5 @@
 html {
-    /* padding-top: 120px; */
     color: white;
-    /* display: flex; */
 }
 
 
@@ -12,7 +10,6 @@ html {
     position: relative;
     top: 150px;
     justify-content: center;
-    /* border: 20px solid #565e47; */
     box-shadow: 0 5px 40px;
     background-color: black;
     width: 800px;
@@ -21,22 +18,16 @@ html {
 }
 
 #site-details {
-    /* padding-top: 400px; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* position:relative;
-    gap: 20px;
-    top: 200px; */
 }
 #image-detail-page {
     display: flex;
     gap: 15px;
     width: 600px;
     height: 500px;
-    /* overflow-x: auto; */
-    /* box-shadow: 0 5px 40px; */
     position: relative;
 }
 
@@ -79,7 +70,6 @@ html {
 #site-detail-text {
     font-family: 'PT Sans', sans-serif;
     font-size: 18px;
-    /* font-weight: bold; */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -97,7 +87,6 @@ html {
 .reviews-list {
     font-family: 'PT Sans', sans-serif;
     color: black;
-    /* font-weight: bold; */
     font-size: 18px;;
     position: relative;
     top: 200px;

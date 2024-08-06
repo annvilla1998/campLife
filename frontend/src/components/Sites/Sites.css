@@ -1,7 +1,6 @@
 .sites {
     padding-top: 120px;
     color: #91a058;
-    /* font-family: 'Fredoka', sans-serif; */
     font-family: 'PT Sans', sans-serif;
 }
 
@@ -45,7 +44,7 @@ img {
     width: 100%;
 }
 
-#site-list-text {
+.site-list-text {
     display: flex;
     flex-direction: column;
     line-height: 1.8;
@@ -54,15 +53,9 @@ img {
     margin: 5px 10px;
 }
 
-
-
 #images {
     display: flex;
-    /* gap: 15px; */
     width: 500px;
-    height: 400px;
-    /* overflow-x: hidden; */
-    /* box-shadow: 0 5px 40px; */
     position: relative;
 }
 
@@ -109,10 +102,10 @@ img {
 .site-name {
     font-size: 25px;
     text-decoration: none;
-}
 
-.site-name:hover {
-    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 .price {

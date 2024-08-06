@@ -2,10 +2,7 @@
 
 * {
 	font-family: 'PT Sans', sans-serif;
-}
-
-html {
-	height:100%;
+	transition: all 200ms ease;
 }
 
 #errors {
