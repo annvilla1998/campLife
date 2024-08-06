@@ -20,14 +20,14 @@ export const removeTrip = (trip) => ({
 })
 
 export const getAllTrips = (userId) => async dispatch => {
-    const res = await csrfFetch(`/api/users/${userId}/trips`);
+    const res = await csrfFetch(`/api/trips/${userId}`);
     const trips = await res.json()
     dispatch(getTrips(trips))
 }
 
 export const createTrip = (data) => async dispatch => {
     const { userId } = data
-    const res = await csrfFetch(`/api/users/${userId}/trips`, {
+    const res = await csrfFetch(`/api/trips/${userId}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ export const createTrip = (data) => async dispatch => {
 export const deleteTrip = (trip) => async dispatch => {
     const { userId, id } = trip
     
-    const res = await csrfFetch(`/api/users/${userId}/trips/${id}`, { 
+    const res = await csrfFetch(`/api/trips/${userId}/${id}`, { 
         method: 'DELETE'
     })
     const deletedTrip = await res.json()
