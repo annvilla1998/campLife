@@ -50,5 +50,5 @@ Clone of [Hipcamp](https://www.hipcamp.com/en-US).
   Logged in users can:
    - Create/Read/Update/Delete Campsites
    - Create/Read/Update/Delete Reviews
-   - Create/Read Trips
+   - Create/Read/Delete Trips
    
